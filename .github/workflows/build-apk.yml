@@ -6,40 +6,66 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   build:
+    name: Build Maa Manokamna Small Finance APK
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Java
-        uses: actions/setup-java@v5
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
         with:
-          accept-android-sdk-licenses: false
+          packages: platform-tools
+          accept-android-sdk-licenses: true
 
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
-
-      - name: Build APK
+      - name: Check project files
         run: |
-          if [ -f gradlew ]; then
-            chmod +x gradlew
-            ./gradlew assembleDebug
+          echo "Checking Android project files..."
+          ls -la
+          echo "Checking Gradle files..."
+          find . -maxdepth 3 \
+            \( -name 'settings.gradle' \
+            -o -name 'settings.gradle.kts' \
+            -o -name 'build.gradle' \
+            -o -name 'build.gradle.kts' \
+            -o -name 'gradlew' \) -print
+
+      - name: Build Debug APK
+        run: |
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+            ./gradlew --no-daemon assembleDebug
+          elif [ -f ./gradlew.bat ]; then
+            echo "ERROR: gradlew.bat mila, lekin Linux build ke liye gradlew chahiye."
+            exit 1
           else
-            echo "ERROR: gradlew file is missing."
+            echo "ERROR: gradlew file repository ke root mein nahi mili."
+            echo "Android project mein Gradle Wrapper add karna zaroori hai."
             exit 1
           fi
+
+      - name: Find generated APK
+        run: |
+          find . -type f -name '*.apk' -print
+          test -n "$(find . -type f -path '*/build/outputs/apk/*/*.apk' -print -quit)" \
+            || (echo "ERROR: APK generate nahi hua." && exit 1)
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Maa-Manokamna-APK
-          path: app/build/outputs/apk/debug/*.apk
+          name: Maa-Manokamna-Small-Finance-APK
+          path: '**/build/outputs/apk/**/*.apk'
+          if-no-files-found: error
+          retention-days: 7
