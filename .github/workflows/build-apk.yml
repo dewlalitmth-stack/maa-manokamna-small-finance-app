@@ -1,4 +1,4 @@
-name: Build APK
+name: Build Maa Manokamna Small Finance APK
 
 on:
   workflow_dispatch:
@@ -11,7 +11,6 @@ permissions:
 
 jobs:
   build:
-    name: Build Maa Manokamna Small Finance APK
     runs-on: ubuntu-latest
 
     steps:
@@ -27,50 +26,40 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
         with:
-          packages: platform-tools
+          packages: platform-tools platforms;android-35 build-tools;35.0.0
           accept-android-sdk-licenses: true
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.10.2'
+          gradle-version: '8.9'
 
-      - name: Check Android project files
+      - name: Extract Android project ZIP
         run: |
-          echo "Repository files:"
-          ls -la
-          echo "Gradle project files:"
-          find . -maxdepth 4 \
-            \( -name 'settings.gradle' \
-            -o -name 'settings.gradle.kts' \
-            -o -name 'build.gradle' \
-            -o -name 'build.gradle.kts' \
-            -o -name 'AndroidManifest.xml' \) -print
-
-      - name: Build Debug APK
-        run: |
-          if [ ! -f settings.gradle ] && [ ! -f settings.gradle.kts ]; then
-            echo "ERROR: Root settings.gradle file nahi mili."
-            echo "Android project ki files repository mein sahi jagah upload karein."
+          if [ ! -f MaaManokamnaSmallFinanceAndroidProject.zip ]; then
+            echo "ERROR: Android project ZIP nahi mili."
             exit 1
           fi
 
-          if [ ! -d app ]; then
-            echo "ERROR: app folder repository ke root mein nahi mila."
+          mkdir -p android-project
+          unzip -o MaaManokamnaSmallFinanceAndroidProject.zip \
+            -d android-project
+
+          if [ ! -f android-project/settings.gradle ]; then
+            echo "ERROR: ZIP ke andar settings.gradle nahi mili."
+            find android-project -maxdepth 3 -type f
             exit 1
           fi
 
+      - name: Build APK
+        run: |
+          cd android-project
           gradle --no-daemon assembleDebug
-
-      - name: Show generated APK
-        if: success()
-        run: |
-          find . -type f -name '*.apk' -print
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Maa-Manokamna-Small-Finance-APK
-          path: '**/build/outputs/apk/**/*.apk'
+          path: android-project/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 7
