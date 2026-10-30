@@ -42,14 +42,31 @@ jobs:
           fi
 
           mkdir -p android-project
+
           unzip -o MaaManokamnaSmallFinanceAndroidProject.zip \
             -d android-project
 
           if [ ! -f android-project/settings.gradle ]; then
             echo "ERROR: ZIP ke andar settings.gradle nahi mili."
-            find android-project -maxdepth 3 -type f
+            find android-project -maxdepth 4 -type f
             exit 1
           fi
+
+      - name: Fix PrintDocumentAdapter type
+        run: |
+          FILE="$(find android-project -path '*/app/src/main/java/*/MainActivity.java' -print -quit)"
+
+          if [ -z "$FILE" ]; then
+            echo "ERROR: MainActivity.java nahi mili."
+            find android-project -type f -name 'MainActivity.java'
+            exit 1
+          fi
+
+          echo "Fixing file: $FILE"
+
+          sed -i 's/WebView\.PrintDocumentAdapter/android.print.PrintDocumentAdapter/g' "$FILE"
+
+          grep -n 'PrintDocumentAdapter' "$FILE"
 
       - name: Build APK
         run: |
