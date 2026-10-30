@@ -30,37 +30,42 @@ jobs:
           packages: platform-tools
           accept-android-sdk-licenses: true
 
-      - name: Check project files
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Check Android project files
         run: |
-          echo "Checking Android project files..."
+          echo "Repository files:"
           ls -la
-          echo "Checking Gradle files..."
-          find . -maxdepth 3 \
+          echo "Gradle project files:"
+          find . -maxdepth 4 \
             \( -name 'settings.gradle' \
             -o -name 'settings.gradle.kts' \
             -o -name 'build.gradle' \
             -o -name 'build.gradle.kts' \
-            -o -name 'gradlew' \) -print
+            -o -name 'AndroidManifest.xml' \) -print
 
       - name: Build Debug APK
         run: |
-          if [ -f ./gradlew ]; then
-            chmod +x ./gradlew
-            ./gradlew --no-daemon assembleDebug
-          elif [ -f ./gradlew.bat ]; then
-            echo "ERROR: gradlew.bat mila, lekin Linux build ke liye gradlew chahiye."
-            exit 1
-          else
-            echo "ERROR: gradlew file repository ke root mein nahi mili."
-            echo "Android project mein Gradle Wrapper add karna zaroori hai."
+          if [ ! -f settings.gradle ] && [ ! -f settings.gradle.kts ]; then
+            echo "ERROR: Root settings.gradle file nahi mili."
+            echo "Android project ki files repository mein sahi jagah upload karein."
             exit 1
           fi
 
-      - name: Find generated APK
+          if [ ! -d app ]; then
+            echo "ERROR: app folder repository ke root mein nahi mila."
+            exit 1
+          fi
+
+          gradle --no-daemon assembleDebug
+
+      - name: Show generated APK
+        if: success()
         run: |
           find . -type f -name '*.apk' -print
-          test -n "$(find . -type f -path '*/build/outputs/apk/*/*.apk' -print -quit)" \
-            || (echo "ERROR: APK generate nahi hua." && exit 1)
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
