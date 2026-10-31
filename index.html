@@ -5,312 +5,860 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10274b">
 <title>माँ मनोकामना स्मॉल फाइनेंस</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f1f4f8;color:#17243a}
-header{background:#10274b;color:white;padding:16px;text-align:center}
-h1{font-size:23px;margin:0 0 10px}
-.brand{padding:7px;margin:5px 0;border-radius:8px;font-weight:bold}
-.b1{background:#176bff}.b2{background:#d92738}.b3{background:#16843b}
-nav{display:flex;flex-wrap:wrap;gap:6px;padding:10px;background:#fff;position:sticky;top:0;z-index:2}
-button{border:0;border-radius:8px;padding:10px 12px;font-weight:bold;cursor:pointer;background:#183c69;color:white}
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans Devanagari",sans-serif;
+  background:#f1f4f8;
+  color:#17243a
+}
+header{
+  background:#10274b;
+  color:white;
+  padding:16px;
+  text-align:center
+}
+.logo-durga{
+  width:65px;
+  height:65px;
+  object-fit:cover;
+  border-radius:50%;
+  border:3px solid #e5b847;
+  background:white
+}
+.durga-home{
+  display:block;
+  width:100%;
+  max-width:650px;
+  max-height:480px;
+  object-fit:contain;
+  margin:12px auto;
+  border-radius:14px;
+  border:2px solid #e5b847
+}
+h1{font-size:23px;margin:8px 0}
+.brand{
+  padding:7px;
+  margin:5px 0;
+  border-radius:8px;
+  font-weight:bold
+}
+.b1{background:#176bff}
+.b2{background:#d92738}
+.b3{background:#16843b}
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:10px;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:2
+}
+button{
+  border:0;
+  border-radius:8px;
+  padding:10px 12px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#183c69;
+  color:white
+}
 nav button{flex:1;min-width:100px}
 .gold{background:#e5b847;color:#17243a}
 .green{background:#087f73}
 .red{background:#b4233a}
 .light{background:#e7edf5;color:#183c69}
 main{max-width:1100px;margin:auto;padding:12px}
-.box{background:white;border:1px solid #dfe5ec;border-radius:12px;padding:14px;margin-bottom:13px}
+.box{
+  background:white;
+  border:1px solid #dfe5ec;
+  border-radius:12px;
+  padding:14px;
+  margin-bottom:13px
+}
 h2,h3{color:#10274b}
-input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:8px;margin:5px 0 12px;font:inherit}
+input,select,textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  margin:5px 0 12px;
+  font:inherit
+}
 label{font-weight:bold;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.grid,.stats{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px
+}
 .stat{background:#f4f7fb;border-radius:10px;padding:12px}
-.stat strong{display:block;font-size:20px;color:#10274b;margin-top:6px}
+.stat strong{
+  display:block;
+  font-size:20px;
+  color:#10274b;
+  margin-top:6px
+}
 .row{padding:12px 0;border-bottom:1px solid #e5e7eb}
-.row:last-child{border:0}
 .actions{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .actions button{flex:1}
 table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{border:1px solid #e1e6ed;padding:8px;text-align:left;font-size:13px}
+th,td{
+  border:1px solid #e1e6ed;
+  padding:8px;
+  text-align:left;
+  font-size:13px
+}
 th{background:#eaf0f7}
 .tablewrap{overflow:auto}
 .hidden{display:none!important}
 small{color:#667085}
-#toast{position:fixed;bottom:15px;left:5%;width:90%;padding:12px;background:#10274b;color:white;border-radius:8px;text-align:center;display:none;z-index:9}
-.report{padding:15px;border:1px solid #dfd3b4;border-radius:10px;background:#fff}
-@media(max-width:500px){header h1{font-size:20px}.grid{grid-template-columns:1fr}main{padding:8px}button{padding:9px;font-size:13px}}
-@media print{nav,.no-print,button{display:none!important}body{background:white}main{padding:0}.box{border:0}.hidden{display:none!important}.report{border:0} }
+#toast{
+  position:fixed;
+  bottom:15px;
+  left:5%;
+  width:90%;
+  padding:12px;
+  background:#10274b;
+  color:white;
+  border-radius:8px;
+  text-align:center;
+  display:none;
+  z-index:9
+}
+.report{
+  padding:15px;
+  border:1px solid #dfd3b4;
+  border-radius:10px;
+  background:white
+}
+@media(max-width:500px){
+  header h1{font-size:20px}
+  .grid{grid-template-columns:1fr}
+  main{padding:8px}
+  button{padding:9px;font-size:13px}
+}
+@media print{
+  nav,.no-print,button{display:none!important}
+  body{background:white}
+  main{padding:0}
+  .box{border:0}
+  .hidden{display:none!important}
+}
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>माँ मनोकामना स्मॉल फाइनेंस</h1>
-<div class="brand b1">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>
-<div class="brand b2">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>
-<div class="brand b3">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div>
+  <img src="maa-durga.png" alt="माँ दुर्गा" class="logo-durga"
+       onerror="this.style.display='none'">
+  <h1>माँ मनोकामना स्मॉल फाइनेंस</h1>
+  <div class="brand b1">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>
+  <div class="brand b2">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>
+  <div class="brand b3">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div>
 </header>
 
 <nav class="no-print">
-<button onclick="showPage('home')">डैशबोर्ड</button>
-<button onclick="showPage('customers')">ग्राहक खाते</button>
-<button onclick="showPage('loans')">उधार खाते</button>
-<button onclick="showPage('payments')">लेन-देन</button>
-<button onclick="showPage('reports')">रिपोर्ट / PDF</button>
-<button onclick="showPage('backup')">बैकअप</button>
+  <button onclick="showPage('home')">डैशबोर्ड</button>
+  <button onclick="showPage('customers')">ग्राहक खाते</button>
+  <button onclick="showPage('loans')">उधार खाते</button>
+  <button onclick="showPage('payments')">लेन-देन</button>
+  <button onclick="showPage('reports')">रिपोर्ट / PDF</button>
+  <button onclick="showPage('backup')">बैकअप</button>
 </nav>
 
 <main>
+
+<!-- डैशबोर्ड -->
 <section id="home" class="page">
-<div class="box">
-<h2>डैशबोर्ड</h2>
-<div class="stats">
-<div class="stat">कुल ग्राहक<strong id="sCustomers">0</strong></div>
-<div class="stat">कुल मूल उधार<strong id="sLoan">₹0</strong></div>
-<div class="stat">कुल जमा<strong id="sPaid">₹0</strong></div>
-<div class="stat">कुल बकाया<strong id="sDue">₹0</strong></div>
-</div>
-<div class="actions">
-<button class="gold" onclick="customerForm()">＋ ग्राहक जोड़ें</button>
-<button class="green" onclick="loanForm()">＋ नया उधार</button>
-<button onclick="paymentForm()">＋ जमा दर्ज करें</button>
-</div>
-</div>
-<div class="box"><h3>हाल के ग्राहक</h3><div id="recent"></div></div>
+  <div class="box">
+    <img src="maa-durga.png" alt="जय माँ दुर्गा"
+         class="durga-home"
+         onerror="this.style.display='none'">
+    <h2>🙏 जय माँ दुर्गा 🙏</h2>
+    <h2>डैशबोर्ड</h2>
+    <div class="stats">
+      <div class="stat">कुल ग्राहक<strong id="sCustomers">0</strong></div>
+      <div class="stat">कुल मूल उधार<strong id="sLoan">₹0</strong></div>
+      <div class="stat">कुल जमा<strong id="sPaid">₹0</strong></div>
+      <div class="stat">कुल बकाया<strong id="sDue">₹0</strong></div>
+    </div>
+  </div>
+  <div class="box">
+    <h3>त्वरित कार्य</h3>
+    <div class="actions">
+      <button onclick="customerForm()">➕ नया ग्राहक</button>
+      <button class="green" onclick="loanForm()">नया उधार</button>
+      <button class="gold" onclick="showPage('payments')">जमा दर्ज करें</button>
+    </div>
+  </div>
 </section>
 
+<!-- ग्राहक खाते -->
 <section id="customers" class="page hidden">
-<div class="box">
-<h2>ग्राहक खाते</h2>
-<button class="gold" onclick="customerForm()">＋ नया ग्राहक जोड़ें</button>
-<input id="customerSearch" placeholder="नाम या मोबाइल खोजें" oninput="renderCustomers()">
-<div id="customerList"></div>
-</div>
-<div id="customerDetail" class="box hidden"></div>
+  <div class="box">
+    <h2>ग्राहक खाते</h2>
+    <button onclick="customerForm()">➕ नया ग्राहक जोड़ें</button>
+    <input id="customerSearch" placeholder="ग्राहक का नाम या मोबाइल खोजें"
+           oninput="renderCustomers()">
+    <div id="customerList"></div>
+  </div>
+  <div id="customerDetail"></div>
 </section>
 
+<!-- उधार खाते -->
 <section id="loans" class="page hidden">
-<div class="box">
-<h2>उधार खाते</h2>
-<button class="gold" onclick="loanForm()">＋ नया उधार</button>
-<div id="loanList"></div>
-</div>
+  <div class="box">
+    <h2>उधार खाते</h2>
+    <button onclick="loanForm()">➕ नया उधार जोड़ें</button>
+    <div id="loanList"></div>
+  </div>
 </section>
 
+<!-- लेन-देन -->
 <section id="payments" class="page hidden">
-<div class="box">
-<h2>लेन-देन की हिस्ट्री</h2>
-<button class="green" onclick="paymentForm()">＋ जमा दर्ज करें</button>
-<div id="paymentList"></div>
-</div>
+  <div class="box">
+    <h2>जमा / लेन-देन दर्ज करें</h2>
+    <form id="paymentForm">
+      <label>ग्राहक चुनें</label>
+      <select id="payCustomer" required></select>
+
+      <label>उधार खाता</label>
+      <select id="payLoan" required></select>
+
+      <label>जमा राशि (₹)</label>
+      <input id="payAmount" type="number" min="1" step="0.01" required>
+
+      <label>जमा की तारीख</label>
+      <input id="payDate" type="date" required>
+
+      <label>रसीद / टिप्पणी</label>
+      <input id="payNote" placeholder="वैकल्पिक">
+
+      <button class="green" type="submit">जमा सेव करें</button>
+    </form>
+  </div>
+  <div class="box">
+    <h3>लेन-देन का रिकॉर्ड</h3>
+    <div id="paymentList"></div>
+  </div>
 </section>
 
+<!-- रिपोर्ट -->
 <section id="reports" class="page hidden">
-<div class="box no-print" id="reportOptions">
-<h2>रिपोर्ट और PDF</h2>
-<label>रिपोर्ट प्रकार</label>
-<select id="reportType">
-<option value="all">सभी ग्राहकों की रिपोर्ट</option>
-<option value="due">बकाया रिपोर्ट</option>
-<option value="daily">आज की जमा रिपोर्ट</option>
-</select>
-<div class="actions">
-<button onclick="makeReport()">रिपोर्ट देखें</button>
-<button class="green" onclick="window.print()">PDF / प्रिंट</button>
-<button class="gold" onclick="shareReport()">WhatsApp पर भेजें</button>
-</div>
-</div>
-<div id="reportBack" class="actions no-print hidden">
-<button onclick="closeReport()">⬅ रिपोर्ट विकल्प पर वापस जाएँ</button>
-<button class="red" onclick="closeReport()">रिपोर्ट बंद करें</button>
-</div>
-<div id="reportResult" class="box hidden"></div>
+  <div class="box">
+    <h2>रिपोर्ट / PDF</h2>
+    <label>रिपोर्ट चुनें</label>
+    <select id="reportType">
+      <option value="all">संपूर्ण रिपोर्ट</option>
+      <option value="customers">ग्राहक रिपोर्ट</option>
+      <option value="loans">उधार रिपोर्ट</option>
+      <option value="payments">जमा रिपोर्ट</option>
+    </select>
+    <div class="actions no-print">
+      <button onclick="makeReport()">रिपोर्ट देखें</button>
+      <button class="green" onclick="window.print()">प्रिंट / PDF सेव करें</button>
+      <button class="gold" onclick="shareReport()">WhatsApp शेयर</button>
+    </div>
+  </div>
+  <div class="box report" id="reportText">
+    रिपोर्ट देखने के लिए ऊपर बटन दबाएँ।
+  </div>
 </section>
 
+<!-- बैकअप -->
 <section id="backup" class="page hidden">
-<div class="box">
-<h2>डेटा बैकअप</h2>
-<p>अपने ग्राहक और लेन-देन का बैकअप नियमित रूप से डाउनलोड करें।</p>
-<div class="actions">
-<button class="green" onclick="backup()">बैकअप डाउनलोड करें</button>
-</div>
-<label>बैकअप फ़ाइल से डेटा वापस लाएँ</label>
-<input type="file" id="restoreFile" accept=".json,application/json" onchange="restoreBackup(event)">
-<button class="red" onclick="clearAll()">सारा डेटा मिटाएँ</button>
-<p><small>ध्यान दें: डेटा इसी ब्राउज़र में सेव होता है। ब्राउज़र का डेटा मिटाने पर रिकॉर्ड खो सकते हैं।</small></p>
-</div>
+  <div class="box">
+    <h2>डेटा बैकअप और रीस्टोर</h2>
+    <p>अपने ग्राहक, उधार और जमा रिकॉर्ड की सुरक्षित कॉपी समय-समय पर डाउनलोड करें।</p>
+    <button class="green" onclick="downloadBackup()">⬇ बैकअप डाउनलोड करें</button>
+    <hr>
+    <label>पुरानी बैकअप JSON फाइल चुनें</label>
+    <input type="file" id="restoreFile" accept=".json,application/json">
+    <button class="gold" onclick="restoreBackup()">बैकअप रीस्टोर करें</button>
+    <p><small>रीस्टोर करने से मौजूदा रिकॉर्ड बदल सकते हैं। पहले वर्तमान डेटा का बैकअप लें।</small></p>
+  </div>
 </section>
+
 </main>
 
 <div id="toast"></div>
 
 <script>
-const KEY='maaManokamnaFinance_v2';
-let db={customers:[],loans:[],payments:[]};
-let editingCustomer=null,editingLoan=null,editingPayment=null,activeCustomer=null;
-let reportText='';
+"use strict";
 
-function id(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
-function el(x){return document.getElementById(x)}
-function money(n){return '₹'+Number(n||0).toLocaleString('en-IN',{maximumFractionDigits:2})}
-function today(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function dateText(s){if(!s)return '—';const p=s.split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:s}
-function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function toast(s){el('toast').textContent=s;el('toast').style.display='block';setTimeout(()=>el('toast').style.display='none',2500)}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(db));renderAll();return true}catch(e){alert('डेटा सेव नहीं हुआ। बैकअप लेकर जगह खाली करें।');return false}}
-function load(){
-try{
-const raw=localStorage.getItem(KEY);
-if(raw){const x=JSON.parse(raw);db={customers:x.customers||[],loans:x.loans||[],payments:x.payments||[]}}
-}catch(e){alert('पुराना डेटा पढ़ने में समस्या हुई।')}
-db.loans.forEach(l=>{if(!l.days)l.days=100;if(!l.rate)l.rate=0});
-renderAll()
-}
-function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));el(p).classList.remove('hidden');if(p==='customers')renderCustomers();if(p==='loans')renderLoans();if(p==='payments')renderPayments();if(p==='reports')el('reportOptions').classList.remove('hidden');window.scrollTo(0,0)}
-function customer(id){return db.customers.find(c=>c.id===id)}
-function loan(id){return db.loans.find(l=>l.id===id)}
-function loansOf(cid){return db.loans.filter(l=>l.customerId===cid)}
-function paymentsOf(lid){return db.payments.filter(p=>p.loanId===lid)}
-function principal(l){return Number(l.principal||l.amount||0)}
-function total(l){return principal(l)+principal(l)*Number(l.rate||0)/100}
-function paid(l){return paymentsOf(l.id).reduce((s,p)=>s+Number(p.amount||0),0)}
-function due(l){return Math.max(0,total(l)-paid(l))}
-function dueCustomer(cid){return loansOf(cid).reduce((s,l)=>s+due(l),0)}
-function renderAll(){
-el('sCustomers').textContent=db.customers.length;
-el('sLoan').textContent=money(db.loans.reduce((s,l)=>s+principal(l),0));
-el('sPaid').textContent=money(db.payments.reduce((s,p)=>s+Number(p.amount||0),0));
-el('sDue').textContent=money(db.loans.reduce((s,l)=>s+due(l),0));
-el('recent').innerHTML=db.customers.slice(-5).reverse().map(c=>`<div class="row"><b>${safe(c.name)}</b><br><small>${safe(c.phone||'')} • बकाया ${money(dueCustomer(c.id))}</small><div class="actions"><button onclick="showCustomer('${c.id}')">खाता खोलें</button></div></div>`).join('')||'<p>अभी ग्राहक नहीं हैं।</p>';
-renderCustomers();renderLoans();renderPayments()
-}
-function customerForm(cid=null){
-editingCustomer=cid;const c=cid?customer(cid):{};
-const name=prompt('ग्राहक का नाम लिखें:',c?.name||'');if(name===null)return;
-if(!name.trim()){toast('नाम जरूरी है');return}
-const phone=prompt('मोबाइल नंबर लिखें:',c?.phone||'') ;if(phone===null)return;
-const address=prompt('पूरा पता लिखें:',c?.address||'');if(address===null)return;
-if(cid){Object.assign(c,{name:name.trim(),phone,address})}else db.customers.push({id:id(),name:name.trim(),phone,address,createdAt:today()});
-if(save())toast('ग्राहक सेव हो गया')
-}
-function renderCustomers(){
-const q=(el('customerSearch')?.value||'').toLowerCase();
-el('customerList').innerHTML=db.customers.filter(c=>(c.name+' '+(c.phone||'')).toLowerCase().includes(q)).map(c=>`<div class="row"><b>${safe(c.name)}</b><br><small>${safe(c.phone||'')} • बकाया ${money(dueCustomer(c.id))}</small><div class="actions"><button onclick="showCustomer('${c.id}')">खाता खोलें</button><button class="light" onclick="customerForm('${c.id}')">एडिट</button></div></div>`).join('')||'<p>कोई ग्राहक नहीं मिला।</p>'
-}
-function showCustomer(cid){
-activeCustomer=cid;const c=customer(cid);if(!c)return;
-showPage('customers');el('customerDetail').classList.remove('hidden');
-const ls=loansOf(cid);
-el('customerDetail').innerHTML=`<h2>${safe(c.name)}</h2><p>${safe(c.phone||'')}<br>${safe(c.address||'')}</p>
-<div class="actions"><button class="light" onclick="customerForm('${cid}')">ग्राहक एडिट</button><button class="gold" onclick="loanForm('${cid}')">＋ उधार जोड़ें</button><button class="green" onclick="paymentForm('${ls[0]?.id||''}')">＋ जमा</button></div>
-<h3>उधार खाते</h3>
-${ls.map(l=>`<div class="row"><b>मूल उधार: ${money(principal(l))}</b><br>कुल देय: ${money(total(l))}<br>जमा: ${money(paid(l))}<br>बकाया: ${money(due(l))}<br>अवधि: ${Number(l.days)||100} दिन<br><small>रोजाना किस्त: ${money(total(l)/(Number(l.days)||100))}</small><div class="actions"><button onclick="loanForm('${cid}','${l.id}')">खाता एडिट</button><button class="green" onclick="paymentForm('${l.id}')">जमा दर्ज करें</button><button class="light" onclick="showSchedule('${l.id}')">किस्त सूची</button></div></div>`).join('')||'<p>अभी उधार नहीं है।</p>'}
-<h3>भुगतान रिकॉर्ड</h3>
-<div class="tablewrap"><table><tr><th>तारीख</th><th>राशि</th><th>तरीका</th><th>कार्रवाई</th></tr>
-${db.payments.filter(p=>loan(p.loanId)?.customerId===cid).map(p=>`<tr><td>${dateText(p.date)}</td><td>${money(p.amount)}</td><td>${safe(p.method||'')}</td><td><button onclick="paymentForm('${p.loanId}','${p.id}')">एडिट</button></td></tr>`).join('')||'<tr><td colspan="4">भुगतान रिकॉर्ड नहीं है</td></tr>'}</table></div>
-<div class="actions"><button class="light" onclick="closeCustomer()">⬅ ग्राहक सूची पर वापस</button></div>`
-}
-function closeCustomer(){el('customerDetail').classList.add('hidden');renderCustomers()}
-function loanForm(cid=null,lid=null){
-editingLoan=lid;const l=lid?loan(lid):{};
-if(lid&&!l)return;
-if(!cid)cid=l?.customerId||null;
-if(!db.customers.length){toast('पहले ग्राहक जोड़ें');return}
-let customerId=cid||db.customers[0].id;
-if(!cid&&!lid){const n=prompt('ग्राहक का नाम चुनें। नंबर लिखें:\n'+db.customers.map((c,i)=>(i+1)+'. '+c.name).join('\n'));if(n===null)return;const c=db.customers[Number(n)-1];if(!c){toast('गलत ग्राहक नंबर');return}customerId=c.id}
-if(lid)customerId=l.customerId;
-const amount=prompt('मूल उधार राशि:',l?principal(l):'');if(amount===null)return;
-if(!(Number(amount)>0)){toast('राशि सही लिखें');return}
-const rate=prompt('अतिरिक्त ब्याज/चार्ज प्रतिशत (नहीं हो तो 0):',l?.rate||0);if(rate===null)return;
-const days=prompt('उधार की अवधि कितने दिन? उदाहरण: 50 या 100',l?.days||100);if(days===null)return;
-if(!(Number(days)>0)||Number(days)>1000){toast('दिन 1 से 1000 के बीच लिखें');return}
-const startDate=prompt('उधार शुरू होने की तारीख (YYYY-MM-DD):',l?.startDate||today());if(startDate===null)return;
-const note=prompt('नोट (वैकल्पिक):',l?.note||'');if(note===null)return;
-if(lid){Object.assign(l,{principal:Number(amount),rate:Number(rate)||0,days:Number(days),startDate,note})}
-else db.loans.push({id:id(),customerId,principal:Number(amount),rate:Number(rate)||0,days:Number(days),startDate,note,createdAt:today()});
-if(save()){toast(lid?'उधार खाता अपडेट हुआ':'नया उधार सेव हुआ');showCustomer(customerId)}
-}
-function renderLoans(){
-el('loanList').innerHTML=db.loans.map(l=>`<div class="row"><b>${safe(customer(l.customerId)?.name||'अज्ञात ग्राहक')}</b><br>मूल उधार: ${money(principal(l))} • अवधि: ${Number(l.days)||100} दिन<br>कुल: ${money(total(l))} • जमा: ${money(paid(l))} • बकाया: ${money(due(l))}<div class="actions"><button onclick="loanForm('${l.customerId}','${l.id}')">खाता एडिट</button><button class="green" onclick="paymentForm('${l.id}')">जमा दर्ज करें</button><button class="light" onclick="showSchedule('${l.id}')">किस्त सूची</button></div></div>`).join('')||'<p>अभी उधार खाते नहीं हैं।</p>'
-}
-function paymentForm(lid=null,pid=null){
-if(!db.loans.length){toast('पहले उधार खाता बनाएं');return}
-let p=pid?db.payments.find(x=>x.id===pid):null;
-if(!lid)lid=p?.loanId||db.loans[0].id;
-const l=loan(lid);if(!l)return;
-const amount=prompt('जमा राशि:',p?.amount||'');if(amount===null)return;
-if(!(Number(amount)>0)){toast('जमा राशि सही लिखें');return}
-const date=prompt('जमा तारीख (YYYY-MM-DD):',p?.date||today());if(date===null)return;
-const method=prompt('भुगतान का तरीका (नकद/UPI/बैंक):',p?.method||'नकद');if(method===null)return;
-const note=prompt('नोट (वैकल्पिक):',p?.note||'');if(note===null)return;
-if(p){Object.assign(p,{amount:Number(amount),date,method,note})}
-else db.payments.push({id:id(),loanId:lid,amount:Number(amount),date,method,note,createdAt:new Date().toISOString()});
-if(save()){toast('भुगतान सेव हुआ');showCustomer(l.customerId)}
-}
-function renderPayments(){
-el('paymentList').innerHTML=[...db.payments].sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(p=>`<div class="row"><b>${safe(customer(loan(p.loanId)?.customerId)?.name||'अज्ञात')}</b><br>${dateText(p.date)} • ${money(p.amount)} • ${safe(p.method||'')}<br><small>${safe(p.note||'')}</small><div class="actions"><button onclick="paymentForm('${p.loanId}','${p.id}')">एडिट</button></div></div>`).join('')||'<p>अभी भुगतान नहीं है।</p>'
-}
-function showSchedule(lid){
-const l=loan(lid);if(!l)return;
-const days=Number(l.days)||100,perDay=total(l)/days;
-let rows='';
-for(let i=0;i<days;i++){
-const d=new Date((l.startDate||today())+'T00:00:00');d.setDate(d.getDate()+i);
-const ds=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const accumulated=paymentsOf(lid).filter(p=>p.date<=ds).reduce((s,p)=>s+Number(p.amount||0),0);
-const status=accumulated>=(i+1)*perDay?'जमा':ds<today()?'विलंबित':'देय';
-rows+=`<tr><td>${i+1}</td><td>${dateText(ds)}</td><td>${money(Math.min(perDay,total(l)-i*perDay))}</td><td>${status}</td></tr>`
-}
-el('customerDetail').classList.remove('hidden');
-el('customerDetail').innerHTML=`<h2>${days} दिन की किस्त सूची</h2><p>${safe(customer(l.customerId)?.name||'')} • कुल देय ${money(total(l))} • रोज लगभग ${money(perDay)}</p><div class="tablewrap"><table><tr><th>दिन</th><th>तारीख</th><th>किस्त</th><th>स्थिति</th></tr>${rows}</table></div><div class="actions"><button onclick="window.print()">PDF / प्रिंट</button><button class="light" onclick="showCustomer('${l.customerId}')">⬅ खाते पर वापस</button></div>`
-}
-function makeReport(){
-const type=el('reportType').value;
-let cs=[...db.customers];
-if(type==='due')cs=cs.filter(c=>dueCustomer(c.id)>0);
-const ps=db.payments.filter(p=>type!=='daily'||p.date===today());
-const loanTotal=db.loans.reduce((s,l)=>s+principal(l),0);
-const paidTotal=ps.reduce((s,p)=>s+Number(p.amount||0),0);
-const rows=cs.map(c=>`<tr><td>${safe(c.name)}</td><td>${safe(c.phone||'')}</td><td>${money(loansOf(c.id).reduce((s,l)=>s+principal(l),0))}</td><td>${money(db.payments.filter(p=>loan(p.loanId)?.customerId===c.id&&(type!=='daily'||p.date===today())).reduce((s,p)=>s+Number(p.amount||0),0))}</td><td>${money(dueCustomer(c.id))}</td></tr>`).join('');
-el('reportResult').innerHTML=`<div class="report"><h2>माँ मनोकामना स्मॉल फाइनेंस</h2><div class="brand b1">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div><div class="brand b2">❤️ आपका विश्वास, हमारी पहचान। ❤️</div><div class="brand b3">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div><p>रिपोर्ट तारीख: ${dateText(today())}</p><p>कुल ग्राहक: ${cs.length} • कुल मूल उधार: ${money(loanTotal)} • रिपोर्ट में जमा: ${money(paidTotal)} • कुल वर्तमान बकाया: ${money(db.loans.reduce((s,l)=>s+due(l),0))}</p><div class="tablewrap"><table><tr><th>ग्राहक</th><th>मोबाइल</th><th>मूल उधार</th><th>जमा</th><th>बकाया</th></tr>${rows||'<tr><td colspan="5">कोई रिकॉर्ड नहीं</td></tr>'}</table></div></div>`;
-el('reportResult').classList.remove('hidden');el('reportBack').classList.remove('hidden');
-reportText=el('reportResult').innerText;
-el('reportResult').scrollIntoView({behavior:'smooth'})
-}
-function closeReport(){el('reportResult').classList.add('hidden');el('reportBack').classList.add('hidden');el('reportOptions').scrollIntoView({behavior:'smooth'})}
-function shareReport(){
-if(!reportText)makeReport();
-const text=encodeURIComponent(reportText.slice(0,5000));
-window.open('https://wa.me/?text='+text,'_blank')
-}
-function backup(){
-const blob=new Blob([JSON.stringify({...db,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
-const url=URL.createObjectURL(blob),a=document.createElement('a');
-a.href=url;a.download='maa-manokamna-backup-'+today()+'.json';a.click();
-setTimeout(()=>URL.revokeObjectURL(url),1500);toast('बैकअप डाउनलोड शुरू हुआ')
-}
-function restoreBackup(event){
-const file=event.target.files[0];if(!file)return;
-const reader=new FileReader();
-reader.onload=()=>{
-try{
-const x=JSON.parse(reader.result);
-if(!Array.isArray(x.customers)||!Array.isArray(x.loans)||!Array.isArray(x.payments))throw Error();
-if(!confirm('मौजूदा डेटा को बैकअप से बदलना है? पहले मौजूदा डेटा का बैकअप रखें।'))return;
-db={customers:x.customers,loans:x.loans,payments:x.payments};
-db.loans.forEach(l=>{if(!l.days)l.days=100});
-if(save())toast('बैकअप वापस लोड हो गया')
-}catch(e){alert('यह सही बैकअप JSON फ़ाइल नहीं है।')}
-finally{event.target.value=''}
+const STORAGE_KEY = "maaManokamnaFinance_v2";
+
+let db = {
+  customers: [],
+  loans: [],
+  payments: []
 };
-reader.readAsText(file)
+
+function loadData(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if(saved){
+      const parsed = JSON.parse(saved);
+      db = {
+        customers: Array.isArray(parsed.customers) ? parsed.customers : [],
+        loans: Array.isArray(parsed.loans) ? parsed.loans : [],
+        payments: Array.isArray(parsed.payments) ? parsed.payments : []
+      };
+    }
+  }catch(e){
+    alert("डेटा पढ़ने में समस्या हुई। बैकअप फाइल हो तो सुरक्षित रखें।");
+  }
 }
-function clearAll(){
-if(!confirm('क्या आप सभी ग्राहक, उधार और भुगतान रिकॉर्ड मिटाना चाहते हैं? यह काम वापस नहीं होगा।'))return;
-db={customers:[],loans:[],payments:[]};save();toast('डेटा मिटा दिया गया')
+
+function saveData(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+    renderAll();
+  }catch(e){
+    alert("डेटा सेव नहीं हो पाया। कृपया जगह खाली करें और बैकअप डाउनलोड करें।");
+  }
 }
-load();
+
+function uid(){
+  return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+}
+
+function money(value){
+  return "₹" + Number(value || 0).toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
+}
+
+function today(){
+  const d = new Date();
+  return d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
+}
+
+function safe(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function notify(message){
+  const el = document.getElementById("toast");
+  el.textContent = message;
+  el.style.display = "block";
+  setTimeout(() => el.style.display = "none", 2500);
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+  const page = document.getElementById(id);
+  if(page) page.classList.remove("hidden");
+  renderAll();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function getCustomer(id){
+  return db.customers.find(c => c.id === id);
+}
+
+function getLoan(id){
+  return db.loans.find(l => l.id === id);
+}
+
+function paidForLoan(loanId){
+  return db.payments
+    .filter(p => p.loanId === loanId)
+    .reduce((sum,p) => sum + Number(p.amount || 0), 0);
+}
+
+function loanTotal(loan){
+  const principal = Number(loan.amount || 0);
+  const rate = Number(loan.rate || 0);
+  return principal + principal * rate / 100;
+}
+
+function loanDue(loan){
+  return Math.max(0, loanTotal(loan) - paidForLoan(loan.id));
+}
+
+function customerForm(id){
+  const old = id ? getCustomer(id) : null;
+
+  const name = prompt("ग्राहक का पूरा नाम:", old?.name || "");
+  if(name === null) return;
+  if(!name.trim()){
+    alert("ग्राहक का नाम लिखें।");
+    return;
+  }
+
+  const phone = prompt("मोबाइल नंबर:", old?.phone || "");
+  if(phone === null) return;
+
+  const address = prompt("पूरा पता:", old?.address || "");
+  if(address === null) return;
+
+  if(old){
+    old.name = name.trim();
+    old.phone = phone.trim();
+    old.address = address.trim();
+  }else{
+    db.customers.push({
+      id:uid(),
+      name:name.trim(),
+      phone:phone.trim(),
+      address:address.trim(),
+      created:today()
+    });
+  }
+
+  saveData();
+  showPage("customers");
+  notify("ग्राहक का रिकॉर्ड सेव हो गया।");
+}
+
+function loanForm(customerId, loanId){
+  const old = loanId ? getLoan(loanId) : null;
+
+  if(!db.customers.length){
+    alert("पहले ग्राहक जोड़ें।");
+    showPage("customers");
+    return;
+  }
+
+  let selectedCustomer = customerId || old?.customerId || "";
+
+  if(!selectedCustomer){
+    const choices = db.customers.map((c,i) =>
+      (i+1) + ". " + c.name + " (" + (c.phone || "मोबाइल नहीं") + ")"
+    ).join("\n");
+
+    const answer = prompt("ग्राहक का क्रमांक लिखें:\n" + choices, "1");
+    if(answer === null) return;
+
+    const index = Number(answer) - 1;
+    if(!db.customers[index]){
+      alert("सही ग्राहक चुनें।");
+      return;
+    }
+    selectedCustomer = db.customers[index].id;
+  }
+
+  const amount = prompt("मूल उधार राशि (₹):", old?.amount ?? "");
+  if(amount === null) return;
+  if(!Number.isFinite(Number(amount)) || Number(amount) <= 0){
+    alert("सही उधार राशि लिखें।");
+    return;
+  }
+
+  const rate = prompt("कुल ब्याज प्रतिशत (यदि नहीं तो 0):", old?.rate ?? "0");
+  if(rate === null) return;
+  if(!Number.isFinite(Number(rate)) || Number(rate) < 0){
+    alert("सही ब्याज प्रतिशत लिखें।");
+    return;
+  }
+
+  const days = prompt("उधार अवधि कितने दिन? (50 या 100 लिख सकते हैं):", old?.days ?? "50");
+  if(days === null) return;
+  if(!Number.isFinite(Number(days)) || Number(days) <= 0){
+    alert("सही अवधि लिखें।");
+    return;
+  }
+
+  const date = prompt("उधार देने की तारीख (YYYY-MM-DD):", old?.date || today());
+  if(date === null) return;
+
+  const note = prompt("टिप्पणी:", old?.note || "");
+  if(note === null) return;
+
+  if(old){
+    old.customerId = selectedCustomer;
+    old.amount = Number(amount);
+    old.rate = Number(rate);
+    old.days = Number(days);
+    old.date = date;
+    old.note = note.trim();
+  }else{
+    db.loans.push({
+      id:uid(),
+      customerId:selectedCustomer,
+      amount:Number(amount),
+      rate:Number(rate),
+      days:Number(days),
+      date:date,
+      note:note.trim()
+    });
+  }
+
+  saveData();
+  showPage("loans");
+  notify("उधार खाता सेव हो गया।");
+}
+
+function deleteCustomer(id){
+  const related = db.loans.filter(l => l.customerId === id);
+  if(related.length){
+    alert("इस ग्राहक के उधार खाते मौजूद हैं। पहले उधार रिकॉर्ड जाँचें।");
+    return;
+  }
+  if(!confirm("क्या आप इस ग्राहक को हटाना चाहते हैं?")) return;
+  db.customers = db.customers.filter(c => c.id !== id);
+  saveData();
+}
+
+function deleteLoan(id){
+  if(db.payments.some(p => p.loanId === id)){
+    alert("इस उधार खाते में जमा रिकॉर्ड हैं। इन्हें सुरक्षित रखने के लिए खाता नहीं हटाया गया।");
+    return;
+  }
+  if(!confirm("क्या आप यह उधार खाता हटाना चाहते हैं?")) return;
+  db.loans = db.loans.filter(l => l.id !== id);
+  saveData();
+}
+
+function deletePayment(id){
+  if(!confirm("क्या आप इस जमा रिकॉर्ड को हटाना चाहते हैं?")) return;
+  db.payments = db.payments.filter(p => p.id !== id);
+  saveData();
+}
+
+function showCustomer(id){
+  const c = getCustomer(id);
+  if(!c) return;
+
+  const loans = db.loans.filter(l => l.customerId === id);
+  const detail = document.getElementById("customerDetail");
+
+  detail.innerHTML = `
+    <div class="box">
+      <h2>${safe(c.name)}</h2>
+      <p>मोबाइल: ${safe(c.phone || "नहीं दिया गया")}</p>
+      <p>पता: ${safe(c.address || "नहीं दिया गया")}</p>
+      <div class="actions">
+        <button onclick="customerForm('${c.id}')">ग्राहक एडिट</button>
+        <button class="green" onclick="loanForm('${c.id}')">नया उधार</button>
+      </div>
+      <h3>उधार खाते</h3>
+      ${
+        loans.length ? loans.map(l => `
+          <div class="row">
+            <b>उधार: ${money(l.amount)}</b><br>
+            ब्याज: ${safe(l.rate)}% |
+            अवधि: ${safe(l.days)} दिन<br>
+            कुल देय: ${money(loanTotal(l))}<br>
+            जमा: ${money(paidForLoan(l.id))}<br>
+            बकाया: ${money(loanDue(l))}
+            <div class="actions">
+              <button onclick="loanForm('${c.id}','${l.id}')">एडिट</button>
+              <button class="gold" onclick="quickPay('${l.id}')">जमा दर्ज करें</button>
+            </div>
+          </div>
+        `).join("") : "<p>इस ग्राहक का अभी कोई उधार खाता नहीं है।</p>"
+      }
+    </div>`;
+
+  showPage("customers");
+  document.getElementById("customerDetail").innerHTML = detail.innerHTML;
+}
+
+function renderCustomers(){
+  const el = document.getElementById("customerList");
+  if(!el) return;
+
+  const query = (document.getElementById("customerSearch")?.value || "")
+    .toLowerCase().trim();
+
+  const list = db.customers.filter(c =>
+    c.name.toLowerCase().includes(query) ||
+    (c.phone || "").includes(query)
+  );
+
+  el.innerHTML = list.length ? list.map(c => `
+    <div class="row">
+      <b>${safe(c.name)}</b><br>
+      मोबाइल: ${safe(c.phone || "नहीं दिया गया")}<br>
+      <small>${safe(c.address || "")}</small>
+      <div class="actions">
+        <button onclick="showCustomer('${c.id}')">विवरण</button>
+        <button class="gold" onclick="customerForm('${c.id}')">एडिट</button>
+        <button class="red" onclick="deleteCustomer('${c.id}')">हटाएँ</button>
+        <button class="green" onclick="loanForm('${c.id}')">उधार दें</button>
+      </div>
+    </div>
+  `).join("") : "<p>कोई ग्राहक नहीं मिला। नया ग्राहक जोड़ें।</p>";
+}
+
+function renderLoans(){
+  const el = document.getElementById("loanList");
+  if(!el) return;
+
+  el.innerHTML = db.loans.length ? db.loans.map(l => {
+    const c = getCustomer(l.customerId);
+    return `
+      <div class="row">
+        <b>${safe(c?.name || "अज्ञात ग्राहक")}</b><br>
+        मूल उधार: ${money(l.amount)}<br>
+        ब्याज: ${safe(l.rate)}% |
+        अवधि: ${safe(l.days)} दिन<br>
+        कुल देय: ${money(loanTotal(l))}<br>
+        जमा: ${money(paidForLoan(l.id))}<br>
+        <b>बकाया: ${money(loanDue(l))}</b><br>
+        तारीख: ${safe(l.date || "")}
+        <div class="actions">
+          <button onclick="loanForm('${l.customerId}','${l.id}')">एडिट</button>
+          <button class="gold" onclick="quickPay('${l.id}')">जमा</button>
+          <button class="red" onclick="deleteLoan('${l.id}')">हटाएँ</button>
+        </div>
+      </div>`;
+  }).join("") : "<p>अभी कोई उधार खाता नहीं है।</p>";
+}
+
+function quickPay(loanId){
+  const loan = getLoan(loanId);
+  if(!loan) return;
+
+  showPage("payments");
+  document.getElementById("payCustomer").value = loan.customerId;
+  updatePayLoans();
+  document.getElementById("payLoan").value = loanId;
+  document.getElementById("payAmount").focus();
+}
+
+function updatePayLoans(){
+  const customerId = document.getElementById("payCustomer").value;
+  const select = document.getElementById("payLoan");
+
+  const loans = db.loans.filter(l => l.customerId === customerId);
+  select.innerHTML = loans.map(l =>
+    `<option value="${l.id}">${safe(l.date)} — ${money(l.amount)} — बकाया ${money(loanDue(l))}</option>`
+  ).join("");
+
+  if(!loans.length){
+    select.innerHTML = '<option value="">इस ग्राहक का उधार नहीं है</option>';
+  }
+}
+
+function renderPayments(){
+  const customerSelect = document.getElementById("payCustomer");
+  if(!customerSelect) return;
+
+  const previous = customerSelect.value;
+  customerSelect.innerHTML = db.customers.map(c =>
+    `<option value="${c.id}">${safe(c.name)}</option>`
+  ).join("");
+
+  if(previous && db.customers.some(c => c.id === previous)){
+    customerSelect.value = previous;
+  }
+
+  updatePayLoans();
+
+  const el = document.getElementById("paymentList");
+  if(!el) return;
+
+  const list = [...db.payments].sort((a,b) =>
+    (b.date || "").localeCompare(a.date || "")
+  );
+
+  el.innerHTML = list.length ? list.map(p => {
+    const c = getCustomer(p.customerId);
+    return `
+      <div class="row">
+        <b>${safe(c?.name || "अज्ञात ग्राहक")}</b><br>
+        जमा राशि: ${money(p.amount)}<br>
+        तारीख: ${safe(p.date)}<br>
+        टिप्पणी: ${safe(p.note || "")}
+        <div class="actions">
+          <button class="red" onclick="deletePayment('${p.id}')">रिकॉर्ड हटाएँ</button>
+        </div>
+      </div>`;
+  }).join("") : "<p>अभी कोई जमा रिकॉर्ड नहीं है।</p>";
+}
+
+document.getElementById("paymentForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const customerId = document.getElementById("payCustomer").value;
+  const loanId = document.getElementById("payLoan").value;
+  const amount = Number(document.getElementById("payAmount").value);
+  const date = document.getElementById("payDate").value;
+  const note = document.getElementById("payNote").value.trim();
+
+  const loan = getLoan(loanId);
+
+  if(!getCustomer(customerId) || !loan || loan.customerId !== customerId){
+    alert("कृपया सही ग्राहक और उधार खाता चुनें।");
+    return;
+  }
+
+  if(!Number.isFinite(amount) || amount <= 0){
+    alert("जमा राशि सही लिखें।");
+    return;
+  }
+
+  if(amount > loanDue(loan) + 0.001){
+    if(!confirm("जमा राशि बकाया से अधिक है। क्या फिर भी जमा दर्ज करना चाहते हैं?")) return;
+  }
+
+  db.payments.push({
+    id:uid(),
+    customerId,
+    loanId,
+    amount,
+    date,
+    note
+  });
+
+  this.reset();
+  document.getElementById("payDate").value = today();
+
+  saveData();
+  showPage("payments");
+  notify("जमा रिकॉर्ड सेव हो गया।");
+});
+
+function renderDashboard(){
+  document.getElementById("sCustomers").textContent = db.customers.length;
+
+  document.getElementById("sLoan").textContent =
+    money(db.loans.reduce((s,l) => s + Number(l.amount || 0), 0));
+
+  document.getElementById("sPaid").textContent =
+    money(db.payments.reduce((s,p) => s + Number(p.amount || 0), 0));
+
+  document.getElementById("sDue").textContent =
+    money(db.loans.reduce((s,l) => s + loanDue(l), 0));
+}
+
+function renderAll(){
+  renderDashboard();
+  renderCustomers();
+  renderLoans();
+  renderPayments();
+}
+
+function makeReport(){
+  const type = document.getElementById("reportType").value;
+  const el = document.getElementById("reportText");
+
+  let html = `
+    <h2>माँ मनोकामना स्मॉल फाइनेंस</h2>
+    <p>रिपोर्ट की तारीख: ${today()}</p>`;
+
+  if(type === "all" || type === "customers"){
+    html += "<h3>ग्राहक रिपोर्ट</h3><div class='tablewrap'><table><tr><th>नाम</th><th>मोबाइल</th><th>पता</th></tr>";
+    db.customers.forEach(c => {
+      html += `<tr><td>${safe(c.name)}</td><td>${safe(c.phone)}</td><td>${safe(c.address)}</td></tr>`;
+    });
+    html += "</table></div>";
+  }
+
+  if(type === "all" || type === "loans"){
+    html += "<h3>उधार रिपोर्ट</h3><div class='tablewrap'><table><tr><th>ग्राहक</th><th>तारीख</th><th>मूल राशि</th><th>कुल देय</th><th>जमा</th><th>बकाया</th></tr>";
+    db.loans.forEach(l => {
+      html += `<tr>
+        <td>${safe(getCustomer(l.customerId)?.name || "")}</td>
+        <td>${safe(l.date)}</td>
+        <td>${money(l.amount)}</td>
+        <td>${money(loanTotal(l))}</td>
+        <td>${money(paidForLoan(l.id))}</td>
+        <td>${money(loanDue(l))}</td>
+      </tr>`;
+    });
+    html += "</table></div>";
+  }
+
+  if(type === "all" || type === "payments"){
+    html += "<h3>जमा रिपोर्ट</h3><div class='tablewrap'><table><tr><th>तारीख</th><th>ग्राहक</th><th>राशि</th><th>टिप्पणी</th></tr>";
+    db.payments.forEach(p => {
+      html += `<tr>
+        <td>${safe(p.date)}</td>
+        <td>${safe(getCustomer(p.customerId)?.name || "")}</td>
+        <td>${money(p.amount)}</td>
+        <td>${safe(p.note)}</td>
+      </tr>`;
+    });
+    html += "</table></div>";
+  }
+
+  el.innerHTML = html;
+}
+
+function shareReport(){
+  const el = document.getElementById("reportText");
+  if(el.textContent.includes("रिपोर्ट देखने के लिए")){
+    makeReport();
+  }
+
+  const text = "माँ मनोकामना स्मॉल फाइनेंस रिपोर्ट\nतारीख: " + today() +
+    "\nग्राहक: " + db.customers.length +
+    "\nकुल मूल उधार: " + money(db.loans.reduce((s,l) => s + Number(l.amount || 0),0)) +
+    "\nकुल जमा: " + money(db.payments.reduce((s,p) => s + Number(p.amount || 0),0)) +
+    "\nकुल बकाया: " + money(db.loans.reduce((s,l) => s + loanDue(l),0));
+
+  const url = "https://wa.me/?text=" + encodeURIComponent(text);
+  window.open(url, "_blank");
+}
+
+function downloadBackup(){
+  const blob = new Blob([JSON.stringify(db,null,2)], {
+    type:"application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "maa-manokamna-backup-" + today() + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function restoreBackup(){
+  const file = document.getElementById("restoreFile").files[0];
+  if(!file){
+    alert("पहले बैकअप JSON फाइल चुनें।");
+    return;
+  }
+
+  if(!confirm("रीस्टोर करने से मौजूदा डेटा बदल जाएगा। क्या आपने वर्तमान डेटा का बैकअप लिया है?")) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    try{
+      const parsed = JSON.parse(reader.result);
+
+      if(!Array.isArray(parsed.customers) ||
+         !Array.isArray(parsed.loans) ||
+         !Array.isArray(parsed.payments)){
+        throw new Error("Invalid backup");
+      }
+
+      db = parsed;
+      saveData();
+      showPage("home");
+      alert("बैकअप सफलतापूर्वक रीस्टोर हो गया।");
+    }catch(e){
+      alert("बैकअप फाइल सही नहीं है।");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+document.getElementById("payDate").value = today();
+document.getElementById("payCustomer").addEventListener("change", updatePayLoans);
+
+loadData();
+renderAll();
 </script>
+
 </body>
 </html>
