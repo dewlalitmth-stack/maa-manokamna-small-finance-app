@@ -1,497 +1,480 @@
 <!doctype html>
 
-<html lang="hi">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#10274b">
-<title>माँ मनोकामना स्मॉल फाइनेंस</title>
-<style>
-:root{--navy:#10274b;--blue:#183c69;--gold:#d5a642;--cream:#fbf8f0;--teal:#087f73;--red:#b4233a;--muted:#667085;--line:#e5e7eb}
-*{box-sizing:border-box}
-body{margin:0;background:#f3f5f8;color:#17243a;font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;font-weight:700}
-.app{max-width:1400px;margin:auto}
-.top{background:var(--navy);color:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;position:sticky;top:0;z-index:5}
-.top h1{font-size:20px;margin:0}
-.layout{display:grid;grid-template-columns:220px minmax(0,1fr)}
-aside{padding:15px;background:#fff;border-right:1px solid var(--line);min-height:90vh}
-.nav{display:block;width:100%;text-align:left;background:white;color:#334155;margin:4px 0}
-.nav.active,.nav:hover{background:var(--navy);color:white}
-.main{padding:18px;min-width:0}
-.hero{background:linear-gradient(120deg,#10274b,#244d79);color:white;border-radius:18px;padding:22px;margin-bottom:16px}
-.hero h2{margin:0 0 8px}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
-.stat,.box{background:white;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:13px}
-.stat small{color:var(--muted)}
-.stat strong{display:block;font-size:22px;color:var(--navy);margin-top:6px;overflow-wrap:anywhere}
-.head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.head h3{margin:0;color:var(--navy)}
-.gold{background:var(--gold);color:#17243a}
-.blue{background:var(--navy);color:white}
-.teal{background:var(--teal);color:white}
-.light{background:#eaf0f6;color:var(--navy)}
-.red{background:var(--red);color:white}
-.actions,.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
-.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}
-.field label{font-size:12px;font-weight:800}
-.field input,.field select,.field textarea,.search{width:100%;border:1px solid #cfd7e2;border-radius:9px;padding:10px;background:white}
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px}
-table{border-collapse:collapse;width:100%;min-width:580px;background:white}
-th,td{padding:10px;border-bottom:1px solid #edf0f4;text-align:left;font-size:13px;white-space:nowrap}
-th{background:#edf2f8;color:#263f60}
-tr:last-child td{border-bottom:0}
-.hidden{display:none!important}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #edf0f4}
-.row:last-child{border-bottom:0}
-.muted{color:var(--muted);font-size:12px}
-.empty{text-align:center;color:var(--muted);padding:22px}
-.badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#fff1cb;color:#805a00;font-size:11px}
-.modalbg{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:14px;z-index:20}
-.modal{background:#fffdf8;width:min(650px,100%);max-height:92vh;overflow:auto;border-radius:15px;padding:18px}
-.modalhead{display:flex;justify-content:space-between;align-items:center}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:12px 16px;border-radius:10px;z-index:40;max-width:90vw}
-.mobile{display:none}
-.report{background:white;padding:18px;border:1px solid #e4d7b5;border-radius:12px}
-.report h2{color:#9d1d32}
-.reportgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.reportgrid>div{border:1px solid #e4d7b5;border-radius:8px;padding:10px}
-.reportgrid strong{display:block;color:var(--navy);margin-top:5px}
-.brand-messages{margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:900;line-height:1.45}
-.brand-message{padding:6px 10px;border-radius:10px;border:1px solid #fff;text-align:center;box-shadow:0 2px 5px #0002}
-.brand-message:nth-child(1){background:linear-gradient(90deg,#0039b7,#176bff);color:#fff}
-.brand-message:nth-child(2){background:linear-gradient(90deg,#c91d28,#ff7a00);color:#fff}
-.brand-message:nth-child(3){background:linear-gradient(90deg,#087c32,#19b957);color:#fff}
-.top .brand-messages{max-width:520px}
-@media(max-width:850px){
-.layout{grid-template-columns:1fr}
-aside{display:none}
-.main{padding:12px 10px 78px}
-.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-.mobile{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--navy);justify-content:space-around;padding:6px 2px calc(6px + env(safe-area-inset-bottom));z-index:10}
-.mobile button{background:transparent;color:white;font-size:11px;padding:6px}
-.mobile button.active{color:#f3d98d}
-.grid2{grid-template-columns:1fr}
-.hero{padding:18px}
-.stat{padding:12px}
-}
-@media(max-width:600px){
-.top{align-items:flex-start;flex-wrap:wrap}
-.top>div{width:100%}
-.top h1{font-size:18px}
-.brand-messages{font-size:12px}
-.top>.gold{margin-left:auto}
-}
-@media print{
-.top,aside,.mobile,.no-print,button{display:none!important}
-.layout{display:block}
-.main{padding:0}
-.box{display:none!important}
-.report{border:0;padding:0}
-.tablewrap{overflow:visible}
-table{min-width:0}
-th,td{white-space:normal;font-size:10px;padding:5px}
-@page{size:A4;margin:10mm}
-}
-</style>
-</head>
-<body>
-<div class="app">
-<header class="top">
-  <div>
-    <h1>माँ मनोकामना स्मॉल फाइनेंस</h1>
-    <div class="brand-messages">
-      <div class="brand-message">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>
-      <div class="brand-message">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>
-      <div class="brand-message">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div>
-    </div>
-  </div>
-  <button class="gold" onclick="openLoan()">＋ नया उधार</button>
-</header><div class="layout">
-<aside>
-  <button class="nav active" data-page="home" onclick="page('home')">⌂ डैशबोर्ड</button>
-  <button class="nav" data-page="customers" onclick="page('customers')">♙ ग्राहक खाते</button>
-  <button class="nav" data-page="transactions" onclick="page('transactions')">₹ लेन-देन</button>
-  <button class="nav" data-page="schedule" onclick="page('schedule')">▦ 100 दिन की किस्त</button>
-  <button class="nav" data-page="reports" onclick="page('reports')">▤ रिपोर्ट / PDF</button>
-  <button class="nav" data-page="settings" onclick="page('settings')">⚙ सेटिंग / बैकअप</button>
-  <p class="muted">॥ जय माँ दुर्गा ॥</p>
-</aside><main class="main">
-<section id="page-home" class="page">
-  <div class="hero">
-    <h2>आपका हिसाब, एक जगह</h2>
-    <p>ग्राहक, उधार, रोजाना किस्त और रिपोर्ट—सबका हिसाब एक जगह रखें।</p>
-  </div>
-  <div class="stats">
-    <div class="stat"><small>कुल मूल उधार</small><strong id="s-loan">₹0</strong></div>
-    <div class="stat"><small>कुल जमा राशि</small><strong id="s-paid">₹0</strong></div>
-    <div class="stat"><small>कुल बकाया</small><strong id="s-due">₹0</strong></div>
-    <div class="stat"><small>आज की वसूली</small><strong id="s-today">₹0</strong></div>
-  </div>
-  <div class="box">
-    <div class="head">
-      <h3>त्वरित काम</h3>
-      <div class="actions">
-        <button class="gold" onclick="openCustomer()">＋ ग्राहक जोड़ें</button>
-        <button class="teal" onclick="openPayment()">＋ जमा दर्ज करें</button>
-      </div>
-    </div>
-    <div class="actions">
-      <button class="light" onclick="openLoan()">नया उधार</button>
-      <button class="light" onclick="page('schedule')">किस्त सूची</button>
-      <button class="light" onclick="page('reports')">रिपोर्ट बनाएं</button>
-    </div>
-  </div>
-  <div class="box"><h3>हाल के लेन-देन</h3><div id="recent"></div></div>
-  <div class="box"><h3>बकाया वाले ग्राहक</h3><div id="due-list"></div></div>
-</section><section id="page-customers" class="page hidden">
-  <div class="box">
-    <div class="head"><h3>ग्राहक खाते</h3><button class="gold" onclick="openCustomer()">＋ नया ग्राहक</button></div>
-    <input class="search" id="cq" placeholder="नाम या मोबाइल खोजें" oninput="renderCustomers()">
-    <div id="customers-list"></div>
-  </div>
-  <div id="detail" class="box hidden"></div>
-</section><section id="page-transactions" class="page hidden">
-  <div class="box">
-    <div class="head"><h3>लेन-देन की हिस्ट्री</h3><button class="teal" onclick="openPayment()">＋ जमा दर्ज करें</button></div>
-    <input class="search" id="tq" placeholder="ग्राहक खोजें" oninput="renderTransactions()">
-    <div id="txn"></div>
-  </div>
-</section><section id="page-schedule" class="page hidden">
-  <div class="box">
-    <div class="head"><h3>100 दिन की किस्त योजना</h3><button class="light" onclick="print()">PDF / प्रिंट</button></div>
-    <input class="search" id="sq" placeholder="ग्राहक खोजें" oninput="renderSchedule()">
-    <div id="schedule-list"></div>
-  </div>
-</section><section id="page-reports" class="page hidden">
-  <div class="box no-print">
-    <h3>रिपोर्ट और PDF</h3>
-    <div class="grid2">
-      <div class="field">
-        <label>रिपोर्ट प्रकार</label>
-        <select id="rtype">
-          <option value="all">सभी ग्राहकों का सारांश</option>
-          <option value="customer">एक ग्राहक की रिपोर्ट</option>
-          <option value="daily">दैनिक वसूली रिपोर्ट</option>
-          <option value="monthly">मासिक रिपोर्ट</option>
-          <option value="due">बकाया रिपोर्ट</option>
-        </select>
-      </div>
-      <div class="field"><label>ग्राहक</label><select id="rcustomer"></select></div>
-      <div class="field"><label>शुरू तारीख</label><input id="rfrom" type="date"></div>
-      <div class="field"><label>अंतिम तारीख</label><input id="rto" type="date"></div>
-    </div>
-    <div class="actions">
-      <button class="gold" onclick="generateReport()">रिपोर्ट देखें</button>
-      <button class="blue" onclick="print()">PDF डाउनलोड / प्रिंट</button>
-      <button class="teal" onclick="shareReport()">WhatsApp / शेयर</button>
-    </div>
-  </div>
-  <div id="report" class="box hidden"></div>
-</section><section id="page-settings" class="page hidden">
-  <div class="box">
-    <h3>डेटा और बैकअप</h3>
-    <p class="muted">डेटा इस ब्राउज़र/ऐप के स्थानीय स्टोरेज में सेव होता है। नियमित बैकअप रखें।</p>
-    <div class="actions">
-      <button class="gold" onclick="backup()">⬇ बैकअप डाउनलोड करें</button>
-      <button class="light" onclick="$('file').click()">⬆ बैकअप वापस लोड करें</button>
-      <input id="file" type="file" accept="application/json" class="hidden" onchange="restore(event)">
-    </div>
-  </div>
-  <div class="box">
-    <h3>सुरक्षा</h3>
-    <p>ऐप का स्टोरेज साफ करने या ऐप हटाने से पहले बैकअप डाउनलोड करें।</p>
-    <button class="red" onclick="clearData()">सारा स्थानीय डेटा मिटाएँ</button>
-  </div>
-</section>
-</main>
-</div><nav class="mobile">
-  <button class="active" data-page="home" onclick="page('home')">⌂ होम</button>
-  <button data-page="customers" onclick="page('customers')">♙ ग्राहक</button>
-  <button data-page="transactions" onclick="page('transactions')">₹ लेन-देन</button>
-  <button data-page="reports" onclick="page('reports')">▤ रिपोर्ट</button>
-  <button data-page="settings" onclick="page('settings')">⚙ सेटिंग</button>
-</nav>
-</div>
-<div id="modal"></div>
-<div id="toast" class="toast hidden"></div><script>
-'use strict';
-const KEY='maaManokamnaFinance_v2';
-let db={customers:[],loans:[],payments:[],audit:[]},activeCustomer=null,currentReportText='';
-const $=id=>document.getElementById(id);
-const today=()=>{
-  const d=new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-};
-const money=n=>'₹'+(Number(n)||0).toLocaleString('en-IN',{maximumFractionDigits:2});
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const dateText=d=>d?new Date(d+'T00:00:00').toLocaleDateString('en-IN'):'—';
-
-function normalizeData(x){
-  if(!x||!Array.isArray(x.customers)||!Array.isArray(x.loans)||!Array.isArray(x.payments))return null;
-  return {customers:x.customers,loans:x.loans,payments:x.payments,audit:Array.isArray(x.audit)?x.audit:[]};
-}
-function load(){
-  try{
-    const raw=localStorage.getItem(KEY);
-    if(raw){
-      const x=normalizeData(JSON.parse(raw));
-      if(x)db=x;
-      else alert('पुराना डेटा फ़ॉर्मेट सही नहीं है। स्टोरेज साफ न करें; बैकअप की जाँच करें।');
-    }
-  }catch(e){
-    console.error(e);
-    alert('डेटा पढ़ने में समस्या हुई। ऐप का स्टोरेज साफ न करें।');
-  }
-  renderAll();
-}
-function save(){
-  try{
-    const raw=JSON.stringify(db);
-    localStorage.setItem(KEY,raw);
-    if(localStorage.getItem(KEY)!==raw)throw new Error('Save verification failed');
-    renderAll();
-    return true;
-  }catch(e){
-    console.error(e);
-    alert('डेटा सेव नहीं हो पाया। ऐप का स्टोरेज साफ न करें। यदि बैकअप है तो सुरक्षित रखें।');
-    return false;
-  }
-}
-function toast(t){
-  $('toast').textContent=t;
-  $('toast').classList.remove('hidden');
-  setTimeout(()=>$('toast').classList.add('hidden'),2800);
-}
-function page(p){
-  document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));
-  $('page-'+p)?.classList.remove('hidden');
-  document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));
-  if(p==='customers')renderCustomers();
-  if(p==='transactions')renderTransactions();
-  if(p==='schedule')renderSchedule();
-  if(p==='reports')fillReportCustomers();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function customer(id){return db.customers.find(c=>c.id===id)}
-function loan(id){return db.loans.find(l=>l.id===id)}
-function customerLoans(id){return db.loans.filter(l=>l.customerId===id)}
-function paymentsForLoan(id){return db.payments.filter(p=>p.loanId===id)}
-function paidForLoan(id){return paymentsForLoan(id).reduce((s,p)=>s+Number(p.amount||0),0)}
-function totalPayable(l){return Number(l.totalPayable||l.principal||0)}
-function outstanding(l){return Math.max(0,totalPayable(l)-paidForLoan(l.id))}
-function customerDue(id){return customerLoans(id).reduce((s,l)=>s+outstanding(l),0)}
-function addAudit(action,oldVal,newVal,cid){
-  db.audit.unshift({id:uid(),date:new Date().toISOString(),action,oldVal,newVal,customerId:cid});
-}
-function renderAll(){
-  renderStats();renderRecent();renderDue();renderCustomers();renderTransactions();renderSchedule();fillReportCustomers();
-}
-function renderStats(){
-  $('s-loan').textContent=money(db.loans.reduce((s,l)=>s+Number(l.principal||0),0));
-  $('s-paid').textContent=money(db.payments.reduce((s,p)=>s+Number(p.amount||0),0));
-  $('s-due').textContent=money(db.loans.reduce((s,l)=>s+outstanding(l),0));
-  $('s-today').textContent=money(db.payments.filter(p=>p.date===today()).reduce((s,p)=>s+Number(p.amount||0),0));
-}
-function renderRecent(){
-  let a=[...db.payments.map(p=>({...p,type:'जमा'})),...db.loans.map(l=>({...l,type:'उधार',amount:l.principal,date:l.startDate}))]
-    .sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,8);
-  $('recent').innerHTML=a.length?a.map(x=>`<div class="row"><span><b>${esc(customer(x.customerId)?.name||'ग्राहक')}</b><br><small class="muted">${x.type} • ${dateText(x.date)}</small></span><b>${money(x.amount)}</b></div>`).join(''):'<div class="empty">अभी कोई लेन-देन नहीं है।</div>';
-}
-function renderDue(){
-  let a=db.customers.filter(c=>customerDue(c.id)>0).sort((a,b)=>customerDue(b.id)-customerDue(a.id)).slice(0,8);
-  $('due-list').innerHTML=a.length?a.map(c=>`<div class="row"><span><b>${esc(c.name)}</b><br><small class="muted">${esc(c.phone||'मोबाइल नहीं')}</small></span><span><b>${money(customerDue(c.id))}</b> <button class="light" onclick="viewCustomer('${c.id}')">खाता</button></span></div>`).join(''):'<div class="empty">अभी बकाया नहीं है।</div>';
-}
-function openModal(title,body){
-  $('modal').innerHTML=`<div class="modalbg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modalhead"><h3>${title}</h3><button class="light" onclick="closeModal()">✕</button></div>${body}</div></div>`;
-}
-function closeModal(){$('modal').innerHTML=''}
-function openCustomer(c=null){
-  openModal(c?'ग्राहक एडिट करें':'नया ग्राहक',`<form onsubmit="saveCustomer(event,'${c?.id||''}')"><div class="grid2"><div class="field"><label>ग्राहक का नाम *</label><input name="name" required value="${esc(c?.name||'')}"></div><div class="field"><label>मोबाइल</label><input name="phone" value="${esc(c?.phone||'')}"></div><div class="field"><label>पिता / अभिभावक</label><input name="father" value="${esc(c?.father||'')}"></div><div class="field"><label>पता</label><input name="address" value="${esc(c?.address||'')}"></div></div><button class="gold">सेव करें</button></form>`);
-}
-function saveCustomer(e,id){
-  e.preventDefault();
-  const f=new FormData(e.target),v={name:f.get('name').trim(),phone:f.get('phone').trim(),father:f.get('father').trim(),address:f.get('address').trim()};
-  if(id){
-    const c=customer(id),old=JSON.stringify(c);
-    Object.assign(c,v);addAudit('ग्राहक संपादन',old,JSON.stringify(v),id);
-  }else{
-    v.id=uid();v.createdAt=today();db.customers.push(v);addAudit('नया ग्राहक',null,JSON.stringify(v),v.id);
-  }
-  if(!save())return;
-  closeModal();toast('ग्राहक सेव हो गया');
-}
-function openLoan(pre=''){
-  if(!db.customers.length){toast('पहले ग्राहक जोड़ें');openCustomer();return}
-  const opts=db.customers.map(c=>`<option value="${c.id}" ${pre===c.id?'selected':''}>${esc(c.name)} ${esc(c.phone||'')}</option>`).join('');
-  openModal('नया उधार / 100 दिन की योजना',`<form onsubmit="saveLoan(event)"><div class="field"><label>ग्राहक *</label><select name="customerId" required>${opts}</select></div><div class="grid2"><div class="field"><label>मूल उधार राशि (₹)</label><input name="principal" type="number" min="1" step=".01" required></div><div class="field"><label>कुल वापसी राशि (₹)</label><input name="totalPayable" type="number" min="1" step=".01" required></div><div class="field"><label>तारीख</label><input name="startDate" type="date" value="${today()}" required></div></div><p class="muted">कुल वापसी राशि और किसी शुल्क की जानकारी ग्राहक को स्पष्ट दें।</p><button class="gold">उधार सेव करें</button></form>`);
-}
-function saveLoan(e){
-  e.preventDefault();
-  const f=new FormData(e.target),p=Number(f.get('principal')),t=Number(f.get('totalPayable'));
-  if(p<=0||t<p){toast('कुल वापसी राशि मूल उधार से कम नहीं हो सकती');return}
-  const l={id:uid(),customerId:f.get('customerId'),principal:p,totalPayable:t,startDate:f.get('startDate'),days:100};
-  db.loans.push(l);addAudit('नया उधार',null,JSON.stringify(l),l.customerId);
-  if(!save())return;
-  closeModal();toast('उधार सेव हो गया');viewCustomer(l.customerId);
-}
-function openPayment(pre='',edit=''){
-  if(!db.loans.length){toast('पहले उधार दर्ज करें');openLoan();return}
-  const old=db.payments.find(p=>p.id===edit);
-  const opts=db.loans.map(l=>`<option value="${l.id}" ${(pre||old?.loanId)===l.id?'selected':''}>${esc(customer(l.customerId)?.name||'ग्राहक')} — बकाया ${money(outstanding(l))}</option>`).join('');
-  openModal(old?'जमा राशि एडिट करें':'जमा राशि दर्ज करें',`<form onsubmit="savePayment(event,'${edit}')"><div class="field"><label>उधार खाता</label><select name="loanId" required>${opts}</select></div><div class="grid2"><div class="field"><label>राशि (₹)</label><input name="amount" type="number" min=".01" step=".01" required value="${old?.amount??''}"></div><div class="field"><label>तारीख</label><input name="date" type="date" required value="${old?.date||today()}"></div><div class="field"><label>तरीका</label><select name="method"><option>नकद</option><option>UPI</option><option>बैंक</option><option>अन्य</option></select></div><div class="field"><label>नोट / रसीद</label><input name="note" value="${esc(old?.note||'')}"></div></div><button class="gold">सेव करें</button></form>`);
-}
-function savePayment(e,id){
-  e.preventDefault();
-  const f=new FormData(e.target),v={loanId:f.get('loanId'),amount:Number(f.get('amount')),date:f.get('date'),method:f.get('method'),note:f.get('note').trim()};
-  if(v.amount<=0){toast('राशि शून्य से अधिक हो');return}
-  const l=loan(v.loanId);if(!l)return;
-  if(!id&&v.amount>outstanding(l)&&!confirm('राशि बकाया से अधिक है। फिर भी सेव करें?'))return;
-  if(id){
-    const p=db.payments.find(x=>x.id===id),old=JSON.stringify(p);
-    Object.assign(p,v);addAudit('जमा एडिट',old,JSON.stringify(p),l.customerId);
-  }else{
-    v.id=uid();v.createdAt=new Date().toISOString();db.payments.push(v);addAudit('जमा दर्ज',null,JSON.stringify(v),l.customerId);
-  }
-  if(!save())return;
-  closeModal();toast('भुगतान सेव हो गया');viewCustomer(l.customerId);
-}
-function renderCustomers(){
-  const q=($('cq')?.value||'').toLowerCase();
-  const a=db.customers.filter(c=>(c.name+' '+c.phone+' '+c.address).toLowerCase().includes(q));
-  $('customers-list').innerHTML=a.length?a.map(c=>`<div class="row"><span><b>${esc(c.name)}</b><br><small class="muted">${esc(c.phone||'मोबाइल नहीं')} • बकाया ${money(customerDue(c.id))}</small></span><button class="light" onclick="viewCustomer('${c.id}')">खाता खोलें</button></div>`).join(''):'<div class="empty">कोई ग्राहक नहीं मिला।</div>';
-}
-function viewCustomer(id){
-  activeCustomer=id;
-  const c=customer(id);if(!c)return;
-  page('customers');
-  $('detail').classList.remove('hidden');
-  const ls=customerLoans(id);
-  $('detail').innerHTML=`<div class="head"><div><h3>${esc(c.name)}</h3><p class="muted">${esc(c.phone||'')} ${esc(c.address||'')}</p></div><div class="actions"><button class="light" onclick="openCustomer(customer('${id}'))">एडिट</button><button class="gold" onclick="openLoan('${id}')">＋ उधार</button><button class="teal" onclick="openPayment('${ls.find(l=>outstanding(l)>0)?.id||ls[0]?.id||''}')">＋ जमा</button></div></div><div class="reportgrid"><div>मूल उधार<strong>${money(ls.reduce((s,l)=>s+l.principal,0))}</strong></div><div>कुल जमा<strong>${money(ls.reduce((s,l)=>s+paidForLoan(l.id),0))}</strong></div><div>बकाया<strong>${money(customerDue(id))}</strong></div></div><h3>उधार खाते</h3>${ls.map(l=>`<div class="row"><span>मूल ${money(l.principal)}<br><small class="muted">${dateText(l.startDate)} • रोज ${money(totalPayable(l)/100)}</small></span><span>बकाया ${money(outstanding(l))}<br><button class="teal" onclick="openPayment('${l.id}')">＋ जमा</button></span></div>`).join('')||'<p class="empty">अभी उधार दर्ज नहीं है।</p>'}<h3>जमा राशि</h3><div class="tablewrap"><table><thead><tr><th>तारीख</th><th>राशि</th><th>तरीका</th><th>नोट</th><th>कार्रवाई</th></tr></thead><tbody>${db.payments.filter(p=>loan(p.loanId)?.customerId===id).map(p=>`<tr><td>${dateText(p.date)}</td><td>${money(p.amount)}</td><td>${esc(p.method||'')}</td><td>${esc(p.note||'')}</td><td><button class="light" onclick="openPayment('${p.loanId}','${p.id}')">एडिट</button> <button class="red" onclick="deletePayment('${p.id}')">रद्द</button></td></tr>`).join('')||'<tr><td colspan="5">जमा नहीं है</td></tr>'}</tbody></table></div>`;
-}
-function deletePayment(id){
-  const p=db.payments.find(x=>x.id===id);
-  if(!p||!confirm('इस भुगतान को रद्द करें?'))return;
-  addAudit('भुगतान रद्द',JSON.stringify(p),null,loan(p.loanId)?.customerId);
-  db.payments=db.payments.filter(x=>x.id!==id);
-  if(!save())return;
-  viewCustomer(activeCustomer);toast('भुगतान रद्द किया गया');
-}
-function renderTransactions(){
-  const q=($('tq')?.value||'').toLowerCase();
-  const a=[...db.payments.map(p=>({...p,type:'जमा'})),...db.loans.map(l=>({...l,type:'उधार',amount:l.principal,date:l.startDate}))]
-    .filter(x=>(customer(x.customerId)?.name||'').toLowerCase().includes(q))
-    .sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  $('txn').innerHTML=a.length?`<div class="tablewrap"><table><thead><tr><th>तारीख</th><th>ग्राहक</th><th>प्रकार</th><th>राशि</th></tr></thead><tbody>${a.map(x=>`<tr><td>${dateText(x.date)}</td><td>${esc(customer(x.customerId)?.name||'')}</td><td>${x.type}</td><td>${money(x.amount)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">कोई लेन-देन नहीं।</div>';
-}
-function scheduleRows(l){
-  const daily=totalPayable(l)/100;
-  return Array.from({length:100},(_,i)=>{
-    const d=new Date(l.startDate+'T00:00:00');
-    d.setDate(d.getDate()+i);
-    const date=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    const paid=paymentsForLoan(l.id).filter(p=>p.date<=date).reduce((s,p)=>s+p.amount,0);
-    return {day:i+1,date,amount:Math.min(daily,Math.max(0,totalPayable(l)-i*daily)),state:paid>=Math.min(totalPayable(l),(i+1)*daily)-.001?'जमा':date<today()?'विलंबित':'देय'};
-  });
-}
-function renderSchedule(){
-  const q=($('sq')?.value||'').toLowerCase();
-  const a=db.loans.filter(l=>(customer(l.customerId)?.name||'').toLowerCase().includes(q));
-  $('schedule-list').innerHTML=a.length?a.map(l=>`<div class="row"><span><b>${esc(customer(l.customerId)?.name||'')}</b><br><small class="muted">${money(l.principal)} • कुल ${money(totalPayable(l))}</small></span><button class="light" onclick="showSchedule('${l.id}')">100 दिन देखें</button></div>`).join(''):'<div class="empty">किस्त दिखाने के लिए उधार दर्ज करें।</div>';
-}
-function showSchedule(id){
-  const l=loan(id);if(!l)return;
-  const rows=scheduleRows(l);
-  openModal('100 दिन की किस्त',`<p>${esc(customer(l.customerId)?.name||'')} • रोज ${money(totalPayable(l)/100)}</p><div class="tablewrap"><table><thead><tr><th>दिन</th><th>तारीख</th><th>किस्त</th><th>स्थिति</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.day}</td><td>${dateText(r.date)}</td><td>${money(r.amount)}</td><td>${r.state}</td></tr>`).join('')}</tbody></table></div><button class="gold" onclick="closeModal();print()">PDF / प्रिंट</button>`);
-}
-function fillReportCustomers(){
-  const s=$('rcustomer');if(!s)return;
-  const old=s.value;
-  s.innerHTML='<option value="">सभी / ग्राहक चुनें</option>'+db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');
-  if(db.customers.some(c=>c.id===old))s.value=old;
-}
-function generateReport(){
-  const type=$('rtype').value,cid=$('rcustomer').value,from=$('rfrom').value,to=$('rto').value;
-  if(type==='customer'&&!cid){toast('ग्राहक चुनें');return}
-  const loans=db.loans.filter(l=>(!cid||l.customerId===cid)&&(!from||l.startDate>=from)&&(!to||l.startDate<=to));
-  const pays=db.payments.filter(p=>(!cid||loan(p.loanId)?.customerId===cid)&&(!from||p.date>=from)&&(!to||p.date<=to));
-  let cs=db.customers.filter(c=>(!cid||c.id===cid)&&(type!=='due'||customerDue(c.id)>0));
-  if(type==='daily')cs=cs.filter(c=>pays.some(p=>loan(p.loanId)?.customerId===c.id&&p.date===today()));
-  if(type==='monthly'){
-    const m=today().slice(0,7);
-    cs=cs.filter(c=>pays.some(p=>loan(p.loanId)?.customerId===c.id&&p.date.startsWith(m)));
-  }
-  const principal=loans.reduce((s,l)=>s+l.principal,0),paid=pays.reduce((s,p)=>s+p.amount,0);
-  const html=`<div class="report">
-    <h2>माँ मनोकामना स्मॉल फाइनेंस</h2>
-    <div class="brand-messages">
-      <div class="brand-message">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>
-      <div class="brand-message">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>
-      <div class="brand-message">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div>
-    </div>
-    <h3>${esc($('rtype').selectedOptions[0].text)}</h3>
-    <p>रिपोर्ट तारीख: ${dateText(today())}</p>
-    <div class="reportgrid">
-      <div>मूल उधार<strong>${money(principal)}</strong></div>
-      <div>चुनी अवधि में जमा<strong>${money(paid)}</strong></div>
-      <div>वर्तमान बकाया<strong>${money(loans.reduce((s,l)=>s+outstanding(l),0))}</strong></div>
-    </div>
-    <h3>ग्राहक सारांश</h3>
-    <div class="tablewrap"><table><thead><tr><th>नाम</th><th>मोबाइल</th><th>मूल उधार</th><th>कुल जमा</th><th>बकाया</th></tr></thead><tbody>
-    ${cs.map(c=>{
-      const ls=loans.filter(l=>l.customerId===c.id);
-      const cp=pays.filter(p=>loan(p.loanId)?.customerId===c.id).reduce((s,p)=>s+p.amount,0);
-      return `<tr><td>${esc(c.name)}</td><td>${esc(c.phone||'—')}</td><td>${money(ls.reduce((s,l)=>s+l.principal,0))}</td><td>${money(cp)}</td><td>${money(customerDue(c.id))}</td></tr>`;
-    }).join('')||'<tr><td colspan="5">कोई रिकॉर्ड नहीं</td></tr>'}
-    </tbody></table></div>
-    <h3>जमा लेन-देन</h3>
-    <div class="tablewrap"><table><thead><tr><th>तारीख</th><th>ग्राहक</th><th>राशि</th><th>तरीका</th></tr></thead><tbody>
-    ${pays.map(p=>`<tr><td>${dateText(p.date)}</td><td>${esc(customer(loan(p.loanId)?.customerId)?.name||'')}</td><td>${money(p.amount)}</td><td>${esc(p.method||'')}</td></tr>`).join('')||'<tr><td colspan="4">कोई जमा नहीं</td></tr>'}
-    </tbody></table></div>
-    <p class="muted">यह रिपोर्ट ऐप में दर्ज जानकारी पर आधारित है।</p>
-  </div>`;
-  $('report').classList.remove('hidden');
-  $('report').innerHTML=html;
-  currentReportText=$('report').innerText;
-}
-function shareReport(){
-  if(!currentReportText)generateReport();
-  if(currentReportText)window.open('https://wa.me/?text='+encodeURIComponent(currentReportText.slice(0,3000)),'_blank');
-}
-function backup(){
-  const blob=new Blob([JSON.stringify({...db,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='maa-manokamna-backup-'+today()+'.json';
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  toast('बैकअप डाउनलोड शुरू हुआ');
-}
-function restore(e){
-  const f=e.target.files[0];if(!f)return;
-  const reader=new FileReader();
-  reader.onload=()=>{
-    try{
-      const x=normalizeData(JSON.parse(reader.result));
-      if(!x)throw Error('Invalid backup');
-      if(!confirm('मौजूदा डेटा को बैकअप से बदलें? पहले मौजूदा बैकअप सुरक्षित करें।'))return;
-      const old=db;db=x;
-      if(!save()){db=old;renderAll();return}
-      toast('बैकअप वापस लोड हो गया');
-    }catch(err){alert('बैकअप फ़ाइल सही नहीं है।')}
-    finally{e.target.value=''}
-  };
-  reader.readAsText(f);
-}
-function clearData(){
-  if(!confirm('सभी ग्राहक, उधार और भुगतान स्थायी रूप से मिट जाएँगे। क्या आपने बैकअप डाउनलोड किया है?'))return;
-  db={customers:[],loans:[],payments:[],audit:[]};
-  if(!save())return;
-  $('detail').classList.add('hidden');
-  toast('स्थानीय डेटा मिटा दिया गया');
-}
-load();
-</script></body>
+<html lang="hi">  
+<head>  
+<meta charset="utf-8">  
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">  
+<meta name="theme-color" content="#10274b">  
+<title>माँ मनोकामना स्मॉल फाइनेंस</title>  
+<style>  
+:root{--navy:#10274b;--blue:#183c69;--gold:#d5a642;--cream:#fbf8f0;--teal:#087f73;--red:#b4233a;--muted:#667085;--line:#e5e7eb}  
+*{box-sizing:border-box}  
+body{margin:0;background:#f3f5f8;color:#17243a;font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif}  
+button,input,select,textarea{font:inherit}  
+button{cursor:pointer;border:0;border-radius:9px;padding:10px 13px;font-weight:700}  
+.app{max-width:1400px;margin:auto}  
+.top{background:var(--navy);color:white;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:5}  
+.top h1{font-size:20px;margin:0}  
+.top small{color:#f3d98d}  
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr)}  
+aside{padding:15px;background:#fff;border-right:1px solid var(--line);min-height:90vh}  
+.nav{display:block;width:100%;text-align:left;background:white;color:#334155;margin:4px 0}  
+.nav.active,.nav:hover{background:var(--navy);color:white}  
+.main{padding:18px;min-width:0}  
+.hero{background:linear-gradient(120deg,#10274b,#244d79);color:white;border-radius:18px;padding:22px;margin-bottom:16px}  
+.hero h2{margin:0 0 8px}  
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}  
+.stat,.box{background:white;border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:13px}  
+.stat small{color:var(--muted)}  
+.stat strong{display:block;font-size:22px;color:var(--navy);margin-top:6px;overflow-wrap:anywhere}  
+.head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}  
+.head h3{margin:0;color:var(--navy)}  
+.gold{background:var(--gold);color:#17243a}  
+.blue{background:var(--navy);color:white}  
+.teal{background:var(--teal);color:white}  
+.light{background:#eaf0f6;color:var(--navy)}  
+.red{background:var(--red);color:white}  
+.actions,.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}  
+.field{display:flex;flex-direction:column;gap:5px;margin:10px 0}  
+.field label{font-size:12px;font-weight:800}  
+.field input,.field select,.field textarea,.search{width:100%;border:1px solid #cfd7e2;border-radius:9px;padding:10px;background:white}  
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}  
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:10px}  
+table{border-collapse:collapse;width:100%;min-width:580px;background:white}  
+th,td{padding:10px;border-bottom:1px solid #edf0f4;text-align:left;font-size:13px;white-space:nowrap}  
+th{background:#edf2f8;color:#263f60}  
+tr:last-child td{border-bottom:0}  
+.hidden{display:none!important}  
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #edf0f4}  
+.row:last-child{border-bottom:0}  
+.muted{color:var(--muted);font-size:12px}  
+.empty{text-align:center;color:var(--muted);padding:22px}  
+.badge{display:inline-block;padding:4px 8px;border-radius:20px;background:#fff1cb;color:#805a00;font-size:11px}  
+.modalbg{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:14px;z-index:20}  
+.modal{background:#fffdf8;width:min(650px,100%);max-height:92vh;overflow:auto;border-radius:15px;padding:18px}  
+.modalhead{display:flex;justify-content:space-between;align-items:center}  
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:12px 16px;border-radius:10px;z-index:40;max-width:90vw}  
+.mobile{display:none}  
+.report{background:white;padding:18px;border:1px solid #e4d7b5;border-radius:12px}  
+.report h2{color:#9d1d32}  
+.reportgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}  
+.reportgrid>div{border:1px solid #e4d7b5;border-radius:8px;padding:10px}  
+.reportgrid strong{display:block;color:var(--navy);margin-top:5px}  
+@media(max-width:850px){  
+.layout{grid-template-columns:1fr}  
+aside{display:none}  
+.main{padding:12px 10px 78px}  
+.stats{grid-template-columns:repeat(2,minmax(0,1fr))}  
+.mobile{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--navy);justify-content:space-around;padding:6px 2px calc(6px + env(safe-area-inset-bottom));z-index:10}  
+.mobile button{background:transparent;color:white;font-size:11px;padding:6px}  
+.mobile button.active{color:#f3d98d}  
+.grid2{grid-template-columns:1fr}  
+.hero{padding:18px}  
+.stat{padding:12px}  
+}  
+.brand-messages{margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:clamp(13px,2.3vw,17px);font-weight:900;line-height:1.4}  
+.brand-message{padding:7px 10px;border-radius:12px;border:2px solid #fff;text-align:center;box-shadow:0 3px 8px #0002}  
+.brand-message:nth-child(1){background:linear-gradient(90deg,#0039b7,#176bff);color:#fff}  
+.brand-message:nth-child(2){background:linear-gradient(90deg,#c91d28,#ff7a00);color:#fff}  
+.brand-message:nth-child(3){background:linear-gradient(90deg,#087c32,#19b957);color:#fff}  
+.report-brand{margin:12px 0 18px}  
+@media print{  
+.brand-messages{break-inside:avoid}  
+.report-brand{margin-top:8px}  
+.top,aside,.mobile,.no-print,button{display:none!important}  
+.layout{display:block}  
+.main{padding:0}  
+.box{display:none!important}  
+.report{border:0;padding:0}  
+.tablewrap{overflow:visible}  
+table{min-width:0}  
+th,td{white-space:normal;font-size:10px;padding:5px}  
+@page{size:A4;margin:10mm}  
+}  
+</style>  
+</head>  
+<body>  
+<div class="app">  
+<header class="top">  
+<div style="min-width:0;flex:1">  
+<h1>माँ मनोकामना स्मॉल फाइनेंस</h1>  
+<div class="brand-messages">  
+<div class="brand-message">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>  
+<div class="brand-message">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>  
+<div class="brand-message">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div>  
+</div>  
+</div>  
+<button class="gold" onclick="openLoan()">＋ नया उधार</button>  
+</header>  
+<div class="layout">  
+<aside>  
+<button class="nav active" data-page="home" onclick="page('home')">⌂ डैशबोर्ड</button>  
+<button class="nav" data-page="customers" onclick="page('customers')">♙ ग्राहक खाते</button>  
+<button class="nav" data-page="transactions" onclick="page('transactions')">₹ लेन-देन</button>  
+<button class="nav" data-page="schedule" onclick="page('schedule')">▦ 100 दिन की किस्त</button>  
+<button class="nav" data-page="reports" onclick="page('reports')">▤ रिपोर्ट / PDF</button>  
+<button class="nav" data-page="settings" onclick="page('settings')">⚙ सेटिंग / बैकअप</button>  
+<p class="muted">॥ जय माँ दुर्गा ॥</p>  
+</aside>  
+<main class="main">  
+<section id="page-home" class="page">  
+<div class="hero">  
+<h2>आपकी सेवा में सदैव तत्पर</h2>  
+<p>ग्राहक, उधार, रोजाना किस्त और रिपोर्ट—सबका हिसाब एक जगह रखें।</p>  
+</div>  
+<div class="stats">  
+<div class="stat"><small>कुल मूल उधार</small><strong id="s-loan">₹0</strong></div>  
+<div class="stat"><small>कुल जमा राशि</small><strong id="s-paid">₹0</strong></div>  
+<div class="stat"><small>कुल बकाया</small><strong id="s-due">₹0</strong></div>  
+<div class="stat"><small>आज की वसूली</small><strong id="s-today">₹0</strong></div>  
+</div>  
+<div class="box">  
+<div class="head"><h3>त्वरित काम</h3>  
+<div class="actions">  
+<button class="gold" onclick="openCustomer()">＋ ग्राहक जोड़ें</button>  
+<button class="teal" onclick="openPayment()">＋ जमा दर्ज करें</button>  
+</div>  
+</div>  
+<div class="actions">  
+<button class="light" onclick="openLoan()">नया उधार</button>  
+<button class="light" onclick="page('schedule')">किस्त सूची</button>  
+<button class="light" onclick="page('reports')">रिपोर्ट बनाएं</button>  
+</div>  
+</div>  
+<div class="box"><h3>हाल के लेन-देन</h3><div id="recent"></div></div>  
+<div class="box"><h3>बकाया वाले ग्राहक</h3><div id="due-list"></div></div>  
+</section>  
+<section id="page-customers" class="page hidden">  
+<div class="box">  
+<div class="head"><h3>ग्राहक खाते</h3><button class="gold" onclick="openCustomer()">＋ नया ग्राहक</button></div>  
+<input class="search" id="cq" placeholder="नाम या मोबाइल खोजें" oninput="renderCustomers()">  
+<div id="customers-list"></div>  
+</div>  
+<div id="detail" class="box hidden"></div>  
+</section>  
+<section id="page-transactions" class="page hidden">  
+<div class="box">  
+<div class="head"><h3>लेन-देन की हिस्ट्री</h3><button class="teal" onclick="openPayment()">＋ जमा दर्ज करें</button></div>  
+<input class="search" id="tq" placeholder="ग्राहक खोजें" oninput="renderTransactions()">  
+<div id="txn"></div>  
+</div>  
+</section>  
+<section id="page-schedule" class="page hidden">  
+<div class="box">  
+<div class="head"><h3>100 दिन की किस्त योजना</h3><button class="light" onclick="print()">PDF / प्रिंट</button></div>  
+<input class="search" id="sq" placeholder="ग्राहक खोजें" oninput="renderSchedule()">  
+<div id="schedule-list"></div>  
+</div>  
+</section>  
+<section id="page-reports" class="page hidden">  
+<div class="box no-print">  
+<h3>रिपोर्ट और PDF</h3>  
+<div class="grid2">  
+<div class="field"><label>रिपोर्ट प्रकार</label>  
+<select id="rtype">  
+<option value="all">सभी ग्राहकों का सारांश</option>  
+<option value="customer">एक ग्राहक की रिपोर्ट</option>  
+<option value="daily">दैनिक वसूली रिपोर्ट</option>  
+<option value="monthly">मासिक रिपोर्ट</option>  
+<option value="due">बकाया रिपोर्ट</option>  
+</select>  
+</div>  
+<div class="field"><label>ग्राहक</label><select id="rcustomer"></select></div>  
+<div class="field"><label>शुरू तारीख</label><input id="rfrom" type="date"></div>  
+<div class="field"><label>अंतिम तारीख</label><input id="rto" type="date"></div>  
+</div>  
+<div class="actions">  
+<button class="gold" onclick="generateReport()">रिपोर्ट देखें</button>  
+<button class="blue" onclick="print()">PDF डाउनलोड / प्रिंट</button>  
+<button class="teal" onclick="shareReport()">WhatsApp / शेयर</button>  
+</div>  
+</div>  
+<div id="report" class="box hidden"></div>  
+</section>  
+<section id="page-settings" class="page hidden">  
+<div class="box">  
+<h3>डेटा और बैकअप</h3>  
+<p class="muted">डेटा इस ब्राउज़र/ऐप के स्थानीय स्टोरेज में सेव होता है। नियमित बैकअप रखें।</p>  
+<div class="actions">  
+<button class="gold" onclick="backup()">⬇ बैकअप डाउनलोड करें</button>  
+<button class="light" onclick="$('file').click()">⬆ बैकअप वापस लोड करें</button>  
+<input id="file" type="file" accept="application/json" class="hidden" onchange="restore(event)">  
+</div>  
+</div>  
+<div class="box">  
+<h3>सुरक्षा</h3>  
+<p>ऐप का स्टोरेज साफ करने या ऐप हटाने से पहले बैकअप डाउनलोड करें।</p>  
+<button class="red" onclick="clearData()">सारा स्थानीय डेटा मिटाएँ</button>  
+</div>  
+</section>  
+</main>  
+</div>  
+<nav class="mobile">  
+<button class="active" data-page="home" onclick="page('home')">⌂ होम</button>  
+<button data-page="customers" onclick="page('customers')">♙ ग्राहक</button>  
+<button data-page="transactions" onclick="page('transactions')">₹ लेन-देन</button>  
+<button data-page="reports" onclick="page('reports')">▤ रिपोर्ट</button>  
+<button data-page="settings" onclick="page('settings')">⚙ सेटिंग</button>  
+</nav>  
+</div>  
+<div id="modal"></div>  
+<div id="toast" class="toast hidden"></div>  
+<script>  
+'use strict';  
+const KEY='maaManokamnaFinance_v2';  
+let db={customers:[],loans:[],payments:[],audit:[]},activeCustomer=null,currentReportText='';  
+const $=id=>document.getElementById(id);  
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};  
+const money=n=>'₹'+(Number(n)||0).toLocaleString('en-IN',{maximumFractionDigits:2});  
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);  
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));  
+const dateText=d=>d?new Date(d+'T00:00:00').toLocaleDateString('en-IN'):'—';  
+function normalizeData(x){  
+if(!x||!Array.isArray(x.customers)||!Array.isArray(x.loans)||!Array.isArray(x.payments))return null;  
+return {customers:x.customers,loans:x.loans,payments:x.payments,audit:Array.isArray(x.audit)?x.audit:[]}  
+}  
+function load(){  
+try{  
+const raw=localStorage.getItem(KEY);  
+if(raw){  
+const x=normalizeData(JSON.parse(raw));  
+if(x)db=x;  
+else alert('पुराना डेटा फ़ॉर्मेट सही नहीं है। स्टोरेज साफ न करें; बैकअप की जाँच करें।');  
+}  
+}catch(e){console.error(e);alert('डेटा पढ़ने में समस्या हुई। ऐप का स्टोरेज साफ न करें।')}  
+renderAll()  
+}  
+function save(){  
+try{  
+const raw=JSON.stringify(db);  
+localStorage.setItem(KEY,raw);  
+if(localStorage.getItem(KEY)!==raw)throw new Error('Save verification failed');  
+renderAll();return true  
+}catch(e){  
+console.error(e);  
+alert('डेटा सेव नहीं हो पाया। ऐप का स्टोरेज साफ न करें। यदि बैकअप है तो सुरक्षित रखें।');  
+return false  
+}  
+}  
+function toast(t){  
+$('toast').textContent=t;  
+$('toast').classList.remove('hidden');  
+setTimeout(()=>$('toast').classList.add('hidden'),2800)  
+}  
+function page(p){  
+document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));  
+$('page-'+p)?.classList.remove('hidden');  
+document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===p));  
+if(p==='customers')renderCustomers();  
+if(p==='transactions')renderTransactions();  
+if(p==='schedule')renderSchedule();  
+if(p==='reports')fillReportCustomers();  
+window.scrollTo({top:0,behavior:'smooth'})  
+}  
+function customer(id){return db.customers.find(c=>c.id===id)}  
+function loan(id){return db.loans.find(l=>l.id===id)}  
+function customerLoans(id){return db.loans.filter(l=>l.customerId===id)}  
+function paymentsForLoan(id){return db.payments.filter(p=>p.loanId===id)}  
+function paidForLoan(id){return paymentsForLoan(id).reduce((s,p)=>s+Number(p.amount||0),0)}  
+function totalPayable(l){return Number(l.totalPayable||l.principal||0)}  
+function outstanding(l){return Math.max(0,totalPayable(l)-paidForLoan(l.id))}  
+function customerDue(id){return customerLoans(id).reduce((s,l)=>s+outstanding(l),0)}  
+function addAudit(action,oldVal,newVal,cid){  
+db.audit.unshift({id:uid(),date:new Date().toISOString(),action,oldVal,newVal,customerId:cid})  
+}  
+function renderAll(){  
+renderStats();renderRecent();renderDue();renderCustomers();renderTransactions();renderSchedule();fillReportCustomers()  
+}  
+function renderStats(){  
+$('s-loan').textContent=money(db.loans.reduce((s,l)=>s+Number(l.principal||0),0));  
+$('s-paid').textContent=money(db.payments.reduce((s,p)=>s+Number(p.amount||0),0));  
+$('s-due').textContent=money(db.loans.reduce((s,l)=>s+outstanding(l),0));  
+$('s-today').textContent=money(db.payments.filter(p=>p.date===today()).reduce((s,p)=>s+Number(p.amount||0),0))  
+}  
+function renderRecent(){  
+let a=[...db.payments.map(p=>({...p,type:'जमा'})),...db.loans.map(l=>({...l,type:'उधार',amount:l.principal,date:l.startDate}))].sort((a,b)=>(b.date||'').localeCompare(a.date||'')).slice(0,8);  
+$('recent').innerHTML=a.length?a.map(x=>`<div class="row"><span><b>${esc(customer(x.customerId)?.name||'ग्राहक')}</b><br><small class="muted">${x.type} • ${dateText(x.date)}</small></span><b>${money(x.amount)}</b></div>`).join(''):'<div class="empty">अभी कोई लेन-देन नहीं है।</div>'  
+}  
+function renderDue(){  
+let a=db.customers.filter(c=>customerDue(c.id)>0).sort((a,b)=>customerDue(b.id)-customerDue(a.id)).slice(0,8);  
+$('due-list').innerHTML=a.length?a.map(c=>`<div class="row"><span><b>${esc(c.name)}</b><br><small class="muted">${esc(c.phone||'मोबाइल नहीं')}</small></span><span><b>${money(customerDue(c.id))}</b> <button class="light" onclick="viewCustomer('${c.id}')">खाता</button></span></div>`).join(''):'<div class="empty">अभी बकाया नहीं है।</div>'  
+}  
+function openModal(title,body){  
+$('modal').innerHTML=`<div class="modalbg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modalhead"><h3>${title}</h3><button class="light" onclick="closeModal()">✕</button></div>${body}</div></div>`  
+}  
+function closeModal(){$('modal').innerHTML=''}  
+function openCustomer(c=null){  
+openModal(c?'ग्राहक एडिट करें':'नया ग्राहक',`<form onsubmit="saveCustomer(event,'${c?.id||''}')"><div class="grid2"><div class="field"><label>ग्राहक का नाम *</label><input name="name" required value="${esc(c?.name||'')}"></div><div class="field"><label>मोबाइल</label><input name="phone" value="${esc(c?.phone||'')}"></div><div class="field"><label>पिता / अभिभावक</label><input name="father" value="${esc(c?.father||'')}"></div><div class="field"><label>पता</label><input name="address" value="${esc(c?.address||'')}"></div></div><button class="gold">सेव करें</button></form>`)  
+}  
+function saveCustomer(e,id){  
+e.preventDefault();  
+const f=new FormData(e.target),v={name:f.get('name').trim(),phone:f.get('phone').trim(),father:f.get('father').trim(),address:f.get('address').trim()};  
+if(id){const c=customer(id),old=JSON.stringify(c);Object.assign(c,v);addAudit('ग्राहक संपादन',old,JSON.stringify(v),id)}  
+else{v.id=uid();v.createdAt=today();db.customers.push(v);addAudit('नया ग्राहक',null,JSON.stringify(v),v.id)}  
+if(!save())return;  
+closeModal();toast('ग्राहक सेव हो गया')  
+}  
+function openLoan(pre=''){  
+if(!db.customers.length){toast('पहले ग्राहक जोड़ें');openCustomer();return}  
+const opts=db.customers.map(c=>`<option value="${c.id}" ${pre===c.id?'selected':''}>${esc(c.name)} ${esc(c.phone||'')}</option>`).join('');  
+openModal('नया उधार / 100 दिन की योजना',`<form onsubmit="saveLoan(event)"><div class="field"><label>ग्राहक *</label><select name="customerId" required>${opts}</select></div><div class="grid2"><div class="field"><label>मूल उधार राशि (₹)</label><input name="principal" type="number" min="1" step=".01" required></div><div class="field"><label>कुल वापसी राशि (₹)</label><input name="totalPayable" type="number" min="1" step=".01" required></div><div class="field"><label>तारीख</label><input name="startDate" type="date" value="${today()}" required></div></div><p class="muted">कुल वापसी राशि और किसी शुल्क की जानकारी ग्राहक को स्पष्ट दें।</p><button class="gold">उधार सेव करें</button></form>`)  
+}  
+function saveLoan(e){  
+e.preventDefault();  
+const f=new FormData(e.target),p=Number(f.get('principal')),t=Number(f.get('totalPayable'));  
+if(p<=0||t<p){toast('कुल वापसी राशि मूल उधार से कम नहीं हो सकती');return}  
+const l={id:uid(),customerId:f.get('customerId'),principal:p,totalPayable:t,startDate:f.get('startDate'),days:100};  
+db.loans.push(l);addAudit('नया उधार',null,JSON.stringify(l),l.customerId);  
+if(!save())return;  
+closeModal();toast('उधार सेव हो गया');viewCustomer(l.customerId)  
+}  
+function openPayment(pre='',edit=''){  
+if(!db.loans.length){toast('पहले उधार दर्ज करें');openLoan();return}  
+const old=db.payments.find(p=>p.id===edit),opts=db.loans.map(l=>`<option value="${l.id}" ${(pre||old?.loanId)===l.id?'selected':''}>${esc(customer(l.customerId)?.name||'ग्राहक')} — बकाया ${money(outstanding(l))}</option>`).join('');  
+openModal(old?'जमा राशि एडिट करें':'जमा राशि दर्ज करें',`<form onsubmit="savePayment(event,'${edit}')"><div class="field"><label>उधार खाता</label><select name="loanId" required>${opts}</select></div><div class="grid2"><div class="field"><label>राशि (₹)</label><input name="amount" type="number" min=".01" step=".01" required value="${old?.amount??''}"></div><div class="field"><label>तारीख</label><input name="date" type="date" required value="${old?.date||today()}"></div><div class="field"><label>तरीका</label><select name="method"><option>नकद</option><option>UPI</option><option>बैंक</option><option>अन्य</option></select></div><div class="field"><label>नोट / रसीद</label><input name="note" value="${esc(old?.note||'')}"></div></div><button class="gold">सेव करें</button></form>`)  
+}  
+function savePayment(e,id){  
+e.preventDefault();  
+const f=new FormData(e.target),v={loanId:f.get('loanId'),amount:Number(f.get('amount')),date:f.get('date'),method:f.get('method'),note:f.get('note').trim()};  
+if(v.amount<=0){toast('राशि शून्य से अधिक हो');return}  
+const l=loan(v.loanId);if(!l)return;  
+if(!id&&v.amount>outstanding(l)&&!confirm('राशि बकाया से अधिक है। फिर भी सेव करें?'))return;  
+if(id){const p=db.payments.find(x=>x.id===id),old=JSON.stringify(p);Object.assign(p,v);addAudit('जमा एडिट',old,JSON.stringify(p),l.customerId)}  
+else{v.id=uid();v.createdAt=new Date().toISOString();db.payments.push(v);addAudit('जमा दर्ज',null,JSON.stringify(v),l.customerId)}  
+if(!save())return;  
+closeModal();toast('भुगतान सेव हो गया');viewCustomer(l.customerId)  
+}  
+function renderCustomers(){  
+const q=($('cq')?.value||'').toLowerCase();  
+const a=db.customers.filter(c=>(c.name+' '+c.phone+' '+c.address).toLowerCase().includes(q));  
+$('customers-list').innerHTML=a.length?a.map(c=>`<div class="row"><span><b>${esc(c.name)}</b><br><small class="muted">${esc(c.phone||'मोबाइल नहीं')} • बकाया ${money(customerDue(c.id))}</small></span><button class="light" onclick="viewCustomer('${c.id}')">खाता खोलें</button></div>`).join(''):'<div class="empty">कोई ग्राहक नहीं मिला।</div>'  
+}  
+function viewCustomer(id){  
+activeCustomer=id;const c=customer(id);if(!c)return;  
+page('customers');$('detail').classList.remove('hidden');  
+const ls=customerLoans(id);  
+$('detail').innerHTML=`<div class="head"><div><h3>${esc(c.name)}</h3><p class="muted">${esc(c.phone||'')} ${esc(c.address||'')}</p></div><div class="actions"><button class="light" onclick="openCustomer(customer('${id}'))">एडिट</button><button class="gold" onclick="openLoan('${id}')">＋ उधार</button><button class="teal" onclick="openPayment('${ls.find(l=>outstanding(l)>0)?.id||ls[0]?.id||''}')">＋ जमा</button></div></div><div class="reportgrid"><div>मूल उधार<strong>${money(ls.reduce((s,l)=>s+l.principal,0))}</strong></div><div>कुल जमा<strong>${money(ls.reduce((s,l)=>s+paidForLoan(l.id),0))}</strong></div><div>बकाया<strong>${money(customerDue(id))}</strong></div></div><h3>उधार खाते</h3>${ls.map(l=>`<div class="row"><span>मूल ${money(l.principal)}<br><small class="muted">${dateText(l.startDate)} • रोज ${money(totalPayable(l)/100)}</small></span><span>बकाया ${money(outstanding(l))}<br><button class="teal" onclick="openPayment('${l.id}')">＋ जमा</button></span></div>`).join('')||'<p class="empty">अभी उधार दर्ज नहीं है।</p>'}<h3>जमा राशि</h3><div class="tablewrap"><table><thead><tr><th>तारीख</th><th>राशि</th><th>तरीका</th><th>नोट</th><th>कार्रवाई</th></tr></thead><tbody>${db.payments.filter(p=>loan(p.loanId)?.customerId===id).map(p=>`<tr><td>${dateText(p.date)}</td><td>${money(p.amount)}</td><td>${esc(p.method||'')}</td><td>${esc(p.note||'')}</td><td><button class="light" onclick="openPayment('${p.loanId}','${p.id}')">एडिट</button> <button class="red" onclick="deletePayment('${p.id}')">रद्द</button></td></tr>`).join('')||'<tr><td colspan="5">जमा नहीं है</td></tr>'}</tbody></table></div>`  
+}  
+function deletePayment(id){  
+const p=db.payments.find(x=>x.id===id);if(!p||!confirm('इस भुगतान को रद्द करें?'))return;  
+addAudit('भुगतान रद्द',JSON.stringify(p),null,loan(p.loanId)?.customerId);  
+db.payments=db.payments.filter(x=>x.id!==id);  
+if(!save())return;  
+viewCustomer(activeCustomer);toast('भुगतान रद्द किया गया')  
+}  
+function renderTransactions(){  
+const q=($('tq')?.value||'').toLowerCase(),a=[...db.payments.map(p=>({...p,type:'जमा'})),...db.loans.map(l=>({...l,type:'उधार',amount:l.principal,date:l.startDate}))].filter(x=>(customer(x.customerId)?.name||'').toLowerCase().includes(q)).sort((a,b)=>(b.date||'').localeCompare(a.date||''));  
+$('txn').innerHTML=a.length?`<div class="tablewrap"><table><thead><tr><th>तारीख</th><th>ग्राहक</th><th>प्रकार</th><th>राशि</th></tr></thead><tbody>${a.map(x=>`<tr><td>${dateText(x.date)}</td><td>${esc(customer(x.customerId)?.name||'')}</td><td>${x.type}</td><td>${money(x.amount)}</td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">कोई लेन-देन नहीं।</div>'  
+}  
+function scheduleRows(l){  
+const daily=totalPayable(l)/100;  
+return Array.from({length:100},(_,i)=>{  
+const d=new Date(l.startDate+'T00:00:00');d.setDate(d.getDate()+i);  
+const date=d.toISOString().slice(0,10),paid=paymentsForLoan(l.id).filter(p=>p.date<=date).reduce((s,p)=>s+p.amount,0);  
+return {day:i+1,date,amount:Math.min(daily,Math.max(0,totalPayable(l)-i*daily)),state:paid>=Math.min(totalPayable(l),(i+1)*daily)-.001?'जमा':date<today()?'विलंबित':'देय'}  
+})  
+}  
+function renderSchedule(){  
+const q=($('sq')?.value||'').toLowerCase(),a=db.loans.filter(l=>(customer(l.customerId)?.name||'').toLowerCase().includes(q));  
+$('schedule-list').innerHTML=a.length?a.map(l=>`<div class="row"><span><b>${esc(customer(l.customerId)?.name||'')}</b><br><small class="muted">${money(l.principal)} • कुल ${money(totalPayable(l))}</small></span><button class="light" onclick="showSchedule('${l.id}')">100 दिन देखें</button></div>`).join(''):'<div class="empty">किस्त दिखाने के लिए उधार दर्ज करें।</div>'  
+}  
+function showSchedule(id){  
+const l=loan(id);if(!l)return;const rows=scheduleRows(l);  
+openModal('100 दिन की किस्त',`<p>${esc(customer(l.customerId)?.name||'')} • रोज ${money(totalPayable(l)/100)}</p><div class="tablewrap"><table><thead><tr><th>दिन</th><th>तारीख</th><th>किस्त</th><th>स्थिति</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r.day}</td><td>${dateText(r.date)}</td><td>${money(r.amount)}</td><td>${r.state}</td></tr>`).join('')}</tbody></table></div><button class="gold" onclick="closeModal();print()">PDF / प्रिंट</button>`)  
+}  
+function fillReportCustomers(){  
+const s=$('rcustomer');if(!s)return;  
+const old=s.value;s.innerHTML='<option value="">सभी / ग्राहक चुनें</option>'+db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join('');  
+if(db.customers.some(c=>c.id===old))s.value=old  
+}  
+function generateReport(){  
+const type=$('rtype').value,cid=$('rcustomer').value,from=$('rfrom').value,to=$('rto').value;  
+if(type==='customer'&&!cid){toast('ग्राहक चुनें');return}  
+const loans=db.loans.filter(l=>(!cid||l.customerId===cid)&&(!from||l.startDate>=from)&&(!to||l.startDate<=to));  
+const pays=db.payments.filter(p=>(!cid||loan(p.loanId)?.customerId===cid)&&(!from||p.date>=from)&&(!to||p.date<=to));  
+let cs=db.customers.filter(c=>(!cid||c.id===cid)&&(type!=='due'||customerDue(c.id)>0));  
+if(type==='daily')cs=cs.filter(c=>pays.some(p=>loan(p.loanId)?.customerId===c.id&&p.date===today()));  
+if(type==='monthly'){const m=today().slice(0,7);cs=cs.filter(c=>pays.some(p=>loan(p.loanId)?.customerId===c.id&&p.date.startsWith(m)))}  
+const principal=loans.reduce((s,l)=>s+l.principal,0),paid=pays.reduce((s,p)=>s+p.amount,0);  
+const html=`<div class="actions no-print">  
+<button class="blue" onclick="document.querySelector('#page-reports .box.no-print').scrollIntoView({behavior:'smooth'})">⬅ रिपोर्ट विकल्प पर वापस</button>  
+<button class="red" onclick="$('report').classList.add('hidden')">रिपोर्ट बंद करें</button>  
+</div>  
+<div class="report">  
+<h2>माँ मनोकामना स्मॉल फाइनेंस</h2>  
+<div class="brand-messages report-brand">  
+<div class="brand-message">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>  
+<div class="brand-message">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>  
+<div class="brand-message">🌸 आपकी सेवा में सदैव तत्पर! 🌸</div>  
+</div>  
+<h3>${esc($('rtype').selectedOptions[0].text)}</h3>  
+<p>रिपोर्ट तारीख: ${dateText(today())}</p>  
+<div class="reportgrid">  
+<div>मूल उधार<strong>${money(principal)}</strong></div>  
+<div>चुनी अवधि में जमा<strong>${money(paid)}</strong></div>  
+<div>वर्तमान बकाया<strong>${money(loans.reduce((s,l)=>s+outstanding(l),0))}</strong></div>  
+</div>  
+<h3>ग्राहक सारांश</h3>  
+<div class="tablewrap">  
+<table><thead><tr><th>नाम</th><th>मोबाइल</th><th>मूल उधार</th><th>कुल जमा</th><th>बकाया</th></tr></thead>  
+<tbody>${cs.map(c=>{const ls=loans.filter(l=>l.customerId===c.id),cp=pays.filter(p=>loan(p.loanId)?.customerId===c.id).reduce((s,p)=>s+p.amount,0);return `<tr><td>${esc(c.name)}</td><td>${esc(c.phone||'—')}</td><td>${money(ls.reduce((s,l)=>s+l.principal,0))}</td><td>${money(cp)}</td><td>${money(customerDue(c.id))}</td></tr>`}).join('')||'<tr><td colspan="5">कोई रिकॉर्ड नहीं</td></tr>'}</tbody>  
+</table>  
+</div>  
+<h3>जमा लेन-देन</h3>  
+<div class="tablewrap">  
+<table><thead><tr><th>तारीख</th><th>ग्राहक</th><th>राशि</th><th>तरीका</th></tr></thead>  
+<tbody>${pays.map(p=>`<tr><td>${dateText(p.date)}</td><td>${esc(customer(loan(p.loanId)?.customerId)?.name||'')}</td><td>${money(p.amount)}</td><td>${esc(p.method||'')}</td></tr>`).join('')||'<tr><td colspan="4">कोई जमा नहीं</td></tr>'}</tbody>  
+</table>  
+</div>  
+<p class="muted">यह रिपोर्ट ऐप में दर्ज जानकारी पर आधारित है।</p>  
+</div>`;  
+$('report').classList.remove('hidden');  
+$('report').innerHTML=html;  
+currentReportText=$('report').innerText  
+}  
+async function shareReport(){  
+if(!currentReportText)generateReport();  
+if(!currentReportText){alert('पहले रिपोर्ट जनरेट करें।');return}  
+const text=currentReportText.slice(0,3000);  
+try{  
+if(navigator.share){  
+await navigator.share({title:'माँ मनोकामना स्मॉल फाइनेंस रिपोर्ट',text:text});  
+}else{  
+window.location.href='https://api.whatsapp.com/send?text='+encodeURIComponent(text)  
+}  
+}catch(e){  
+if(e.name!=='AbortError'){  
+window.location.href='https://api.whatsapp.com/send?text='+encodeURIComponent(text)  
+}  
+}  
+}  
+function backup(){  
+const blob=new Blob([JSON.stringify({...db,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'});  
+const url=URL.createObjectURL(blob),a=document.createElement('a');  
+a.href=url;a.download='maa-manokamna-backup-'+today()+'.json';a.click();  
+setTimeout(()=>URL.revokeObjectURL(url),1000);toast('बैकअप डाउनलोड शुरू हुआ')  
+}  
+function restore(e){  
+const f=e.target.files[0];if(!f)return;  
+const reader=new FileReader();  
+reader.onload=()=>{  
+try{  
+const x=normalizeData(JSON.parse(reader.result));if(!x)throw Error('Invalid backup');  
+if(!confirm('मौजूदा डेटा को बैकअप से बदलें? पहले मौजूदा बैकअप सुरक्षित करें।'))return;  
+const old=db;db=x;if(!save()){db=old;renderAll();return}  
+toast('बैकअप वापस लोड हो गया')  
+}catch(err){alert('बैकअप फ़ाइल सही नहीं है।')}  
+finally{e.target.value=''}  
+};  
+reader.readAsText(f)  
+}  
+function clearData(){  
+if(!confirm('सभी ग्राहक, उधार और भुगतान स्थायी रूप से मिट जाएँगे। क्या आपने बैकअप डाउनलोड किया है?'))return;  
+db={customers:[],loans:[],payments:[],audit:[]};  
+if(!save())return;  
+$('detail').classList.add('hidden');toast('स्थानीय डेटा मिटा दिया गया')  
+}  
+load();  
+</script>  
+</body>  
 </html>
