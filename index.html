@@ -67,21 +67,18 @@ small{color:#667085}
   @page { size: A4; margin: 12mm; }
   html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
   body * { visibility: hidden !important; }
+  #reports, #reports * { visibility: visible !important; }
   #reports {
     display: block !important;
-    visibility: visible !important;
     position: static !important;
+    width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100% !important;
   }
   #reports > .box:first-child { display: none !important; }
-  #reportText, #reportText * { visibility: visible !important; }
   #reportText {
     display: block !important;
     position: relative !important;
-    left: auto !important;
-    top: auto !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 10mm !important;
@@ -94,10 +91,15 @@ small{color:#667085}
     print-color-adjust: exact !important;
   }
   #reportText::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    opacity: .30 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
-    opacity: .30 !important;
   }
+  #reportText > * { position: relative !important; z-index: 1 !important; }
   #reportText table { min-width: 0 !important; width: 100% !important; }
   #reportText .tablewrap { overflow: visible !important; }
   #reportText tr, #reportText .stat { break-inside: avoid; page-break-inside: avoid; }
@@ -236,7 +238,7 @@ small{color:#667085}
 
     <div class="actions no-print">
       <button onclick="makeReport()">रिपोर्ट देखें</button>
-      <button class="green" onclick="window.print()">प्रिंट / PDF सेव करें</button>
+      <button class="green" onclick="printReport()">प्रिंट / PDF सेव करें</button>
       <button class="gold" onclick="shareReport()">WhatsApp शेयर</button>
     </div>
   </div>
@@ -907,6 +909,17 @@ function toggleReportCustomer(){
 }
 
 /* रिपोर्ट तैयार करना */
+function printReport(){
+  const el = document.getElementById("reportText");
+  if(!el) return;
+  if(el.textContent.includes("रिपोर्ट देखने के लिए")){
+    makeReport();
+  }
+  if(el.textContent.includes("रिपोर्ट देखने के लिए")) return;
+  // Wait for report HTML and watermark to render before printing.
+  setTimeout(() => window.print(), 250);
+}
+
 function makeReport(){
   const type = document.getElementById("reportType").value;
   const el = document.getElementById("reportText");
@@ -991,7 +1004,7 @@ function makeReport(){
   }
 
   if(type==="all" || type==="customers"){
-    html += "<h3>ग्राहक रिपोर्ट</h3><div class='tablewrap'><table><tr><th>नाम</th><th>मोबाइल</th><th>पता</th><th>स्थिति</th></tr>";
+    html += "<div class='tablewrap'><table><tr><th>नाम</th><th>मोबाइल</th><th>पता</th><th>स्थिति</th></tr>";
 
     db.customers.forEach(c=>{
       html += `<tr>
