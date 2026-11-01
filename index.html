@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -41,18 +40,21 @@ small{color:#667085}
 .report{padding:15px;border:1px solid #dfd3b4;border-radius:10px;background:white}
 .badge{display:inline-block;padding:3px 8px;border-radius:6px;background:#e7edf5;font-size:12px}
 .closed-badge{background:#fee2e2;color:#991b1b}
+
 @media(max-width:500px){
  header h1{font-size:20px}
  .grid{grid-template-columns:1fr}
  main{padding:8px}
  button{padding:9px;font-size:13px}
 }
+
 @media print{
  nav,.no-print,button{display:none!important}
  body{background:white}
  main{padding:0}
  .box{border:0}
  .hidden{display:none!important}
+ .report{border:0}
 }
 </style>
 </head>
@@ -63,6 +65,7 @@ small{color:#667085}
   <img src="https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png"
        alt="माँ दुर्गा" class="logo-durga"
        onerror="this.style.display='none'">
+
   <h1>माँ मनोकामना स्मॉल फाइनेंस</h1>
   <div class="brand b1">💙 आपकी ज़रूरत — हमारा भरोसा! 💙</div>
   <div class="brand b2">❤️ आपका विश्वास, हमारी पहचान। ❤️</div>
@@ -85,8 +88,10 @@ small{color:#667085}
     <img src="https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png"
          alt="जय माँ दुर्गा" class="durga-home"
          onerror="this.style.display='none'">
+
     <h2>🙏 जय माँ दुर्गा 🙏</h2>
     <h2>डैशबोर्ड</h2>
+
     <div class="stats">
       <div class="stat">सक्रिय ग्राहक<strong id="sCustomers">0</strong></div>
       <div class="stat">कुल मूल उधार<strong id="sLoan">₹0</strong></div>
@@ -95,6 +100,7 @@ small{color:#667085}
       <div class="stat">बंद खाते<strong id="sClosed">0</strong></div>
     </div>
   </div>
+
   <div class="box">
     <h3>त्वरित कार्य</h3>
     <div class="actions">
@@ -108,16 +114,19 @@ small{color:#667085}
 <section id="customers" class="page hidden">
   <div class="box">
     <h2>ग्राहक खाते</h2>
+
     <div class="actions">
       <button onclick="customerForm()">➕ नया ग्राहक जोड़ें</button>
       <button class="gold" onclick="toggleClosedCustomers()">
         <span id="closedButtonText">बंद खाते देखें</span>
       </button>
     </div>
+
     <p id="customerMode">सक्रिय ग्राहक खाते</p>
     <input id="customerSearch" placeholder="ग्राहक का नाम या मोबाइल खोजें" oninput="renderCustomers()">
     <div id="customerList"></div>
   </div>
+
   <div id="customerDetail"></div>
 </section>
 
@@ -132,20 +141,27 @@ small{color:#667085}
 <section id="payments" class="page hidden">
   <div class="box">
     <h2>जमा / लेन-देन दर्ज करें</h2>
+
     <form id="paymentForm">
       <label>ग्राहक चुनें</label>
       <select id="payCustomer" required></select>
+
       <label>उधार खाता</label>
       <select id="payLoan" required></select>
+
       <label>जमा राशि (₹)</label>
       <input id="payAmount" type="number" min="0.01" step="0.01" required>
+
       <label>जमा की तारीख</label>
       <input id="payDate" type="date" required>
+
       <label>रसीद / टिप्पणी</label>
       <input id="payNote" placeholder="वैकल्पिक">
+
       <button class="green" type="submit">जमा सेव करें</button>
     </form>
   </div>
+
   <div class="box">
     <h3>लेन-देन का रिकॉर्ड</h3>
     <div id="paymentList"></div>
@@ -155,19 +171,30 @@ small{color:#667085}
 <section id="reports" class="page hidden">
   <div class="box">
     <h2>रिपोर्ट / PDF</h2>
+
     <label>रिपोर्ट चुनें</label>
-    <select id="reportType">
+    <select id="reportType" onchange="toggleReportCustomer()">
       <option value="all">संपूर्ण रिपोर्ट</option>
       <option value="customers">ग्राहक रिपोर्ट</option>
       <option value="loans">उधार रिपोर्ट</option>
       <option value="payments">जमा रिपोर्ट</option>
+      <option value="customer">एक ग्राहक की पूरी रिपोर्ट</option>
     </select>
+
+    <div id="reportCustomerWrap" class="hidden">
+      <label>ग्राहक चुनें</label>
+      <select id="reportCustomer">
+        <option value="">-- ग्राहक चुनें --</option>
+      </select>
+    </div>
+
     <div class="actions no-print">
       <button onclick="makeReport()">रिपोर्ट देखें</button>
       <button class="green" onclick="window.print()">प्रिंट / PDF सेव करें</button>
       <button class="gold" onclick="shareReport()">WhatsApp शेयर</button>
     </div>
   </div>
+
   <div class="box report" id="reportText">रिपोर्ट देखने के लिए ऊपर बटन दबाएँ।</div>
 </section>
 
@@ -175,16 +202,22 @@ small{color:#667085}
   <div class="box">
     <h2>डेटा बैकअप और रीस्टोर</h2>
     <p>अपने ग्राहक, उधार और जमा रिकॉर्ड की सुरक्षित कॉपी डाउनलोड करें।</p>
+
     <button class="green" onclick="downloadBackup()">⬇ बैकअप डाउनलोड करें</button>
+
     <hr>
+
     <label>पुरानी बैकअप JSON फाइल चुनें</label>
     <input type="file" id="restoreFile" accept=".json,application/json">
+
     <button class="gold" onclick="restoreBackup()">बैकअप रीस्टोर करें</button>
+
     <p><small>रीस्टोर करने से मौजूदा रिकॉर्ड बदल सकते हैं। पहले वर्तमान डेटा का बैकअप लें।</small></p>
   </div>
 </section>
 
 </main>
+
 <div id="toast"></div>
 
 <script>
@@ -192,29 +225,41 @@ small{color:#667085}
 
 const STORAGE_KEY = "maaManokamnaFinance_v2";
 
-let db = {customers:[],loans:[],payments:[]};
+let db = {
+  customers: [],
+  loans: [],
+  payments: []
+};
+
 let showClosedCustomers = false;
 
+/* डेटा लोड करना */
 function loadData(){
   try{
     const saved = localStorage.getItem(STORAGE_KEY);
+
     if(saved){
       const parsed = JSON.parse(saved);
+
       db = {
-        customers:Array.isArray(parsed.customers)?parsed.customers:[],
-        loans:Array.isArray(parsed.loans)?parsed.loans:[],
-        payments:Array.isArray(parsed.payments)?parsed.payments:[]
+        customers: Array.isArray(parsed.customers) ? parsed.customers : [],
+        loans: Array.isArray(parsed.loans) ? parsed.loans : [],
+        payments: Array.isArray(parsed.payments) ? parsed.payments : []
       };
-      db.customers.forEach(c=>{if(typeof c.closed!=="boolean")c.closed=false;});
+
+      db.customers.forEach(c=>{
+        if(typeof c.closed !== "boolean") c.closed = false;
+      });
     }
   }catch(e){
     alert("डेटा पढ़ने में समस्या हुई। कृपया बैकअप सुरक्षित रखें।");
   }
 }
 
+/* डेटा सेव करना */
 function saveData(){
   try{
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(db));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
     renderAll();
   }catch(e){
     alert("डेटा सेव नहीं हो पाया। कृपया बैकअप डाउनलोड करें।");
@@ -222,89 +267,122 @@ function saveData(){
 }
 
 function uid(){
-  return Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+  return Date.now().toString(36) + Math.random().toString(36).slice(2,7);
 }
 
 function money(value){
-  return "₹"+Number(value||0).toLocaleString("en-IN",{maximumFractionDigits:2});
+  return "₹" + Number(value || 0).toLocaleString("en-IN", {
+    maximumFractionDigits: 2
+  });
 }
 
 function today(){
-  const d=new Date();
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  const d = new Date();
+
+  return d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
 }
 
 function safe(value){
-  return String(value??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  return String(value ?? "").replace(/[&<>"']/g, c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
   }[c]));
 }
 
 function notify(message){
-  const el=document.getElementById("toast");
-  el.textContent=message;
-  el.style.display="block";
+  const el = document.getElementById("toast");
+
+  el.textContent = message;
+  el.style.display = "block";
+
   setTimeout(()=>el.style.display="none",2500);
 }
 
+/* पेज बदलना */
 function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
-  const page=document.getElementById(id);
-  if(page)page.classList.remove("hidden");
+
+  const page = document.getElementById(id);
+  if(page) page.classList.remove("hidden");
+
   renderAll();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function getCustomer(id){return db.customers.find(c=>c.id===id);}
-function getLoan(id){return db.loans.find(l=>l.id===id);}
+function getCustomer(id){
+  return db.customers.find(c=>c.id===id);
+}
+
+function getLoan(id){
+  return db.loans.find(l=>l.id===id);
+}
 
 function paidForLoan(loanId){
-  return db.payments.filter(p=>p.loanId===loanId)
+  return db.payments
+    .filter(p=>p.loanId===loanId)
     .reduce((sum,p)=>sum+Number(p.amount||0),0);
 }
 
 function loanTotal(loan){
-  const principal=Number(loan.amount||0);
-  return principal+principal*Number(loan.rate||0)/100;
+  const principal = Number(loan.amount||0);
+  return principal + principal * Number(loan.rate||0) / 100;
 }
 
 function loanDue(loan){
   return Math.max(0,loanTotal(loan)-paidForLoan(loan.id));
 }
 
+/* नया ग्राहक या ग्राहक एडिट */
 function customerForm(id){
-  const old=id?getCustomer(id):null;
+  const old = id ? getCustomer(id) : null;
+
   if(old?.closed){
     alert("यह खाता बंद है। बदलाव करने से पहले इसे दोबारा खोलें।");
     return;
   }
 
-  const name=prompt("ग्राहक का पूरा नाम:",old?.name||"");
-  if(name===null)return;
-  if(!name.trim()){alert("ग्राहक का नाम लिखें।");return;}
+  const name = prompt("ग्राहक का पूरा नाम:",old?.name||"");
+  if(name===null) return;
 
-  const phone=prompt("मोबाइल नंबर:",old?.phone||"");
-  if(phone===null)return;
-  const address=prompt("पूरा पता:",old?.address||"");
-  if(address===null)return;
+  if(!name.trim()){
+    alert("ग्राहक का नाम लिखें।");
+    return;
+  }
+
+  const phone = prompt("मोबाइल नंबर:",old?.phone||"");
+  if(phone===null) return;
+
+  const address = prompt("पूरा पता:",old?.address||"");
+  if(address===null) return;
 
   if(old){
-    old.name=name.trim();
-    old.phone=phone.trim();
-    old.address=address.trim();
+    old.name = name.trim();
+    old.phone = phone.trim();
+    old.address = address.trim();
   }else{
     db.customers.push({
-      id:uid(),name:name.trim(),phone:phone.trim(),
-      address:address.trim(),created:today(),closed:false
+      id:uid(),
+      name:name.trim(),
+      phone:phone.trim(),
+      address:address.trim(),
+      created:today(),
+      closed:false
     });
   }
+
   saveData();
   showPage("customers");
   notify("ग्राहक का रिकॉर्ड सेव हो गया।");
 }
 
+/* नया उधार या उधार एडिट */
 function loanForm(customerId,loanId){
-  const old=loanId?getLoan(loanId):null;
+  const old = loanId ? getLoan(loanId) : null;
 
   if(customerId && getCustomer(customerId)?.closed){
     alert("यह ग्राहक खाता बंद है। नया उधार देने के लिए पहले खाता खोलें।");
@@ -316,152 +394,206 @@ function loanForm(customerId,loanId){
     return;
   }
 
-  const activeCustomers=db.customers.filter(c=>!c.closed);
+  const activeCustomers = db.customers.filter(c=>!c.closed);
+
   if(!activeCustomers.length){
     alert("पहले एक सक्रिय ग्राहक जोड़ें या बंद खाता दोबारा खोलें।");
     showPage("customers");
     return;
   }
 
-  let selectedCustomer=customerId||old?.customerId||"";
+  let selectedCustomer = customerId || old?.customerId || "";
+
   if(!selectedCustomer){
-    const choices=activeCustomers.map((c,i)=>
+    const choices = activeCustomers.map((c,i)=>
       (i+1)+". "+c.name+" ("+(c.phone||"मोबाइल नहीं")+")"
     ).join("\n");
-    const answer=prompt("ग्राहक का क्रमांक लिखें:\n"+choices,"1");
-    if(answer===null)return;
-    const index=Number(answer)-1;
-    if(!activeCustomers[index]){alert("सही ग्राहक चुनें।");return;}
-    selectedCustomer=activeCustomers[index].id;
+
+    const answer = prompt("ग्राहक का क्रमांक लिखें:\n"+choices,"1");
+    if(answer===null) return;
+
+    const index = Number(answer)-1;
+
+    if(!activeCustomers[index]){
+      alert("सही ग्राहक चुनें।");
+      return;
+    }
+
+    selectedCustomer = activeCustomers[index].id;
   }
 
-  const amount=prompt("मूल उधार राशि (₹):",old?.amount??"");
-  if(amount===null)return;
-  if(!Number.isFinite(Number(amount))||Number(amount)<=0){alert("सही उधार राशि लिखें।");return;}
+  const amount = prompt("मूल उधार राशि (₹):",old?.amount??"");
+  if(amount===null) return;
 
-  const rate=prompt("कुल ब्याज प्रतिशत (यदि नहीं तो 0):",old?.rate??"0");
-  if(rate===null)return;
-  if(!Number.isFinite(Number(rate))||Number(rate)<0){alert("सही ब्याज प्रतिशत लिखें।");return;}
+  if(!Number.isFinite(Number(amount)) || Number(amount)<=0){
+    alert("सही उधार राशि लिखें।");
+    return;
+  }
 
-  const days=prompt("उधार अवधि कितने दिन?",old?.days??"100");
-  if(days===null)return;
-  if(!Number.isFinite(Number(days))||Number(days)<=0){alert("सही अवधि लिखें।");return;}
+  const rate = prompt("कुल ब्याज प्रतिशत (यदि नहीं तो 0):",old?.rate??"0");
+  if(rate===null) return;
 
-  const date=prompt("उधार देने की तारीख (YYYY-MM-DD):",old?.date||today());
-  if(date===null)return;
-  const note=prompt("टिप्पणी:",old?.note||"");
-  if(note===null)return;
+  if(!Number.isFinite(Number(rate)) || Number(rate)<0){
+    alert("सही ब्याज प्रतिशत लिखें।");
+    return;
+  }
+
+  const days = prompt("उधार अवधि कितने दिन?",old?.days??"100");
+  if(days===null) return;
+
+  if(!Number.isFinite(Number(days)) || Number(days)<=0){
+    alert("सही अवधि लिखें।");
+    return;
+  }
+
+  const date = prompt("उधार देने की तारीख (YYYY-MM-DD):",old?.date||today());
+  if(date===null) return;
+
+  const note = prompt("टिप्पणी:",old?.note||"");
+  if(note===null) return;
 
   if(old){
-    old.customerId=selectedCustomer;
-    old.amount=Number(amount);
-    old.rate=Number(rate);
-    old.days=Number(days);
-    old.date=date;
-    old.note=note.trim();
+    old.customerId = selectedCustomer;
+    old.amount = Number(amount);
+    old.rate = Number(rate);
+    old.days = Number(days);
+    old.date = date;
+    old.note = note.trim();
   }else{
     db.loans.push({
-      id:uid(),customerId:selectedCustomer,amount:Number(amount),
-      rate:Number(rate),days:Number(days),date,note:note.trim()
+      id:uid(),
+      customerId:selectedCustomer,
+      amount:Number(amount),
+      rate:Number(rate),
+      days:Number(days),
+      date,
+      note:note.trim()
     });
   }
+
   saveData();
   showPage("loans");
   notify("उधार खाता सेव हो गया।");
 }
 
+/* ग्राहक खाता बंद करना */
 function closeCustomer(id){
-  const c=getCustomer(id);
-  if(!c)return;
-  if(c.closed){notify("यह खाता पहले से बंद है।");return;}
+  const c = getCustomer(id);
+  if(!c) return;
 
-  const loans=db.loans.filter(l=>l.customerId===id);
-  const due=loans.reduce((sum,l)=>sum+loanDue(l),0);
-
-  if(due>0){
-    if(!confirm("इस ग्राहक पर "+money(due)+" बकाया है। खाता बंद करने से वसूली बंद नहीं होगी। क्या फिर भी खाता बंद करें?"))return;
-  }else{
-    if(!confirm("इस ग्राहक का पूरा लेन-देन हो गया है। क्या खाता बंद करें? पुराना रिकॉर्ड सुरक्षित रहेगा।"))return;
+  if(c.closed){
+    notify("यह खाता पहले से बंद है।");
+    return;
   }
 
-  c.closed=true;
+  const loans = db.loans.filter(l=>l.customerId===id);
+  const due = loans.reduce((sum,l)=>sum+loanDue(l),0);
+
+  if(due>0){
+    if(!confirm("इस ग्राहक पर "+money(due)+" बकाया है। खाता बंद करने से वसूली बंद नहीं होगी। क्या फिर भी खाता बंद करें?")) return;
+  }else{
+    if(!confirm("इस ग्राहक का पूरा लेन-देन हो गया है। क्या खाता बंद करें? पुराना रिकॉर्ड सुरक्षित रहेगा।")) return;
+  }
+
+  c.closed = true;
   saveData();
   notify("खाता बंद हो गया। पुराना रिकॉर्ड सुरक्षित है।");
 }
 
+/* बंद खाता दोबारा खोलना */
 function reopenCustomer(id){
-  const c=getCustomer(id);
-  if(!c)return;
-  if(!confirm("क्या आप "+c.name+" का खाता दोबारा खोलना चाहते हैं?"))return;
-  c.closed=false;
+  const c = getCustomer(id);
+  if(!c) return;
+
+  if(!confirm("क्या आप "+c.name+" का खाता दोबारा खोलना चाहते हैं?")) return;
+
+  c.closed = false;
   saveData();
   notify("खाता दोबारा खोल दिया गया।");
 }
 
+/* बंद ग्राहक देखना */
 function toggleClosedCustomers(){
-  showClosedCustomers=!showClosedCustomers;
-  document.getElementById("customerMode").textContent=
-    showClosedCustomers?"बंद ग्राहक खाते":"सक्रिय ग्राहक खाते";
-  document.getElementById("closedButtonText").textContent=
-    showClosedCustomers?"सक्रिय खाते देखें":"बंद खाते देखें";
-  document.getElementById("customerSearch").value="";
+  showClosedCustomers = !showClosedCustomers;
+
+  document.getElementById("customerMode").textContent =
+    showClosedCustomers ? "बंद ग्राहक खाते" : "सक्रिय ग्राहक खाते";
+
+  document.getElementById("closedButtonText").textContent =
+    showClosedCustomers ? "सक्रिय खाते देखें" : "बंद खाते देखें";
+
+  document.getElementById("customerSearch").value = "";
   renderCustomers();
 }
 
+/* ग्राहक हटाना */
 function deleteCustomer(id){
-  const c=getCustomer(id);
-  if(!c)return;
+  const c = getCustomer(id);
+  if(!c) return;
 
-  const relatedLoans=db.loans.filter(l=>l.customerId===id);
-  const relatedLoanIds=relatedLoans.map(l=>l.id);
-  const hasPayments=db.payments.some(p=>
-    p.customerId===id||relatedLoanIds.includes(p.loanId)
+  const relatedLoans = db.loans.filter(l=>l.customerId===id);
+  const relatedLoanIds = relatedLoans.map(l=>l.id);
+
+  const hasPayments = db.payments.some(p=>
+    p.customerId===id || relatedLoanIds.includes(p.loanId)
   );
 
-  if(relatedLoans.length||hasPayments){
+  if(relatedLoans.length || hasPayments){
     alert("इस ग्राहक के उधार या भुगतान रिकॉर्ड मौजूद हैं। पुराने वित्तीय रिकॉर्ड सुरक्षित रखने के लिए इसे यहाँ से स्थायी रूप से नहीं हटाया जा सकता। आप खाता बंद कर सकते हैं।");
     return;
   }
 
-  if(!confirm("क्या आप "+c.name+" का ग्राहक रिकॉर्ड स्थायी रूप से हटाना चाहते हैं? यह काम वापस नहीं किया जा सकेगा।"))return;
+  if(!confirm("क्या आप "+c.name+" का ग्राहक रिकॉर्ड स्थायी रूप से हटाना चाहते हैं? यह काम वापस नहीं किया जा सकेगा।")) return;
 
-  db.customers=db.customers.filter(x=>x.id!==id);
+  db.customers = db.customers.filter(x=>x.id!==id);
+
   saveData();
   notify("ग्राहक रिकॉर्ड हटा दिया गया।");
 }
 
+/* उधार खाता हटाना */
 function deleteLoan(id){
-  const loan=getLoan(id);
-  if(!loan)return;
+  const loan = getLoan(id);
+  if(!loan) return;
+
   if(db.payments.some(p=>p.loanId===id)){
     alert("इस उधार खाते में जमा रिकॉर्ड हैं। उन्हें सुरक्षित रखने के लिए खाता नहीं हटाया गया।");
     return;
   }
-  if(!confirm("क्या आप यह उधार खाता हटाना चाहते हैं?"))return;
-  db.loans=db.loans.filter(l=>l.id!==id);
+
+  if(!confirm("क्या आप यह उधार खाता हटाना चाहते हैं?")) return;
+
+  db.loans = db.loans.filter(l=>l.id!==id);
+
   saveData();
   notify("उधार खाता हटा दिया गया।");
 }
 
+/* जमा रिकॉर्ड हटाना */
 function deletePayment(id){
-  if(!confirm("क्या आप यह जमा रिकॉर्ड हटाना चाहते हैं? हटाने से बकाया राशि बदल जाएगी।"))return;
-  db.payments=db.payments.filter(p=>p.id!==id);
+  if(!confirm("क्या आप यह जमा रिकॉर्ड हटाना चाहते हैं? हटाने से बकाया राशि बदल जाएगी।")) return;
+
+  db.payments = db.payments.filter(p=>p.id!==id);
+
   saveData();
   notify("जमा रिकॉर्ड हटा दिया गया।");
 }
 
+/* ग्राहक का पूरा विवरण */
 function showCustomer(id){
-  const c=getCustomer(id);
-  if(!c)return;
+  const c = getCustomer(id);
+  if(!c) return;
 
-  const loans=db.loans.filter(l=>l.customerId===id);
-  const detail=document.getElementById("customerDetail");
+  const loans = db.loans.filter(l=>l.customerId===id);
+  const detail = document.getElementById("customerDetail");
 
-  detail.innerHTML=`
+  detail.innerHTML = `
     <div class="box">
       <h2>${safe(c.name)} ${c.closed?'<span class="badge closed-badge">बंद खाता</span>':''}</h2>
+
       <p>मोबाइल: ${safe(c.phone||"नहीं दिया गया")}</p>
       <p>पता: ${safe(c.address||"नहीं दिया गया")}</p>
+
       <div class="actions">
         ${c.closed
           ? `<button class="green" onclick="reopenCustomer('${c.id}')">खाता दोबारा खोलें</button>`
@@ -469,272 +601,498 @@ function showCustomer(id){
              <button class="gold" onclick="closeCustomer('${c.id}')">खाता बंद करें</button>
              <button class="green" onclick="loanForm('${c.id}')">नया उधार</button>`
         }
+
         <button class="red" onclick="deleteCustomer('${c.id}')">खाता हटाएँ</button>
       </div>
+
       <h3>उधार खाते और पुराना रिकॉर्ड</h3>
-      ${loans.length?loans.map(l=>`
+
+      ${loans.length ? loans.map(l=>`
         <div class="row">
           <b>उधार: ${money(l.amount)}</b><br>
           ब्याज: ${safe(l.rate)}% | अवधि: ${safe(l.days)} दिन<br>
           कुल देय: ${money(loanTotal(l))}<br>
           जमा: ${money(paidForLoan(l.id))}<br>
           बकाया: ${money(loanDue(l))}
+
           <div class="actions">
             ${!c.closed?`<button onclick="loanForm('${c.id}','${l.id}')">एडिट</button>`:""}
             <button class="gold" onclick="quickPay('${l.id}')">जमा दर्ज करें</button>
           </div>
-        </div>`).join(""):"<p>इस ग्राहक का अभी कोई उधार खाता नहीं है।</p>"}
-    </div>`;
+        </div>
+      `).join("") : "<p>इस ग्राहक का अभी कोई उधार खाता नहीं है।</p>"}
+    </div>
+  `;
 
   showPage("customers");
-  detail.innerHTML=detail.innerHTML;
 }
 
+/* ग्राहक सूची */
 function renderCustomers(){
-  const el=document.getElementById("customerList");
-  if(!el)return;
+  const el = document.getElementById("customerList");
+  if(!el) return;
 
-  const query=(document.getElementById("customerSearch")?.value||"").toLowerCase().trim();
-  const list=db.customers.filter(c=>{
-    const matches=(c.name||"").toLowerCase().includes(query)||(c.phone||"").includes(query);
-    return matches&&(showClosedCustomers?c.closed===true:c.closed!==true);
+  const query = (document.getElementById("customerSearch")?.value||"").toLowerCase().trim();
+
+  const list = db.customers.filter(c=>{
+    const matches = (c.name||"").toLowerCase().includes(query) || (c.phone||"").includes(query);
+    return matches && (showClosedCustomers ? c.closed===true : c.closed!==true);
   });
 
-  el.innerHTML=list.length?list.map(c=>`
+  el.innerHTML = list.length ? list.map(c=>`
     <div class="row">
       <b>${safe(c.name)}</b> ${c.closed?'<span class="badge closed-badge">बंद</span>':''}<br>
       मोबाइल: ${safe(c.phone||"नहीं दिया गया")}<br>
       <small>${safe(c.address||"")}</small>
+
       <div class="actions">
         <button onclick="showCustomer('${c.id}')">विवरण</button>
+
         ${c.closed
           ? `<button class="green" onclick="reopenCustomer('${c.id}')">दोबारा खोलें</button>`
           : `<button class="gold" onclick="customerForm('${c.id}')">एडिट</button>
              <button class="gold" onclick="closeCustomer('${c.id}')">खाता बंद करें</button>
              <button class="green" onclick="loanForm('${c.id}')">उधार दें</button>`
         }
+
         <button class="red" onclick="deleteCustomer('${c.id}')">हटाएँ</button>
       </div>
-    </div>`).join(""):(showClosedCustomers?"<p>कोई बंद खाता नहीं है।</p>":"<p>कोई सक्रिय ग्राहक नहीं मिला।</p>");
+    </div>
+  `).join("") : (showClosedCustomers ? "<p>कोई बंद खाता नहीं है।</p>" : "<p>कोई सक्रिय ग्राहक नहीं मिला।</p>");
 }
 
+/* उधार सूची */
 function renderLoans(){
-  const el=document.getElementById("loanList");
-  if(!el)return;
+  const el = document.getElementById("loanList");
+  if(!el) return;
 
-  el.innerHTML=db.loans.length?db.loans.map(l=>{
-    const c=getCustomer(l.customerId);
+  el.innerHTML = db.loans.length ? db.loans.map(l=>{
+    const c = getCustomer(l.customerId);
+
     return `<div class="row">
       <b>${safe(c?.name||"अज्ञात ग्राहक")}</b>
       ${c?.closed?'<span class="badge closed-badge">बंद ग्राहक</span>':''}<br>
+
       मूल उधार: ${money(l.amount)}<br>
       ब्याज: ${safe(l.rate)}% | अवधि: ${safe(l.days)} दिन<br>
       कुल देय: ${money(loanTotal(l))}<br>
       जमा: ${money(paidForLoan(l.id))}<br>
       <b>बकाया: ${money(loanDue(l))}</b><br>
       तारीख: ${safe(l.date||"")}
+
       <div class="actions">
         ${!c?.closed?`<button onclick="loanForm('${l.customerId}','${l.id}')">एडिट</button>`:""}
         <button class="gold" onclick="quickPay('${l.id}')">जमा</button>
         <button class="red" onclick="deleteLoan('${l.id}')">हटाएँ</button>
       </div>
     </div>`;
-  }).join(""):"<p>अभी कोई उधार खाता नहीं है।</p>";
+  }).join("") : "<p>अभी कोई उधार खाता नहीं है।</p>";
 }
 
+/* उधार से सीधे जमा दर्ज करना */
 function quickPay(loanId){
-  const loan=getLoan(loanId);
-  if(!loan)return;
+  const loan = getLoan(loanId);
+  if(!loan) return;
+
   showPage("payments");
-  document.getElementById("payCustomer").value=loan.customerId;
+
+  document.getElementById("payCustomer").value = loan.customerId;
   updatePayLoans();
-  document.getElementById("payLoan").value=loanId;
+  document.getElementById("payLoan").value = loanId;
   document.getElementById("payAmount").focus();
 }
 
+/* चुने गए ग्राहक के उधार खाते */
 function updatePayLoans(){
-  const customerId=document.getElementById("payCustomer").value;
-  const select=document.getElementById("payLoan");
-  const loans=db.loans.filter(l=>l.customerId===customerId);
+  const customerId = document.getElementById("payCustomer").value;
+  const select = document.getElementById("payLoan");
 
-  select.innerHTML=loans.map(l=>
+  const loans = db.loans.filter(l=>l.customerId===customerId);
+
+  select.innerHTML = loans.map(l=>
     `<option value="${l.id}">${safe(l.date)} — ${money(l.amount)} — बकाया ${money(loanDue(l))}</option>`
   ).join("");
 
-  if(!loans.length)select.innerHTML='<option value="">इस ग्राहक का उधार नहीं है</option>';
+  if(!loans.length){
+    select.innerHTML = '<option value="">इस ग्राहक का उधार नहीं है</option>';
+  }
 }
 
+/* जमा रिकॉर्ड दिखाना */
 function renderPayments(){
-  const customerSelect=document.getElementById("payCustomer");
-  if(!customerSelect)return;
+  const customerSelect = document.getElementById("payCustomer");
+  if(!customerSelect) return;
 
-  const previous=customerSelect.value;
-  customerSelect.innerHTML=db.customers.map(c=>
+  const previous = customerSelect.value;
+
+  customerSelect.innerHTML = db.customers.map(c=>
     `<option value="${c.id}">${safe(c.name)}${c.closed?" (बंद खाता)":""}</option>`
   ).join("");
 
-  if(previous&&db.customers.some(c=>c.id===previous))customerSelect.value=previous;
+  if(previous && db.customers.some(c=>c.id===previous)){
+    customerSelect.value = previous;
+  }
+
   updatePayLoans();
 
-  const el=document.getElementById("paymentList");
-  const list=[...db.payments].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const el = document.getElementById("paymentList");
+  const list = [...db.payments].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
 
-  el.innerHTML=list.length?list.map(p=>{
-    const c=getCustomer(p.customerId);
+  el.innerHTML = list.length ? list.map(p=>{
+    const c = getCustomer(p.customerId);
+
     return `<div class="row">
       <b>${safe(c?.name||"अज्ञात ग्राहक")}</b><br>
       जमा राशि: ${money(p.amount)}<br>
       तारीख: ${safe(p.date)}<br>
       टिप्पणी: ${safe(p.note||"")}
+
       <div class="actions">
         <button class="red" onclick="deletePayment('${p.id}')">रिकॉर्ड हटाएँ</button>
       </div>
     </div>`;
-  }).join(""):"<p>अभी कोई जमा रिकॉर्ड नहीं है।</p>";
+  }).join("") : "<p>अभी कोई जमा रिकॉर्ड नहीं है।</p>";
 }
 
+/* जमा फॉर्म सेव करना */
 document.getElementById("paymentForm").addEventListener("submit",function(e){
   e.preventDefault();
 
-  const customerId=document.getElementById("payCustomer").value;
-  const loanId=document.getElementById("payLoan").value;
-  const amount=Number(document.getElementById("payAmount").value);
-  const date=document.getElementById("payDate").value;
-  const note=document.getElementById("payNote").value.trim();
-  const loan=getLoan(loanId);
+  const customerId = document.getElementById("payCustomer").value;
+  const loanId = document.getElementById("payLoan").value;
+  const amount = Number(document.getElementById("payAmount").value);
+  const date = document.getElementById("payDate").value;
+  const note = document.getElementById("payNote").value.trim();
 
-  if(!getCustomer(customerId)||!loan||loan.customerId!==customerId){
-    alert("कृपया सही ग्राहक और उधार खाता चुनें।");return;
+  const loan = getLoan(loanId);
+
+  if(!getCustomer(customerId) || !loan || loan.customerId!==customerId){
+    alert("कृपया सही ग्राहक और उधार खाता चुनें।");
+    return;
   }
-  if(!Number.isFinite(amount)||amount<=0){alert("जमा राशि सही लिखें।");return;}
-  if(!date){alert("जमा की तारीख चुनें।");return;}
+
+  if(!Number.isFinite(amount) || amount<=0){
+    alert("जमा राशि सही लिखें।");
+    return;
+  }
+
+  if(!date){
+    alert("जमा की तारीख चुनें।");
+    return;
+  }
 
   if(amount>loanDue(loan)+0.001){
-    if(!confirm("जमा राशि बकाया से अधिक है। क्या फिर भी जमा दर्ज करें?"))return;
+    if(!confirm("जमा राशि बकाया से अधिक है। क्या फिर भी जमा दर्ज करें?")) return;
   }
 
-  db.payments.push({id:uid(),customerId,loanId,amount,date,note});
+  db.payments.push({
+    id:uid(),
+    customerId,
+    loanId,
+    amount,
+    date,
+    note
+  });
+
   this.reset();
-  document.getElementById("payDate").value=today();
+  document.getElementById("payDate").value = today();
+
   saveData();
   showPage("payments");
   notify("जमा रिकॉर्ड सेव हो गया।");
 });
 
+/* डैशबोर्ड */
 function renderDashboard(){
-  document.getElementById("sCustomers").textContent=db.customers.filter(c=>!c.closed).length;
-  document.getElementById("sClosed").textContent=db.customers.filter(c=>c.closed).length;
-  document.getElementById("sLoan").textContent=money(db.loans.reduce((s,l)=>s+Number(l.amount||0),0));
-  document.getElementById("sPaid").textContent=money(db.payments.reduce((s,p)=>s+Number(p.amount||0),0));
-  document.getElementById("sDue").textContent=money(db.loans.reduce((s,l)=>s+loanDue(l),0));
+  document.getElementById("sCustomers").textContent =
+    db.customers.filter(c=>!c.closed).length;
+
+  document.getElementById("sClosed").textContent =
+    db.customers.filter(c=>c.closed).length;
+
+  document.getElementById("sLoan").textContent =
+    money(db.loans.reduce((s,l)=>s+Number(l.amount||0),0));
+
+  document.getElementById("sPaid").textContent =
+    money(db.payments.reduce((s,p)=>s+Number(p.amount||0),0));
+
+  document.getElementById("sDue").textContent =
+    money(db.loans.reduce((s,l)=>s+loanDue(l),0));
 }
 
+/* सभी सूचियों को अपडेट करना */
 function renderAll(){
   renderDashboard();
   renderCustomers();
   renderLoans();
   renderPayments();
+  updateReportCustomerOptions();
 }
 
+/* रिपोर्ट में ग्राहक सूची */
+function updateReportCustomerOptions(){
+  const sel = document.getElementById("reportCustomer");
+  if(!sel) return;
+
+  const previous = sel.value;
+
+  sel.innerHTML = '<option value="">-- ग्राहक चुनें --</option>' +
+    db.customers.map(c=>
+      `<option value="${safe(c.id)}">${safe(c.name)}${c.closed?" (खाता बंद)":""}</option>`
+    ).join("");
+
+  if(db.customers.some(c=>String(c.id)===String(previous))){
+    sel.value = previous;
+  }
+}
+
+/* ग्राहक रिपोर्ट चुनने पर ग्राहक सूची दिखाना */
+function toggleReportCustomer(){
+  const type = document.getElementById("reportType").value;
+  const wrap = document.getElementById("reportCustomerWrap");
+
+  if(wrap){
+    wrap.classList.toggle("hidden",type!=="customer");
+  }
+
+  if(type==="customer"){
+    updateReportCustomerOptions();
+  }
+}
+
+/* रिपोर्ट तैयार करना */
 function makeReport(){
-  const type=document.getElementById("reportType").value;
-  const el=document.getElementById("reportText");
-  let html=`<h2>माँ मनोकामना स्मॉल फाइनेंस</h2><p>रिपोर्ट की तारीख: ${today()}</p>`;
+  const type = document.getElementById("reportType").value;
+  const el = document.getElementById("reportText");
 
-  if(type==="all"||type==="customers"){
-    html+="<h3>ग्राहक रिपोर्ट</h3><div class='tablewrap'><table><tr><th>नाम</th><th>मोबाइल</th><th>पता</th><th>स्थिति</th></tr>";
+  let html = `<h2>माँ मनोकामना स्मॉल फाइनेंस</h2>
+    <p>रिपोर्ट की तारीख: ${today()}</p>`;
+
+  if(type==="customer"){
+    const customerId = document.getElementById("reportCustomer").value;
+
+    const customer = db.customers.find(c=>String(c.id)===String(customerId));
+
+    if(!customer){
+      alert("कृपया पहले ग्राहक चुनें।");
+      return;
+    }
+
+    const loans = db.loans.filter(l=>String(l.customerId)===String(customer.id));
+    const payments = db.payments.filter(p=>String(p.customerId)===String(customer.id));
+
+    const principal = loans.reduce((s,l)=>s+Number(l.amount||0),0);
+    const payable = loans.reduce((s,l)=>s+loanTotal(l),0);
+    const paid = payments.reduce((s,p)=>s+Number(p.amount||0),0);
+    const due = loans.reduce((s,l)=>s+loanDue(l),0);
+
+    html += `<h3>ग्राहक की पूरी रिपोर्ट</h3>
+      <p>
+        <b>नाम:</b> ${safe(customer.name)}<br>
+        <b>मोबाइल:</b> ${safe(customer.phone||"—")}<br>
+        <b>पता:</b> ${safe(customer.address||"—")}<br>
+        <b>खाता स्थिति:</b> ${customer.closed?"बंद":"सक्रिय"}
+      </p>
+
+      <div class="stats">
+        <div class="stat">कुल मूल उधार<strong>${money(principal)}</strong></div>
+        <div class="stat">कुल देय<strong>${money(payable)}</strong></div>
+        <div class="stat">कुल जमा<strong>${money(paid)}</strong></div>
+        <div class="stat">बाकी बकाया<strong>${money(due)}</strong></div>
+      </div>`;
+
+    html += "<h3>उधार खातों का विवरण</h3><div class='tablewrap'><table><tr><th>तारीख</th><th>मूल राशि</th><th>कुल देय</th><th>जमा</th><th>बकाया</th></tr>";
+
+    if(loans.length){
+      loans.forEach(l=>{
+        html += `<tr>
+          <td>${safe(l.date||"")}</td>
+          <td>${money(l.amount)}</td>
+          <td>${money(loanTotal(l))}</td>
+          <td>${money(paidForLoan(l.id))}</td>
+          <td>${money(loanDue(l))}</td>
+        </tr>`;
+      });
+    }else{
+      html += "<tr><td colspan='5'>इस ग्राहक का कोई उधार रिकॉर्ड नहीं है।</td></tr>";
+    }
+
+    html += "</table></div>";
+
+    html += "<h3>जमा किस्तों / लेन-देन का विवरण</h3><div class='tablewrap'><table><tr><th>तारीख</th><th>उधार खाता</th><th>जमा राशि</th><th>टिप्पणी / रसीद</th></tr>";
+
+    if(payments.length){
+      payments.slice()
+        .sort((a,b)=>String(a.date||"").localeCompare(String(b.date||"")))
+        .forEach(p=>{
+          const loan = getLoan(p.loanId);
+
+          html += `<tr>
+            <td>${safe(p.date||"")}</td>
+            <td>${loan ? safe(loan.date||"")+" — "+money(loan.amount) : "—"}</td>
+            <td>${money(p.amount)}</td>
+            <td>${safe(p.note||"")}</td>
+          </tr>`;
+        });
+    }else{
+      html += "<tr><td colspan='4'>अभी कोई जमा रिकॉर्ड नहीं है।</td></tr>";
+    }
+
+    html += "</table></div>";
+
+    el.innerHTML = html;
+    return;
+  }
+
+  if(type==="all" || type==="customers"){
+    html += "<h3>ग्राहक रिपोर्ट</h3><div class='tablewrap'><table><tr><th>नाम</th><th>मोबाइल</th><th>पता</th><th>स्थिति</th></tr>";
+
     db.customers.forEach(c=>{
-      html+=`<tr><td>${safe(c.name)}</td><td>${safe(c.phone)}</td><td>${safe(c.address)}</td><td>${c.closed?"बंद":"सक्रिय"}</td></tr>`;
+      html += `<tr>
+        <td>${safe(c.name)}</td>
+        <td>${safe(c.phone)}</td>
+        <td>${safe(c.address)}</td>
+        <td>${c.closed?"बंद":"सक्रिय"}</td>
+      </tr>`;
     });
-    html+="</table></div>";
+
+    html += "</table></div>";
   }
 
-  if(type==="all"||type==="loans"){
-    html+="<h3>उधार रिपोर्ट</h3><div class='tablewrap'><table><tr><th>ग्राहक</th><th>तारीख</th><th>मूल राशि</th><th>कुल देय</th><th>जमा</th><th>बकाया</th></tr>";
+  if(type==="all" || type==="loans"){
+    html += "<h3>उधार रिपोर्ट</h3><div class='tablewrap'><table><tr><th>ग्राहक</th><th>तारीख</th><th>मूल राशि</th><th>कुल देय</th><th>जमा</th><th>बकाया</th></tr>";
+
     db.loans.forEach(l=>{
-      html+=`<tr><td>${safe(getCustomer(l.customerId)?.name||"")}</td><td>${safe(l.date)}</td><td>${money(l.amount)}</td><td>${money(loanTotal(l))}</td><td>${money(paidForLoan(l.id))}</td><td>${money(loanDue(l))}</td></tr>`;
+      html += `<tr>
+        <td>${safe(getCustomer(l.customerId)?.name||"")}</td>
+        <td>${safe(l.date||"")}</td>
+        <td>${money(l.amount)}</td>
+        <td>${money(loanTotal(l))}</td>
+        <td>${money(paidForLoan(l.id))}</td>
+        <td>${money(loanDue(l))}</td>
+      </tr>`;
     });
-    html+="</table></div>";
+
+    html += "</table></div>";
   }
 
-  if(type==="all"||type==="payments"){
-    html+="<h3>जमा रिपोर्ट</h3><div class='tablewrap'><table><tr><th>तारीख</th><th>ग्राहक</th><th>राशि</th><th>टिप्पणी</th></tr>";
+  if(type==="all" || type==="payments"){
+    html += "<h3>जमा रिपोर्ट</h3><div class='tablewrap'><table><tr><th>तारीख</th><th>ग्राहक</th><th>राशि</th><th>टिप्पणी</th></tr>";
+
     db.payments.forEach(p=>{
-      html+=`<tr><td>${safe(p.date)}</td><td>${safe(getCustomer(p.customerId)?.name||"")}</td><td>${money(p.amount)}</td><td>${safe(p.note)}</td></tr>`;
+      html += `<tr>
+        <td>${safe(p.date||"")}</td>
+        <td>${safe(getCustomer(p.customerId)?.name||"")}</td>
+        <td>${money(p.amount)}</td>
+        <td>${safe(p.note||"")}</td>
+      </tr>`;
     });
-    html+="</table></div>";
+
+    html += "</table></div>";
   }
 
-  el.innerHTML=html;
+  el.innerHTML = html;
 }
 
-async function shareReport(){
+/* WhatsApp में रिपोर्ट का संदेश साझा करना */
+function shareReport(){
   const el = document.getElementById("reportText");
 
   if(el.textContent.includes("रिपोर्ट देखने के लिए")){
     makeReport();
   }
 
-  const report = document.getElementById("reportText");
+  if(el.textContent.includes("रिपोर्ट देखने के लिए")) return;
+
   const text = "माँ मनोकामना स्मॉल फाइनेंस\n" +
     "रिपोर्ट की तारीख: " + today() + "\n\n" +
-    report.innerText;
+    el.innerText;
 
-  // पहले रिपोर्ट को PDF के रूप में प्रिंट/सेव करने का विकल्प
-  window.print();
+  const whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(text);
+  const win = window.open(whatsappUrl,"_blank");
 
-  // WhatsApp में रिपोर्ट का संदेश खोलें
-  const whatsappUrl =
-    "https://wa.me/?text=" + encodeURIComponent(text);
+  if(!win){
+    alert("ब्राउज़र ने नया पेज रोका है। कृपया पॉप-अप की अनुमति दें या WhatsApp शेयर बटन फिर दबाएँ।");
+    return;
+  }
 
-  window.open(whatsappUrl, "_blank");
+  alert("रिपोर्ट का संदेश WhatsApp में खुलेगा। PDF भेजने के लिए पहले ‘प्रिंट / PDF सेव करें’ से PDF सेव करें, फिर WhatsApp में उसे संलग्न करें।");
 }
 
+/* बैकअप डाउनलोड करना */
 function downloadBackup(){
-  const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="maa-manokamna-backup-"+today()+".json";
+  const blob = new Blob([JSON.stringify(db,null,2)],{
+    type:"application/json"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "maa-manokamna-backup-" + today() + ".json";
+
   document.body.appendChild(a);
   a.click();
   a.remove();
+
   setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
+/* बैकअप रीस्टोर करना */
 function restoreBackup(){
-  const file=document.getElementById("restoreFile").files[0];
-  if(!file){alert("पहले बैकअप JSON फाइल चुनें।");return;}
-  if(!confirm("रीस्टोर करने से मौजूदा डेटा बदल जाएगा। क्या आपने वर्तमान डेटा का बैकअप लिया है?"))return;
+  const file = document.getElementById("restoreFile").files[0];
 
-  const reader=new FileReader();
-  reader.onload=function(){
+  if(!file){
+    alert("पहले बैकअप JSON फाइल चुनें।");
+    return;
+  }
+
+  if(!confirm("रीस्टोर करने से मौजूदा डेटा बदल जाएगा। क्या आपने वर्तमान डेटा का बैकअप लिया है?")) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
     try{
-      const parsed=JSON.parse(reader.result);
-      if(!Array.isArray(parsed.customers)||!Array.isArray(parsed.loans)||!Array.isArray(parsed.payments)){
+      const parsed = JSON.parse(reader.result);
+
+      if(!Array.isArray(parsed.customers) ||
+         !Array.isArray(parsed.loans) ||
+         !Array.isArray(parsed.payments)){
         throw new Error("Invalid backup");
       }
-      db={
+
+      db = {
         customers:parsed.customers,
         loans:parsed.loans,
         payments:parsed.payments
       };
-      db.customers.forEach(c=>{if(typeof c.closed!=="boolean")c.closed=false;});
+
+      db.customers.forEach(c=>{
+        if(typeof c.closed!=="boolean") c.closed = false;
+      });
+
       saveData();
       showPage("home");
+
       alert("बैकअप सफलतापूर्वक रीस्टोर हो गया।");
-    }catch(e){alert("बैकअप फाइल सही नहीं है।");}
+    }catch(e){
+      alert("बैकअप फाइल सही नहीं है।");
+    }
   };
+
   reader.readAsText(file);
 }
 
-document.getElementById("payDate").value=today();
+/* ऐप शुरू करना */
+document.getElementById("payDate").value = today();
+
 document.getElementById("payCustomer").addEventListener("change",updatePayLoans);
 
 loadData();
 renderAll();
+toggleReportCustomer();
+
 </script>
 
 </body>
 </html>
-```
