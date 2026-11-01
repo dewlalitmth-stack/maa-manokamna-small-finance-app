@@ -64,45 +64,51 @@ small{color:#667085}
 }
 
 @media print {
-  @page { size: A4; margin: 12mm; }
-  html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  @page { size: A4 portrait; margin: 6mm; }
+  html, body {
+    width: 100% !important; height: auto !important;
+    margin: 0 !important; padding: 0 !important;
+    background: #fff !important;
+  }
   body * { visibility: hidden !important; }
   #reports, #reports * { visibility: visible !important; }
   #reports {
-    display: block !important;
-    position: static !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    display: block !important; position: static !important;
+    width: 100% !important; margin: 0 !important; padding: 0 !important;
   }
   #reports > .box:first-child { display: none !important; }
   #reportText {
-    display: block !important;
-    position: relative !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 10mm !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    overflow: visible !important;
-    background: transparent !important;
-    color: #17243a !important;
+    display: block !important; position: relative !important;
+    width: 100% !important; margin: 0 !important;
+    padding: 5mm !important; border: 0 !important;
+    border-radius: 0 !important; overflow: visible !important;
+    background: transparent !important; color: #17243a !important;
+    font-size: 8pt !important; line-height: 1.12 !important;
+    zoom: .78 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+  /* Repeat the Navadurga watermark over the entire printable page */
   #reportText::before {
     content: "" !important;
-    position: absolute !important;
-    inset: 0 !important;
-    z-index: 0 !important;
+    position: fixed !important;
+    inset: -6mm !important;
+    z-index: 0 !important; pointer-events: none !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
     opacity: .30 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
   #reportText > * { position: relative !important; z-index: 1 !important; }
   #reportText table { min-width: 0 !important; width: 100% !important; }
+  #reportText th, #reportText td { padding: 3px 4px !important; font-size: 7.5pt !important; }
   #reportText .tablewrap { overflow: visible !important; }
-  #reportText tr, #reportText .stat { break-inside: avoid; page-break-inside: avoid; }
+  #reportText h1, #reportText h2, #reportText h3, #reportText p { margin-top: 3px !important; margin-bottom: 4px !important; }
+  #reportText tr, #reportText .stat { break-inside: avoid !important; page-break-inside: avoid !important; }
+  #reportText img { max-height: 28px !important; }
+  nav, button, .no-print, .report-controls, .report-selection, select { display: none !important; }
 }
 </style>
 </head>
