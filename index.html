@@ -5,17 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10274b">
 <title>माँ मनोकामना स्मॉल फाइनेंस</title>
-```css
-@media print {
-  button,
-  .no-print,
-  .report-controls,
-  .report-selection,
-  select {
-    display: none !important;
-  }
-}
-```
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f1f4f8;color:#17243a}
@@ -58,13 +47,24 @@ small{color:#667085}
  button{padding:9px;font-size:13px}
 }
 
+/* PDF/प्रिंट: केवल तैयार रिपोर्ट छपे, ऐप के बाकी पेज और नियंत्रण नहीं */
 @media print{
- nav,.no-print,button{display:none!important}
- body{background:white}
- main{padding:0}
- .box{border:0}
- .hidden{display:none!important}
- .report{border:0}
+  @page{size:auto;margin:12mm}
+  body{background:white!important;color:#17243a!important}
+  body.print-report *{visibility:hidden!important}
+  body.print-report #reportText,
+  body.print-report #reportText *{visibility:visible!important}
+  body.print-report #reportText{
+    display:block!important;position:absolute!important;left:0!important;top:0!important;
+    width:100%!important;margin:0!important;padding:0!important;border:0!important;
+    border-radius:0!important;overflow:visible!important;background:white!important;
+    color:#17243a!important;box-shadow:none!important
+  }
+  body.print-report #reportText .tablewrap{overflow:visible!important}
+  body.print-report #reportText table{width:100%!important;min-width:0!important;border-collapse:collapse!important}
+  body.print-report #reportText th,
+  body.print-report #reportText td{font-size:10pt!important;overflow-wrap:anywhere!important}
+  body.print-report #reportText tr{break-inside:avoid;page-break-inside:avoid}
 }
 </style>
 </head>
@@ -200,7 +200,7 @@ small{color:#667085}
 
     <div class="actions no-print">
       <button onclick="makeReport()">रिपोर्ट देखें</button>
-      <button class="green" onclick="window.print()">प्रिंट / PDF सेव करें</button>
+      <button class="green" onclick="printReport()">प्रिंट / PDF सेव करें</button>
       <button class="gold" onclick="shareReport()">WhatsApp शेयर</button>
     </div>
   </div>
@@ -1002,6 +1002,20 @@ function makeReport(){
   }
 
   el.innerHTML = html;
+}
+
+/* केवल रिपोर्ट को प्रिंट/PDF में भेजना */
+function printReport(){
+  const el = document.getElementById("reportText");
+  if(!el || !el.innerText.trim() || el.textContent.includes("रिपोर्ट देखने के लिए")){
+    makeReport();
+    if(!el || !el.innerText.trim() || el.textContent.includes("रिपोर्ट देखने के लिए")) return;
+  }
+  document.body.classList.add("print-report");
+  const cleanup = ()=>document.body.classList.remove("print-report");
+  window.addEventListener("afterprint", cleanup, {once:true});
+  window.print();
+  setTimeout(cleanup, 1500);
 }
 
 /* WhatsApp में रिपोर्ट का संदेश साझा करना */
