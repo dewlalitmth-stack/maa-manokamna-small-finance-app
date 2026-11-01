@@ -47,14 +47,22 @@ small{color:#667085}
  button{padding:9px;font-size:13px}
 }
 
-/* PDF/प्रिंट: केवल अलग प्रिंट-कॉपी दिखे */
-#printRoot{display:none}
+/* रिपोर्ट पर माँ दुर्गा का वॉटरमार्क — 40% opacity */
+#reportText{position:relative;isolation:isolate;overflow:hidden}
+#reportText::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.40}
+/* PDF/प्रिंट: केवल रिपोर्ट की अलग कॉपी दिखे */
+#printRoot{display:none;position:relative;isolation:isolate;overflow:hidden;padding:8mm;background:#fff;color:#17243a;font-family:Arial,"Noto Sans Devanagari",sans-serif}
+#printRoot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.40}
+#printRoot h2,#printRoot h3{position:relative;color:#10274b}
+#printRoot table,#printRoot p,#printRoot div,#printRoot h2,#printRoot h3{position:relative}
 @media print{
   @page{size:auto;margin:12mm}
   body.print-report > :not(#printRoot){display:none!important}
-  body.print-report #printRoot{display:block!important;position:static!important;width:100%!important;margin:0!important;padding:0!important;background:#fff!important;color:#17243a!important;font-family:Arial,sans-serif!important}
+  body.print-report #printRoot{display:block!important;position:relative!important;width:100%!important;margin:0!important;padding:8mm!important;background:#fff!important;color:#17243a!important;font-family:Arial,"Noto Sans Devanagari",sans-serif!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-report #printRoot::before{opacity:.40!important}
   body.print-report #printRoot table{width:100%!important;min-width:0!important;border-collapse:collapse!important}
   body.print-report #printRoot th,body.print-report #printRoot td{border:1px solid #777!important;padding:6px!important;font-size:10pt!important;overflow-wrap:anywhere!important;color:#17243a!important}
+  body.print-report #printRoot th{background:#eaf0f7!important}
   body.print-report #printRoot tr{break-inside:avoid;page-break-inside:avoid}
   body.print-report #printRoot .tablewrap{overflow:visible!important}
 }
@@ -1014,7 +1022,7 @@ function printReport(){
     printRoot.id = "printRoot";
     document.body.appendChild(printRoot);
   }
-  printRoot.innerHTML = el.innerHTML;
+  printRoot.innerHTML = '<div class="print-report-content">' + el.innerHTML + '</div>';
   document.body.classList.add("print-report");
   let cleaned = false;
   const cleanup = ()=>{
