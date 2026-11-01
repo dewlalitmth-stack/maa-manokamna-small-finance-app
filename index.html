@@ -129,6 +129,65 @@ small{color:#667085}
   body.print-report #printRoot .print-footer { font-size: 15pt !important; margin-top: 4px !important; padding: 4px !important; }
 }
 
+
+/* FIX: extend the report and Navadurga watermark across the entire A4 page */
+#printRoot {
+  position: relative !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 285mm !important;
+  height: 285mm !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+#printRoot::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: -1 !important;
+  display: block !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 100% 100% !important;
+  opacity: .30 !important;
+  pointer-events: none !important;
+}
+#printRoot > * { position: relative; z-index: 1; }
+#printRoot .print-report-content {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-evenly !important;
+}
+#printRoot .print-report-content h3 { margin-top: 8px !important; margin-bottom: 5px !important; }
+#printRoot .print-report-content p { margin-top: 5px !important; margin-bottom: 7px !important; }
+#printRoot .print-report-content table { margin-top: 4px !important; margin-bottom: 8px !important; }
+#printRoot .print-thanks { margin-top: 10px !important; margin-bottom: 8px !important; }
+#printRoot .print-signoff { margin-top: 10px !important; margin-bottom: 8px !important; }
+#printRoot .print-footer { margin-top: 8px !important; margin-bottom: 0 !important; }
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  html, body { margin: 0 !important; padding: 0 !important; }
+  body.print-report #printRoot {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    height: 297mm !important;
+    padding: 5mm 6mm !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  body.print-report #printRoot::before {
+    inset: 0 !important;
+    background-size: 100% 100% !important;
+    opacity: .30 !important;
+  }
+}
+
 </style>
 </head>
 
