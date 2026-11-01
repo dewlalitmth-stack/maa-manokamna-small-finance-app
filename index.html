@@ -668,18 +668,26 @@ function makeReport(){
   el.innerHTML=html;
 }
 
-function shareReport(){
-  const el=document.getElementById("reportText");
-  if(el.textContent.includes("रिपोर्ट देखने के लिए"))makeReport();
+async function shareReport(){
+  const el = document.getElementById("reportText");
 
-  const text="माँ मनोकामना स्मॉल फाइनेंस रिपोर्ट\nतारीख: "+today()+
-    "\nसक्रिय ग्राहक: "+db.customers.filter(c=>!c.closed).length+
-    "\nबंद खाते: "+db.customers.filter(c=>c.closed).length+
-    "\nकुल मूल उधार: "+money(db.loans.reduce((s,l)=>s+Number(l.amount||0),0))+
-    "\nकुल जमा: "+money(db.payments.reduce((s,p)=>s+Number(p.amount||0),0))+
-    "\nकुल बकाया: "+money(db.loans.reduce((s,l)=>s+loanDue(l),0));
+  if(el.textContent.includes("रिपोर्ट देखने के लिए")){
+    makeReport();
+  }
 
-  window.open("https://wa.me/?text="+encodeURIComponent(text),"_blank");
+  const report = document.getElementById("reportText");
+  const text = "माँ मनोकामना स्मॉल फाइनेंस\n" +
+    "रिपोर्ट की तारीख: " + today() + "\n\n" +
+    report.innerText;
+
+  // पहले रिपोर्ट को PDF के रूप में प्रिंट/सेव करने का विकल्प
+  window.print();
+
+  // WhatsApp में रिपोर्ट का संदेश खोलें
+  const whatsappUrl =
+    "https://wa.me/?text=" + encodeURIComponent(text);
+
+  window.open(whatsappUrl, "_blank");
 }
 
 function downloadBackup(){
