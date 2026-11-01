@@ -47,12 +47,12 @@ small{color:#667085}
  button{padding:9px;font-size:13px}
 }
 
-/* रिपोर्ट पर माँ दुर्गा का वॉटरमार्क — 20% opacity */
+/* रिपोर्ट पर माँ दुर्गा का वॉटरमार्क — 30% opacity */
 #reportText{position:relative;isolation:isolate;overflow:hidden}
-#reportText::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.20}
-/* PDF/प्रिंट: केवल रिपोर्ट की अलग कॉपी दिखे */
+#reportText::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.30}
+/* PDF/प्रिंट: डैशबोर्ड, ग्राहक/उधार खाते, नेविगेशन और ऐप के सभी बटन छिपाकर केवल रिपोर्ट दिखे */
 #printRoot{display:none;position:relative;isolation:isolate;overflow:hidden;padding:8mm;background:#fff;color:#17243a;font-family:Arial,"Noto Sans Devanagari",sans-serif}
-#printRoot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.20}
+#printRoot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.30}
 #printRoot{font-size:12px;line-height:1.45}
 #printRoot .print-brand{display:flex;align-items:center;gap:14px;background:#062957;color:#fff;border:2px solid #d5a642;border-radius:10px;padding:8px 12px;margin-bottom:6px;position:relative}
 #printRoot .print-brand img{width:76px;height:76px;object-fit:cover;border-radius:50%;border:3px solid #e5b847;background:#fff;flex-shrink:0}
@@ -79,8 +79,9 @@ small{color:#667085}
 @media print{
   @page{size:auto;margin:10mm}
   body.print-report > :not(#printRoot){display:none!important}
+  body.print-report header,body.print-report nav,body.print-report main,body.print-report footer,body.print-report #toast{display:none!important}
   body.print-report #printRoot{display:block!important;position:relative!important;width:100%!important;margin:0!important;padding:8mm!important;background:#fff!important;color:#17243a!important;font-family:Arial,"Noto Sans Devanagari",sans-serif!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  body.print-report #printRoot::before{opacity:.20!important}
+  body.print-report #printRoot::before{opacity:.30!important}
   body.print-report #printRoot table{width:100%!important;min-width:0!important;border-collapse:collapse!important}
   body.print-report #printRoot th,body.print-report #printRoot td{border:1px solid #4387c8!important;padding:5px!important;font-size:9pt!important;overflow-wrap:anywhere!important;color:#17243a!important}
   body.print-report #printRoot th{background:#cfe3fb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
