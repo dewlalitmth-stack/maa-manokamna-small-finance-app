@@ -5,17 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10274b">
 <title>माँ मनोकामना स्मॉल फाइनेंस</title>
-```css
-@media print {
-  button,
-  .no-print,
-  .report-controls,
-  .report-selection,
-  select {
-    display: none !important;
-  }
-}
-```
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,"Noto Sans Devanagari",sans-serif;background:#f1f4f8;color:#17243a}
@@ -74,13 +63,44 @@ small{color:#667085}
  button{padding:9px;font-size:13px}
 }
 
-@media print{
- nav,.no-print,button{display:none!important}
- body{background:white}
- main{padding:0}
- .box{border:0}
- .hidden{display:none!important}
- .report{border:0}
+@media print {
+  @page { size: A4; margin: 12mm; }
+  html, body { background: #fff !important; margin: 0 !important; padding: 0 !important; }
+  body * { visibility: hidden !important; }
+  #reports {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  #reports > .box:first-child { display: none !important; }
+  #reportText, #reportText * { visibility: visible !important; }
+  #reportText {
+    display: block !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    background: transparent !important;
+    color: #17243a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  #reportText::before {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    opacity: .30 !important;
+  }
+  #reportText table { min-width: 0 !important; width: 100% !important; }
+  #reportText .tablewrap { overflow: visible !important; }
+  #reportText tr, #reportText .stat { break-inside: avoid; page-break-inside: avoid; }
 }
 </style>
 </head>
