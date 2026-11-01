@@ -53,16 +53,40 @@ small{color:#667085}
 /* PDF/प्रिंट: केवल रिपोर्ट की अलग कॉपी दिखे */
 #printRoot{display:none;position:relative;isolation:isolate;overflow:hidden;padding:8mm;background:#fff;color:#17243a;font-family:Arial,"Noto Sans Devanagari",sans-serif}
 #printRoot::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png");background-repeat:no-repeat;background-position:center;background-size:contain;opacity:.40}
+#printRoot{font-size:12px;line-height:1.45}
+#printRoot .print-brand{display:flex;align-items:center;gap:14px;background:#062957;color:#fff;border:2px solid #d5a642;border-radius:10px;padding:10px 14px;margin-bottom:12px;position:relative}
+#printRoot .print-brand img{width:76px;height:76px;object-fit:cover;border-radius:50%;border:3px solid #e5b847;background:#fff;flex-shrink:0}
+#printRoot .print-brand-title{font-size:24px;font-weight:900;color:#ffdc32;line-height:1.25}
+#printRoot .print-brand-sub{font-size:14px;color:white;font-weight:bold;margin-top:4px}
+#printRoot .print-title{background:#062957;color:#fff!important;text-align:center;border-radius:8px;padding:5px 18px;margin:8px auto 12px;max-width:360px;font-size:24px}
 #printRoot h2,#printRoot h3{position:relative;color:#10274b}
+#printRoot h3{display:inline-block;background:#062957;color:#fff!important;padding:5px 10px;border-radius:7px;margin:12px 0 6px;font-size:15px}
 #printRoot table,#printRoot p,#printRoot div,#printRoot h2,#printRoot h3{position:relative}
+#printRoot table{border-collapse:collapse;width:100%;min-width:0;margin-bottom:8px}
+#printRoot th,#printRoot td{border:1px solid #4387c8;padding:6px;text-align:center}
+#printRoot th{background:#cfe3fb;color:#10274b}
+#printRoot .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:10px 0}
+#printRoot .stat{background:#eef4fc;border:1px solid #8db5e0;border-radius:6px;padding:8px}
+#printRoot .stat strong{display:block;font-size:16px;color:#10274b}
+#printRoot .print-signoff{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:18px;position:relative;break-inside:avoid}
+#printRoot .print-date{font-size:11px;font-weight:bold}
+#printRoot .print-signature{text-align:center;min-width:190px;color:#10274b}
+#printRoot .signature-name{font-family:'Brush Script MT','Segoe Script',cursive;font-size:29px;font-style:italic;font-weight:bold;color:#123d78;border-bottom:2px solid #d5a642;display:inline-block;padding:0 8px 2px;transform:rotate(-3deg)}
+#printRoot .signature-label{font-size:11px;font-weight:bold;margin-top:4px}
+#printRoot .print-footer{background:#062957;color:#fff;text-align:center;border:2px solid #d5a642;border-radius:8px;padding:8px;margin-top:12px;font-size:20px;font-weight:bold}
+#printRoot .print-footer small{display:block;color:#fff;font-size:12px}
+#printRoot .print-thanks{text-align:center;color:#123d9b;font-weight:bold;font-size:13px;margin:14px 0}
 @media print{
   @page{size:auto;margin:12mm}
   body.print-report > :not(#printRoot){display:none!important}
   body.print-report #printRoot{display:block!important;position:relative!important;width:100%!important;margin:0!important;padding:8mm!important;background:#fff!important;color:#17243a!important;font-family:Arial,"Noto Sans Devanagari",sans-serif!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   body.print-report #printRoot::before{opacity:.40!important}
   body.print-report #printRoot table{width:100%!important;min-width:0!important;border-collapse:collapse!important}
-  body.print-report #printRoot th,body.print-report #printRoot td{border:1px solid #777!important;padding:6px!important;font-size:10pt!important;overflow-wrap:anywhere!important;color:#17243a!important}
-  body.print-report #printRoot th{background:#eaf0f7!important}
+  body.print-report #printRoot th,body.print-report #printRoot td{border:1px solid #4387c8!important;padding:5px!important;font-size:9pt!important;overflow-wrap:anywhere!important;color:#17243a!important}
+  body.print-report #printRoot th{background:#cfe3fb!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.print-report #printRoot .print-brand,body.print-report #printRoot .print-footer,body.print-report #printRoot .print-title,body.print-report #printRoot h3{ -webkit-print-color-adjust:exact;print-color-adjust:exact }
+  body.print-report #printRoot .print-brand-title{font-size:20pt!important}
+  body.print-report #printRoot .print-signoff{break-inside:avoid;page-break-inside:avoid}
   body.print-report #printRoot tr{break-inside:avoid;page-break-inside:avoid}
   body.print-report #printRoot .tablewrap{overflow:visible!important}
 }
@@ -1022,7 +1046,23 @@ function printReport(){
     printRoot.id = "printRoot";
     document.body.appendChild(printRoot);
   }
-  printRoot.innerHTML = '<div class="print-report-content">' + el.innerHTML + '</div>';
+  // पसंद किए गए नमूने जैसा रिपोर्ट लेआउट, वॉटरमार्क और Lalit Kumar हस्ताक्षर
+  const reportBody = el.innerHTML
+    .replace(/<h2[^>]*>.*?<\/h2>/is, '')
+    .replace(/<p>रिपोर्ट की तारीख:.*?<\/p>/is, '');
+  printRoot.innerHTML = `
+    <div class="print-brand">
+      <img src="https://dewlalitmth-stack.github.io/maa-manokamna-small-finance-app/maa-durga.png.png" alt="माँ दुर्गा">
+      <div><div class="print-brand-title">माँ मनोकामना स्मॉल फाइनेंस</div><div class="print-brand-sub">आपकी ज़रूरत — हमारा भरोसा!</div></div>
+    </div>
+    <h2 class="print-title">ग्राहक रिपोर्ट</h2>
+    <div class="print-report-content">${reportBody}</div>
+    <div class="print-thanks">🙏 धन्यवाद! आप समय पर भुगतान करें और अपनी आर्थिक स्थिति मजबूत बनाएं। 🙏</div>
+    <div class="print-signoff">
+      <div class="print-date">रिपोर्ट तैयार करने की तिथि : ${today()}</div>
+      <div class="print-signature"><div class="signature-name">✒ Lalit Kumar</div><div class="signature-label">प्रबंधक के हस्ताक्षर</div></div>
+    </div>
+    <div class="print-footer">माँ मनोकामना स्मॉल फाइनेंस<small>सदा आपके साथ...</small></div>`;
   document.body.classList.add("print-report");
   let cleaned = false;
   const cleanup = ()=>{
