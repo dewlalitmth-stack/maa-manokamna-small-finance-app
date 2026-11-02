@@ -192,6 +192,9 @@ small{color:#667085}
 
 /* FINAL PRINT FIX: full A4 page height, full-page watermark, evenly spaced report */
 @media print {
+  /* PDF only: hide the मूल राशि column in the loan report; keep it visible on screen. */
+  body.print-report #printRoot .loan-report-table th:nth-child(3),
+  body.print-report #printRoot .loan-report-table td:nth-child(3) { display: none !important; }
   @page { size: A4 portrait; margin: 0 !important; }
   html, body {
     width: 210mm !important;
@@ -1245,7 +1248,7 @@ function makeReport(){
   }
 
   if(type==="all" || type==="loans"){
-    html += "<h3>उधार रिपोर्ट</h3><div class='tablewrap'><table><tr><th>ग्राहक</th><th>तारीख</th><th>मूल राशि</th><th>कुल देय</th><th>जमा</th><th>बकाया</th></tr>";
+    html += "<h3>उधार रिपोर्ट</h3><div class='tablewrap'><table class='loan-report-table'><tr><th>ग्राहक</th><th>तारीख</th><th>मूल राशि</th><th>कुल देय</th><th>जमा</th><th>बकाया</th></tr>";
 
     db.loans.forEach(l=>{
       html += `<tr>
