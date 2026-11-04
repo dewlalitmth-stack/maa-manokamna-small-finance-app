@@ -1,0 +1,9 @@
+{
+  "name": "maa-manokamna-small-finance",
+  "version": "1.0.0",
+  "description": "Offline Hindi finance ledger for Windows",
+  "main": "src/main.js",
+  "scripts": {"start": "electron .", "dist": "electron-builder --win nsis"},
+  "devDependencies": {"electron": "^33.2.1", "electron-builder": "^25.1.8"},
+  "build": {"appId": "in.maamanokamna.finance", "productName": "Maa Manokamna Small Finance", "directories": {"output": "release"}, "files": ["src/**/*", "package.json"], "win": {"target": ["nsis"], "artifactName": "Maa-Manokamna-Small-Finance-Setup-${version}.${ext}"}, "nsis": {"oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true}}
+}
