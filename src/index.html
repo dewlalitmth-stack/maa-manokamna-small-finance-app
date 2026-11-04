@@ -1,9 +1,654 @@
-<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>माँ मनोकामना स्मॉल फाइनेंस</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f2f5fa;color:#17243b;font-family:Arial,'Noto Sans Devanagari',sans-serif}.top{background:#10274b;color:#fff;padding:18px 26px;border-bottom:4px solid #d5a642}.top h1{margin:0;font-size:27px}.top small{color:#f2d78e}.wrap{padding:20px;max-width:1450px;margin:auto}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tabs button,.btn{border:0;border-radius:8px;padding:11px 16px;background:#087f73;color:white;cursor:pointer;font-weight:600}.tabs button{background:#dce5ef;color:#10274b}.tabs button.active{background:#10274b;color:white}.card{background:white;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 3px 14px #142b4810}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}label{display:block;font-weight:600;margin:6px 0}input,select,textarea{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:7px;font-size:15px}h2{margin:0 0 14px;color:#10274b}table{width:100%;border-collapse:collapse;margin-top:12px}th,td{padding:10px;border-bottom:1px solid #e4e9f0;text-align:left}th{background:#eef3f8}.muted{color:#64748b}.hidden{display:none}.danger{background:#a83232}.gold{color:#b3831d}.notice{background:#fff8e6;padding:12px;border-left:4px solid #d5a642;border-radius:6px;margin-bottom:14px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.stat{font-size:25px;font-weight:bold;color:#087f73}.login{max-width:400px;margin:10vh auto}.right{float:right}
-</style></head><body><header class="top"><h1>माँ मनोकामना स्मॉल फाइनेंस</h1><small>ऑफलाइन खाता-बही • सुरक्षित स्थानीय डेटा</small></header><main class="wrap"><section id="lock" class="card login hidden"><h2>ऐप लॉक</h2><p>अपना 4 अंकों का PIN दर्ज करें</p><input id="pinEntry" type="password" maxlength="4" inputmode="numeric" placeholder="4 अंकों का PIN"><button class="btn" onclick="unlock()">खोलें</button><p id="pinErr" class="danger"></p></section><section id="appArea" class="hidden"><div class="notice">नया खाली खाता-बही। डेटा इसी कंप्यूटर में सुरक्षित रहेगा। ऐप बंद होने पर बैकअप अपने-आप बनेगा और हर 15 मिनट में भी बैकअप बनेगा।</div><nav class="tabs"><button class="active" data-tab="home">डैशबोर्ड</button><button data-tab="customers">ग्राहक</button><button data-tab="loans">नया ऋण</button><button data-tab="payments">किस्त जमा</button><button data-tab="reports">रिपोर्ट</button><button data-tab="settings">सेटिंग / बैकअप</button></nav>
-<section id="home" class="tab"><div class="grid"><div class="card"><div class="muted">कुल ग्राहक</div><div id="sCustomers" class="stat">0</div></div><div class="card"><div class="muted">कुल ऋण</div><div id="sLoans" class="stat">₹0</div></div><div class="card"><div class="muted">कुल जमा</div><div id="sPaid" class="stat">₹0</div></div></div><div class="card"><h2>स्वागत है</h2><p>ग्राहक जोड़ें, ऋण दर्ज करें और चुनी गई अवधि के अनुसार किस्तों का शेड्यूल देखें।</p></div></section>
-<section id="customers" class="tab hidden"><div class="card"><h2>नया ग्राहक जोड़ें</h2><div class="grid"><div><label>ग्राहक का नाम</label><input id="cName"></div><div><label>मोबाइल नंबर</label><input id="cPhone"></div><div><label>पता</label><input id="cAddress"></div></div><button class="btn" onclick="addCustomer()">ग्राहक सेव करें</button></div><div class="card"><h2>ग्राहक सूची</h2><div id="customerList"></div></div></section>
-<section id="loans" class="tab hidden"><div class="card"><h2>नया ऋण दर्ज करें</h2><div class="grid"><div><label>ग्राहक</label><select id="loanCustomer"></select></div><div><label>ऋण राशि (₹)</label><input id="loanAmount" type="number" min="1"></div><div><label>किस्त अवधि</label><select id="durationMode" onchange="toggleDays()"><option value="100">100 दिन</option><option value="custom">अपनी अवधि चुनें</option></select></div><div id="customDaysBox" class="hidden"><label>कुल दिन</label><input id="customDays" type="number" min="1" max="2000" placeholder="जैसे 75"></div><div><label>पहली किस्त की तारीख</label><input id="startDate" type="date"></div></div><button class="btn" onclick="addLoan()">ऋण सेव करें</button><div id="schedulePreview"></div></div><div class="card"><h2>ऋण खाते</h2><div id="loanList"></div></div></section>
-<section id="payments" class="tab hidden"><div class="card"><h2>किस्त जमा करें</h2><div class="grid"><div><label>ऋण खाता</label><select id="payLoan"></select></div><div><label>जमा राशि (₹)</label><input id="payAmount" type="number" min="0"></div><div><label>जमा तारीख</label><input id="payDate" type="date"></div><div><label>टिप्पणी / रसीद</label><input id="payNote"></div></div><button class="btn" onclick="addPayment()">जमा सेव करें</button></div><div class="card"><h2>जमा किस्तें (गलती सुधारने के लिए संपादन उपलब्ध)</h2><div id="paymentList"></div></div></section>
-<section id="reports" class="tab hidden"><div class="card"><h2>रिपोर्ट</h2><label>ग्राहक चुनें</label><select id="reportCustomer" onchange="renderReport()"></select><div id="reportBody"></div><div class="actions"><button class="btn" onclick="window.print()">PDF / प्रिंट</button></div></div></section>
-<section id="settings" class="tab hidden"><div class="card"><h2>सुरक्षा और बैकअप</h2><label>नया 4 अंकों का PIN (खाली छोड़ें तो लॉक बंद)</label><input id="newPin" maxlength="4" type="password" placeholder="4 अंक"><button class="btn" onclick="setPin()">PIN सेव करें</button><hr><p>बैकअप स्थान: <b id="backupPath"></b></p><div class="actions"><button class="btn" onclick="manualBackup()">अभी बैकअप बनाएं</button><button class="btn danger" onclick="restoreBackup()">बैकअप से डेटा वापस लाएं</button></div><p class="muted">बैकअप JSON फाइलें Documents के “Maa Manokamna Backup” फोल्डर में बनेंगी। Restore करने पर वर्तमान डेटा चुनी गई बैकअप फाइल के डेटा से बदल जाएगा।</p></div></section></section></main><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>माँ मनोकामना स्मॉल फाइनेंस</title>
+
+<style>
+:root{
+  --navy:#10274b;
+  --navy2:#183c68;
+  --gold:#d5a642;
+  --gold-light:#f8e8b8;
+  --teal:#087f73;
+  --bg:#f2f5fa;
+  --white:#fff;
+  --text:#17243b;
+  --muted:#64748b;
+  --border:#e1e7ef;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  color:var(--text);
+  font-family:Arial,'Noto Sans Devanagari',sans-serif;
+  background:
+    linear-gradient(rgba(244,247,251,.94),rgba(244,247,251,.96)),
+    url('assets/durga-watermark.jpg') center center/cover fixed;
+}
+
+.top{
+  min-height:190px;
+  padding:30px 35px;
+  color:white;
+  background:
+    linear-gradient(90deg,rgba(9,25,51,.96),rgba(16,39,75,.68)),
+    url('assets/durga-hero.jpg') center 35%/cover;
+  border-bottom:5px solid var(--gold);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.top h1{
+  margin:0 0 10px;
+  font-size:32px;
+  color:#fff;
+  text-shadow:0 2px 8px #000;
+}
+
+.top small{
+  color:var(--gold-light);
+  font-size:15px;
+}
+
+.top .brand-tag{
+  display:inline-block;
+  margin-top:12px;
+  padding:7px 15px;
+  border:1px solid var(--gold);
+  border-radius:30px;
+  color:var(--gold-light);
+  background:#10274b88;
+}
+
+.wrap{
+  max-width:1500px;
+  margin:auto;
+  padding:25px;
+}
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:22px;
+  padding:12px;
+  background:white;
+  border-radius:14px;
+  box-shadow:0 4px 18px #10274b12;
+}
+
+.tabs button{
+  border:0;
+  border-radius:9px;
+  padding:13px 19px;
+  background:#e9eef5;
+  color:var(--navy);
+  cursor:pointer;
+  font-size:15px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.tabs button:hover{
+  background:var(--gold-light);
+}
+
+.tabs button.active{
+  background:var(--navy);
+  color:white;
+  box-shadow:0 3px 10px #10274b30;
+}
+
+.card{
+  position:relative;
+  background:rgba(255,255,255,.96);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:22px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px #10274b0d;
+  overflow:hidden;
+}
+
+.card h2{
+  margin:0 0 18px;
+  padding-bottom:12px;
+  color:var(--navy);
+  border-bottom:2px solid var(--gold-light);
+  font-size:21px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:16px;
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin:8px 0;
+  color:var(--navy);
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  font-size:15px;
+  background:white;
+  color:var(--text);
+}
+
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px #d5a64225;
+}
+
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:12px 19px;
+  background:var(--teal);
+  color:white;
+  cursor:pointer;
+  font-weight:700;
+  font-size:14px;
+  margin-top:13px;
+}
+
+.btn:hover{filter:brightness(.92)}
+
+.danger{background:#a83232}
+
+.gold{color:#b3831d}
+
+.muted{color:var(--muted)}
+
+.hidden{display:none!important}
+
+.notice{
+  background:#fff8e6;
+  padding:15px 18px;
+  border-left:5px solid var(--gold);
+  border-radius:9px;
+  margin-bottom:20px;
+  color:#735719;
+  line-height:1.7;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+
+.stat{
+  font-size:29px;
+  font-weight:bold;
+  color:var(--teal);
+  margin-top:10px;
+}
+
+.stat-card{
+  min-height:125px;
+  border-top:4px solid var(--gold);
+  background:linear-gradient(135deg,#fff,#f7f9fc);
+}
+
+.stat-icon{
+  font-size:14px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.welcome{
+  min-height:250px;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(90deg,rgba(16,39,75,.96),rgba(16,39,75,.68)),
+    url('assets/durga-hero.jpg') center/cover;
+  color:white;
+  border:2px solid var(--gold);
+}
+
+.welcome h2{
+  color:#ffe4a1;
+  border:0;
+  font-size:27px;
+}
+
+.welcome p{
+  font-size:17px;
+  line-height:1.8;
+  max-width:650px;
+  color:white;
+}
+
+.welcome .gold-text{
+  color:#ffe4a1;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+  background:white;
+}
+
+th,td{
+  padding:12px 10px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  font-size:14px;
+}
+
+th{
+  background:var(--navy);
+  color:white;
+  font-weight:700;
+}
+
+tr:nth-child(even){background:#f7f9fc}
+
+.login{
+  max-width:420px;
+  margin:10vh auto;
+  text-align:center;
+  border-top:5px solid var(--gold);
+}
+
+.login h2{
+  text-align:center;
+}
+
+.login .btn{width:100%}
+
+#pinErr{color:#a83232}
+
+#reportBody{
+  position:relative;
+  padding:22px;
+  margin-top:20px;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  background:
+    linear-gradient(rgba(255,255,255,.91),rgba(255,255,255,.94)),
+    url('assets/durga-watermark.jpg') center/contain no-repeat;
+  background-color:white;
+}
+
+#reportBody h2{
+  color:var(--navy);
+  text-align:center;
+  font-size:25px;
+}
+
+#reportBody h3{
+  color:var(--navy);
+  border-bottom:1px solid var(--gold);
+  padding-bottom:9px;
+}
+
+#backupPath{
+  overflow-wrap:anywhere;
+}
+
+hr{
+  border:0;
+  border-top:1px solid var(--border);
+  margin:22px 0;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:700px){
+  .top{
+    padding:24px 18px;
+    min-height:150px;
+  }
+  .top h1{font-size:23px}
+  .wrap{padding:12px}
+  .tabs button{flex:1 1 42%;padding:12px 8px}
+  .card{padding:15px}
+  table{font-size:12px}
+  th,td{padding:8px 6px}
+}
+
+@media print{
+  body{
+    background:white!important;
+  }
+
+  body *{
+    visibility:hidden;
+  }
+
+  #reports,#reports *{
+    visibility:visible;
+  }
+
+  #reports{
+    display:block!important;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    padding:0;
+    margin:0;
+  }
+
+  #reports>.card{
+    border:0;
+    box-shadow:none;
+    padding:5px;
+  }
+
+  #reports>.card>h2,
+  #reports label,
+  #reports select,
+  #reports .actions{
+    display:none!important;
+  }
+
+  #reportBody{
+    display:block!important;
+    border:2px solid #d5a642;
+    background-image:url('assets/durga-watermark.jpg')!important;
+    background-position:center!important;
+    background-repeat:no-repeat!important;
+    background-size:contain!important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    padding:20px;
+  }
+
+  #reportBody:before{
+    content:"माँ मनोकामना स्मॉल फाइनेंस";
+    display:block;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    color:#10274b;
+    border-bottom:2px solid #d5a642;
+    padding-bottom:12px;
+    margin-bottom:18px;
+  }
+
+  th{
+    background:#10274b!important;
+    color:white!important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+  <div>
+    <h1>माँ मनोकामना स्मॉल फाइनेंस</h1>
+    <small>ऑफलाइन खाता-बही • सुरक्षित स्थानीय डेटा</small>
+    <br>
+    <span class="brand-tag">जय माता दी</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="lock" class="card login hidden">
+  <h2>🔐 ऐप लॉक</h2>
+  <p>अपना 4 अंकों का PIN दर्ज करें</p>
+  <input id="pinEntry" type="password" maxlength="4"
+  inputmode="numeric" placeholder="4 अंकों का PIN">
+  <button class="btn" onclick="unlock()">ऐप खोलें</button>
+  <p id="pinErr"></p>
+</section>
+
+<section id="appArea" class="hidden">
+
+<div class="notice">
+  <b>सुरक्षित स्थानीय खाता-बही</b><br>
+  आपका डेटा इसी कंप्यूटर में सुरक्षित रहेगा। ऐप बंद होने पर बैकअप अपने-आप बनेगा और हर 15 मिनट में भी बैकअप बनेगा।
+</div>
+
+<nav class="tabs">
+  <button class="active" data-tab="home">🏠 डैशबोर्ड</button>
+  <button data-tab="customers">👥 ग्राहक</button>
+  <button data-tab="loans">💰 नया ऋण</button>
+  <button data-tab="payments">📥 किस्त जमा</button>
+  <button data-tab="reports">📊 रिपोर्ट</button>
+  <button data-tab="settings">⚙️ सेटिंग / बैकअप</button>
+</nav>
+
+<section id="home" class="tab">
+
+<div class="grid">
+
+  <div class="card stat-card">
+    <div class="stat-icon">👥 कुल ग्राहक</div>
+    <div id="sCustomers" class="stat">0</div>
+  </div>
+
+  <div class="card stat-card">
+    <div class="stat-icon">💰 कुल ऋण</div>
+    <div id="sLoans" class="stat">₹0</div>
+  </div>
+
+  <div class="card stat-card">
+    <div class="stat-icon">📥 कुल जमा</div>
+    <div id="sPaid" class="stat">₹0</div>
+  </div>
+
+</div>
+
+<div class="card welcome">
+  <div>
+    <h2>माँ मनोकामना स्मॉल फाइनेंस में आपका स्वागत है</h2>
+    <p>
+      ग्राहक जोड़ें, ऋण दर्ज करें और चुनी गई अवधि के अनुसार
+      किस्तों का शेड्यूल देखें। अपने सभी ग्राहकों का हिसाब
+      सुरक्षित रखें।
+    </p>
+    <div class="gold-text">॥ जय माता दी ॥</div>
+  </div>
+</div>
+
+</section>
+
+<section id="customers" class="tab hidden">
+
+<div class="card">
+  <h2>👥 नया ग्राहक जोड़ें</h2>
+
+  <div class="grid">
+    <div>
+      <label>ग्राहक का नाम</label>
+      <input id="cName">
+    </div>
+
+    <div>
+      <label>मोबाइल नंबर</label>
+      <input id="cPhone">
+    </div>
+
+    <div>
+      <label>पता</label>
+      <input id="cAddress">
+    </div>
+  </div>
+
+  <button class="btn" onclick="addCustomer()">ग्राहक सेव करें</button>
+</div>
+
+<div class="card">
+  <h2>ग्राहक सूची</h2>
+  <div id="customerList"></div>
+</div>
+
+</section>
+
+<section id="loans" class="tab hidden">
+
+<div class="card">
+  <h2>💰 नया ऋण दर्ज करें</h2>
+
+  <div class="grid">
+
+    <div>
+      <label>ग्राहक</label>
+      <select id="loanCustomer"></select>
+    </div>
+
+    <div>
+      <label>ऋण राशि (₹)</label>
+      <input id="loanAmount" type="number" min="1">
+    </div>
+
+    <div>
+      <label>किस्त अवधि</label>
+      <select id="durationMode" onchange="toggleDays()">
+        <option value="100">100 दिन</option>
+        <option value="custom">अपनी अवधि चुनें</option>
+      </select>
+    </div>
+
+    <div id="customDaysBox" class="hidden">
+      <label>कुल दिन</label>
+      <input id="customDays" type="number" min="1" max="2000"
+      placeholder="जैसे 75">
+    </div>
+
+    <div>
+      <label>पहली किस्त की तारीख</label>
+      <input id="startDate" type="date">
+    </div>
+
+  </div>
+
+  <button class="btn" onclick="addLoan()">ऋण सेव करें</button>
+  <div id="schedulePreview"></div>
+</div>
+
+<div class="card">
+  <h2>ऋण खाते</h2>
+  <div id="loanList"></div>
+</div>
+
+</section>
+
+<section id="payments" class="tab hidden">
+
+<div class="card">
+  <h2>📥 किस्त जमा करें</h2>
+
+  <div class="grid">
+
+    <div>
+      <label>ऋण खाता</label>
+      <select id="payLoan"></select>
+    </div>
+
+    <div>
+      <label>जमा राशि (₹)</label>
+      <input id="payAmount" type="number" min="0">
+    </div>
+
+    <div>
+      <label>जमा तारीख</label>
+      <input id="payDate" type="date">
+    </div>
+
+    <div>
+      <label>टिप्पणी / रसीद</label>
+      <input id="payNote">
+    </div>
+
+  </div>
+
+  <button class="btn" onclick="addPayment()">जमा सेव करें</button>
+</div>
+
+<div class="card">
+  <h2>जमा किस्तें (गलती सुधारने के लिए संपादन उपलब्ध)</h2>
+  <div id="paymentList"></div>
+</div>
+
+</section>
+
+<section id="reports" class="tab hidden">
+
+<div class="card">
+  <h2>📊 ग्राहक रिपोर्ट</h2>
+
+  <label>ग्राहक चुनें</label>
+  <select id="reportCustomer" onchange="renderReport()"></select>
+
+  <div id="reportBody"></div>
+
+  <div class="actions">
+    <button class="btn" onclick="window.print()">PDF / प्रिंट</button>
+  </div>
+</div>
+
+</section>
+
+<section id="settings" class="tab hidden">
+
+<div class="card">
+  <h2>⚙️ सुरक्षा और बैकअप</h2>
+
+  <label>नया 4 अंकों का PIN (खाली छोड़ें तो लॉक बंद)</label>
+  <input id="newPin" maxlength="4" type="password" placeholder="4 अंक">
+
+  <button class="btn" onclick="setPin()">PIN सेव करें</button>
+
+  <hr>
+
+  <p>बैकअप स्थान: <b id="backupPath"></b></p>
+
+  <div class="actions">
+    <button class="btn" onclick="manualBackup()">अभी बैकअप बनाएं</button>
+    <button class="btn danger" onclick="restoreBackup()">बैकअप से डेटा वापस लाएं</button>
+  </div>
+
+  <p class="muted">
+    बैकअप JSON फाइलें Documents के “Maa Manokamna Backup”
+    फोल्डर में बनेंगी। Restore करने पर वर्तमान डेटा चुनी गई
+    बैकअप फाइल के डेटा से बदल जाएगा।
+  </p>
+
+</div>
+
+</section>
+
+</section>
+
+</main>
+
+<footer>
+  माँ मनोकामना स्मॉल फाइनेंस • सुरक्षित स्थानीय खाता-बही • ॥ जय माता दी ॥
+</footer>
+
+<script src="app.js"></script>
+
+</body>
+</html>
