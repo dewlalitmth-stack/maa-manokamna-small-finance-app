@@ -26,7 +26,7 @@ body{
   color:var(--text);
   font-family:Arial,'Noto Sans Devanagari',sans-serif;
   background:
-    linear-gradient(rgba(244,247,251,.94),rgba(244,247,251,.96)),
+    linear-gradient(rgba(244,247,251,.86),rgba(244,247,251,.90)),
     url('assets/durga-watermark.jpg') center center/cover fixed;
 }
 
@@ -35,9 +35,8 @@ body{
   padding:30px 35px;
   color:white;
   background:
-  background:
-  linear-gradient(90deg,rgba(9,25,51,.40),rgba(16,39,75,.25)),
-  url('assets/durga-hero.jpg') center 35%/cover;
+    linear-gradient(90deg,rgba(9,25,51,.40),rgba(16,39,75,.25)),
+    url('assets/durga-hero.jpg') center 35%/cover;
   border-bottom:5px solid var(--gold);
   display:flex;
   align-items:center;
@@ -93,12 +92,9 @@ body{
   cursor:pointer;
   font-size:15px;
   font-weight:700;
-  transition:.2s;
 }
 
-.tabs button:hover{
-  background:var(--gold-light);
-}
+.tabs button:hover{background:var(--gold-light)}
 
 .tabs button.active{
   background:var(--navy);
@@ -167,13 +163,9 @@ input:focus,select:focus,textarea:focus{
 }
 
 .btn:hover{filter:brightness(.92)}
-
 .danger{background:#a83232}
-
 .gold{color:#b3831d}
-
 .muted{color:var(--muted)}
-
 .hidden{display:none!important}
 
 .notice{
@@ -218,7 +210,7 @@ input:focus,select:focus,textarea:focus{
   align-items:center;
   background:
     linear-gradient(90deg,rgba(16,39,75,.50),rgba(16,39,75,.25)),
-  url('assets/durga-hero.jpg') center/cover;
+    url('assets/durga-hero.jpg') center/cover;
   color:white;
   border:2px solid var(--gold);
 }
@@ -270,24 +262,21 @@ tr:nth-child(even){background:#f7f9fc}
   border-top:5px solid var(--gold);
 }
 
-.login h2{
-  text-align:center;
-}
-
+.login h2{text-align:center}
 .login .btn{width:100%}
-
 #pinErr{color:#a83232}
 
 #reportBody{
   position:relative;
   padding:22px;
   margin-top:20px;
-  border:1px solid var(--gold);
+  border:2px solid var(--gold);
   border-radius:10px;
   background:
-    linear-gradient(rgba(255,255,255,.91),rgba(255,255,255,.94)),
+    linear-gradient(rgba(255,255,255,.82),rgba(255,255,255,.86)),
     url('assets/durga-watermark.jpg') center/contain no-repeat;
   background-color:white;
+  min-height:400px;
 }
 
 #reportBody h2{
@@ -302,9 +291,7 @@ tr:nth-child(even){background:#f7f9fc}
   padding-bottom:9px;
 }
 
-#backupPath{
-  overflow-wrap:anywhere;
-}
+#backupPath{overflow-wrap:anywhere}
 
 hr{
   border:0;
@@ -333,6 +320,11 @@ footer{
 }
 
 @media print{
+  @page{
+    size:A4;
+    margin:12mm;
+  }
+
   body{
     background:white!important;
   }
@@ -371,6 +363,7 @@ footer{
   #reportBody{
     display:block!important;
     border:2px solid #d5a642;
+    border-radius:0;
     background-image:url('assets/durga-watermark.jpg')!important;
     background-position:center!important;
     background-repeat:no-repeat!important;
@@ -378,6 +371,7 @@ footer{
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
     padding:20px;
+    min-height:250mm;
   }
 
   #reportBody:before{
@@ -392,11 +386,22 @@ footer{
     margin-bottom:18px;
   }
 
-  th{
+  #reportBody table{
+    width:100%;
+    border-collapse:collapse;
+  }
+
+  #reportBody th{
     background:#10274b!important;
     color:white!important;
     -webkit-print-color-adjust:exact;
     print-color-adjust:exact;
+  }
+
+  #reportBody th,
+  #reportBody td{
+    border:1px solid #b9a36d;
+    padding:8px;
   }
 }
 </style>
@@ -441,208 +446,201 @@ footer{
 </nav>
 
 <section id="home" class="tab">
+  <div class="grid">
 
-<div class="grid">
+    <div class="card stat-card">
+      <div class="stat-icon">👥 कुल ग्राहक</div>
+      <div id="sCustomers" class="stat">0</div>
+    </div>
 
-  <div class="card stat-card">
-    <div class="stat-icon">👥 कुल ग्राहक</div>
-    <div id="sCustomers" class="stat">0</div>
+    <div class="card stat-card">
+      <div class="stat-icon">💰 कुल ऋण</div>
+      <div id="sLoans" class="stat">₹0</div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="stat-icon">📥 कुल जमा</div>
+      <div id="sPaid" class="stat">₹0</div>
+    </div>
+
   </div>
 
-  <div class="card stat-card">
-    <div class="stat-icon">💰 कुल ऋण</div>
-    <div id="sLoans" class="stat">₹0</div>
+  <div class="card welcome">
+    <div>
+      <h2>माँ मनोकामना स्मॉल फाइनेंस में आपका स्वागत है</h2>
+      <p>
+        ग्राहक जोड़ें, ऋण दर्ज करें और चुनी गई अवधि के अनुसार
+        किस्तों का शेड्यूल देखें। अपने सभी ग्राहकों का हिसाब
+        सुरक्षित रखें।
+      </p>
+      <div class="gold-text">॥ जय माता दी ॥</div>
+    </div>
   </div>
-
-  <div class="card stat-card">
-    <div class="stat-icon">📥 कुल जमा</div>
-    <div id="sPaid" class="stat">₹0</div>
-  </div>
-
-</div>
-
-<div class="card welcome">
-  <div>
-    <h2>माँ मनोकामना स्मॉल फाइनेंस में आपका स्वागत है</h2>
-    <p>
-      ग्राहक जोड़ें, ऋण दर्ज करें और चुनी गई अवधि के अनुसार
-      किस्तों का शेड्यूल देखें। अपने सभी ग्राहकों का हिसाब
-      सुरक्षित रखें।
-    </p>
-    <div class="gold-text">॥ जय माता दी ॥</div>
-  </div>
-</div>
-
 </section>
 
 <section id="customers" class="tab hidden">
 
-<div class="card">
-  <h2>👥 नया ग्राहक जोड़ें</h2>
+  <div class="card">
+    <h2>👥 नया ग्राहक जोड़ें</h2>
 
-  <div class="grid">
-    <div>
-      <label>ग्राहक का नाम</label>
-      <input id="cName">
+    <div class="grid">
+      <div>
+        <label>ग्राहक का नाम</label>
+        <input id="cName">
+      </div>
+
+      <div>
+        <label>मोबाइल नंबर</label>
+        <input id="cPhone">
+      </div>
+
+      <div>
+        <label>पता</label>
+        <input id="cAddress">
+      </div>
     </div>
 
-    <div>
-      <label>मोबाइल नंबर</label>
-      <input id="cPhone">
-    </div>
-
-    <div>
-      <label>पता</label>
-      <input id="cAddress">
-    </div>
+    <button class="btn" onclick="addCustomer()">ग्राहक सेव करें</button>
   </div>
 
-  <button class="btn" onclick="addCustomer()">ग्राहक सेव करें</button>
-</div>
-
-<div class="card">
-  <h2>ग्राहक सूची</h2>
-  <div id="customerList"></div>
-</div>
+  <div class="card">
+    <h2>ग्राहक सूची</h2>
+    <div id="customerList"></div>
+  </div>
 
 </section>
 
 <section id="loans" class="tab hidden">
 
-<div class="card">
-  <h2>💰 नया ऋण दर्ज करें</h2>
+  <div class="card">
+    <h2>💰 नया ऋण दर्ज करें</h2>
 
-  <div class="grid">
+    <div class="grid">
+      <div>
+        <label>ग्राहक</label>
+        <select id="loanCustomer"></select>
+      </div>
 
-    <div>
-      <label>ग्राहक</label>
-      <select id="loanCustomer"></select>
+      <div>
+        <label>ऋण राशि (₹)</label>
+        <input id="loanAmount" type="number" min="1">
+      </div>
+
+      <div>
+        <label>किस्त अवधि</label>
+        <select id="durationMode" onchange="toggleDays()">
+          <option value="100">100 दिन</option>
+          <option value="custom">अपनी अवधि चुनें</option>
+        </select>
+      </div>
+
+      <div id="customDaysBox" class="hidden">
+        <label>कुल दिन</label>
+        <input id="customDays" type="number" min="1" max="2000"
+        placeholder="जैसे 75">
+      </div>
+
+      <div>
+        <label>पहली किस्त की तारीख</label>
+        <input id="startDate" type="date">
+      </div>
     </div>
 
-    <div>
-      <label>ऋण राशि (₹)</label>
-      <input id="loanAmount" type="number" min="1">
-    </div>
-
-    <div>
-      <label>किस्त अवधि</label>
-      <select id="durationMode" onchange="toggleDays()">
-        <option value="100">100 दिन</option>
-        <option value="custom">अपनी अवधि चुनें</option>
-      </select>
-    </div>
-
-    <div id="customDaysBox" class="hidden">
-      <label>कुल दिन</label>
-      <input id="customDays" type="number" min="1" max="2000"
-      placeholder="जैसे 75">
-    </div>
-
-    <div>
-      <label>पहली किस्त की तारीख</label>
-      <input id="startDate" type="date">
-    </div>
-
+    <button class="btn" onclick="addLoan()">ऋण सेव करें</button>
+    <div id="schedulePreview"></div>
   </div>
 
-  <button class="btn" onclick="addLoan()">ऋण सेव करें</button>
-  <div id="schedulePreview"></div>
-</div>
-
-<div class="card">
-  <h2>ऋण खाते</h2>
-  <div id="loanList"></div>
-</div>
+  <div class="card">
+    <h2>ऋण खाते</h2>
+    <div id="loanList"></div>
+  </div>
 
 </section>
 
 <section id="payments" class="tab hidden">
 
-<div class="card">
-  <h2>📥 किस्त जमा करें</h2>
+  <div class="card">
+    <h2>📥 किस्त जमा करें</h2>
 
-  <div class="grid">
+    <div class="grid">
+      <div>
+        <label>ऋण खाता</label>
+        <select id="payLoan"></select>
+      </div>
 
-    <div>
-      <label>ऋण खाता</label>
-      <select id="payLoan"></select>
+      <div>
+        <label>जमा राशि (₹)</label>
+        <input id="payAmount" type="number" min="0">
+      </div>
+
+      <div>
+        <label>जमा तारीख</label>
+        <input id="payDate" type="date">
+      </div>
+
+      <div>
+        <label>टिप्पणी / रसीद</label>
+        <input id="payNote">
+      </div>
     </div>
 
-    <div>
-      <label>जमा राशि (₹)</label>
-      <input id="payAmount" type="number" min="0">
-    </div>
-
-    <div>
-      <label>जमा तारीख</label>
-      <input id="payDate" type="date">
-    </div>
-
-    <div>
-      <label>टिप्पणी / रसीद</label>
-      <input id="payNote">
-    </div>
-
+    <button class="btn" onclick="addPayment()">जमा सेव करें</button>
   </div>
 
-  <button class="btn" onclick="addPayment()">जमा सेव करें</button>
-</div>
-
-<div class="card">
-  <h2>जमा किस्तें (गलती सुधारने के लिए संपादन उपलब्ध)</h2>
-  <div id="paymentList"></div>
-</div>
+  <div class="card">
+    <h2>जमा किस्तें (गलती सुधारने के लिए संपादन उपलब्ध)</h2>
+    <div id="paymentList"></div>
+  </div>
 
 </section>
 
 <section id="reports" class="tab hidden">
 
-<div class="card">
-  <h2>📊 ग्राहक रिपोर्ट</h2>
+  <div class="card">
+    <h2>📊 ग्राहक रिपोर्ट</h2>
 
-  <label>ग्राहक चुनें</label>
-  <select id="reportCustomer" onchange="renderReport()"></select>
+    <label>ग्राहक चुनें</label>
+    <select id="reportCustomer" onchange="renderReport()"></select>
 
-  <div id="reportBody"></div>
+    <div id="reportBody"></div>
 
-  <div class="actions">
-    <button class="btn" onclick="window.print()">PDF / प्रिंट</button>
+    <div class="actions">
+      <button class="btn" onclick="window.print()">PDF / प्रिंट</button>
+    </div>
   </div>
-</div>
 
 </section>
 
 <section id="settings" class="tab hidden">
 
-<div class="card">
-  <h2>⚙️ सुरक्षा और बैकअप</h2>
+  <div class="card">
+    <h2>⚙️ सुरक्षा और बैकअप</h2>
 
-  <label>नया 4 अंकों का PIN (खाली छोड़ें तो लॉक बंद)</label>
-  <input id="newPin" maxlength="4" type="password" placeholder="4 अंक">
+    <label>नया 4 अंकों का PIN (खाली छोड़ें तो लॉक बंद)</label>
+    <input id="newPin" maxlength="4" type="password" placeholder="4 अंक">
 
-  <button class="btn" onclick="setPin()">PIN सेव करें</button>
+    <button class="btn" onclick="setPin()">PIN सेव करें</button>
 
-  <hr>
+    <hr>
 
-  <p>बैकअप स्थान: <b id="backupPath"></b></p>
+    <p>बैकअप स्थान: <b id="backupPath"></b></p>
 
-  <div class="actions">
-    <button class="btn" onclick="manualBackup()">अभी बैकअप बनाएं</button>
-    <button class="btn danger" onclick="restoreBackup()">बैकअप से डेटा वापस लाएं</button>
+    <div class="actions">
+      <button class="btn" onclick="manualBackup()">अभी बैकअप बनाएं</button>
+      <button class="btn danger" onclick="restoreBackup()">बैकअप से डेटा वापस लाएं</button>
+    </div>
+
+    <p class="muted">
+      बैकअप JSON फाइलें Documents के “Maa Manokamna Backup”
+      फोल्डर में बनेंगी। Restore करने पर वर्तमान डेटा चुनी गई
+      बैकअप फाइल के डेटा से बदल जाएगा।
+    </p>
+
   </div>
 
-  <p class="muted">
-    बैकअप JSON फाइलें Documents के “Maa Manokamna Backup”
-    फोल्डर में बनेंगी। Restore करने पर वर्तमान डेटा चुनी गई
-    बैकअप फाइल के डेटा से बदल जाएगा।
-  </p>
-
-</div>
-
 </section>
 
 </section>
-
 </main>
 
 <footer>
