@@ -31,40 +31,21 @@ body{
 }
 
 .top{
-  min-height:190px;
-  padding:30px 35px;
-  color:white;
-  background:
-    linear-gradient(90deg,rgba(9,25,51,.40),rgba(16,39,75,.25)),
-    url('assets/durga-hero.jpg') center 35%/cover;
-  border-bottom:5px solid var(--gold);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+  min-height:190px;padding:22px 35px;color:white;
+  background:linear-gradient(110deg,#071b45 0%,#10274b 58%,#183c68 100%);
+  border-bottom:5px solid var(--gold);display:flex;align-items:center;
+  justify-content:space-between;gap:20px;position:relative;overflow:hidden;
 }
+.top:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 45%,rgba(213,166,66,.22),transparent 35%);pointer-events:none}
+.top-brand{position:relative;z-index:2;flex:1;min-width:0}
+.top h1{margin:0 0 10px;font-size:clamp(24px,3vw,36px);color:#fff;text-shadow:0 2px 8px #000}
+.top small{color:var(--gold-light);font-size:16px;font-weight:bold}
+.top .brand-tag{display:inline-block;margin-top:12px;padding:7px 15px;border:1px solid var(--gold);border-radius:30px;color:var(--gold-light);background:#10274b88}
+.top-durga{position:relative;z-index:1;width:min(34%,360px);height:155px;object-fit:contain;object-position:right center;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}
+.welcome-ticker{margin:14px 25px 18px;min-height:64px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid var(--gold);border-radius:16px;background:linear-gradient(90deg,#fff0bd,#fffdf4,#ffe6a0);box-shadow:0 4px 14px #10274b18}
+.welcome-ticker span{display:inline-block;padding:12px 18px;color:#b51f25;font-size:clamp(22px,2.5vw,32px);font-weight:800;text-align:center;text-shadow:0 1px 0 #fff;animation:welcomeFade 5s ease-in-out infinite}
+@keyframes welcomeFade{0%,100%{opacity:0;transform:translateY(9px)}18%,78%{opacity:1;transform:translateY(0)}}
 
-.top h1{
-  margin:0 0 10px;
-  font-size:32px;
-  color:#fff;
-  text-shadow:0 2px 8px #000;
-}
-
-.top small{
-  color:var(--gold-light);
-  font-size:15px;
-}
-
-.top .brand-tag{
-  display:inline-block;
-  margin-top:12px;
-  padding:7px 15px;
-  border:1px solid var(--gold);
-  border-radius:30px;
-  color:var(--gold-light);
-  background:#10274b88;
-}
 
 .wrap{
   max-width:1500px;
@@ -307,17 +288,13 @@ footer{
 }
 
 @media(max-width:700px){
-  .top{
-    padding:24px 18px;
-    min-height:150px;
-  }
-  .top h1{font-size:23px}
-  .wrap{padding:12px}
-  .tabs button{flex:1 1 42%;padding:12px 8px}
-  .card{padding:15px}
-  table{font-size:12px}
-  th,td{padding:8px 6px}
-}
+  .top{padding:18px 14px;min-height:145px;gap:8px}
+  .top h1{font-size:22px}
+  .top small{font-size:12px}
+  .top-durga{width:34%;height:112px}
+  .welcome-ticker{margin:10px 12px 14px;min-height:54px}
+  .welcome-ticker span{font-size:20px}
+
 
 @media print{
   @page{
@@ -392,117 +369,20 @@ footer{
   }
 }
 
-
-/* ===== माँ मनोकामना स्मॉल फाइनेंस रिपोर्ट डिजाइन ===== */
-.report-heading{
-  text-align:center;
-  border-bottom:3px solid var(--gold);
-  padding-bottom:12px;
-  margin-bottom:18px;
-}
-.report-heading h1{
-  color:var(--navy);
-  font-size:25px;
-  margin:0 0 6px;
-  font-weight:bold;
-}
-.report-heading h3{
-  color:#b3831d;
-  font-size:15px;
-  margin:0;
-  padding:0;
-  border:0;
-}
-#reportBody > h2{
-  margin:20px 0 8px;
-  padding:9px 12px;
-  background:rgba(213,166,66,.18);
-  border-left:5px solid var(--gold);
-  color:var(--navy);
-  text-align:left;
-  font-size:18px;
-}
-#reportBody table{
-  width:100%;
-  border-collapse:collapse;
-  margin:8px 0 18px;
-  background:rgba(255,255,255,.78);
-}
-#reportBody th,
-#reportBody td{
-  border:1px solid #b9a36d;
-  padding:7px 5px;
-  font-size:11px;
-  text-align:center;
-  overflow-wrap:anywhere;
-}
-#reportBody th{
-  background:var(--navy);
-  color:#fff;
-}
-.report-thanks{
-  text-align:center;
-  font-weight:bold;
-  font-size:15px;
-  margin-top:24px;
-  color:var(--navy);
-}
-.report-sign{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:20px;
-  margin-top:28px;
-  font-size:12px;
-}
-.report-sign span:last-child{
-  text-align:right;
-}
-.report-footer{
-  text-align:center;
-  border-top:2px solid var(--gold);
-  margin-top:24px;
-  padding-top:10px;
-  color:var(--navy);
-}
-.report-footer h3{
-  border:0;
-  margin:0;
-  padding:0;
-  color:var(--navy);
-}
-.report-footer p{
-  margin:4px 0;
-}
-
-@media print{
-  #reportBody:before{
-    content:none!important;
-    display:none!important;
-  }
-  #reportBody{
-    background:
-      linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.90)),
-      url('assets/durga-watermark.jpg') center/contain no-repeat !important;
-    border:2px solid #d5a642;
-    -webkit-print-color-adjust:exact;
-    print-color-adjust:exact;
-  }
-  #reportBody table{
-    font-size:10px;
-    page-break-inside:auto;
-  }
-  #reportBody tr{
-    page-break-inside:avoid;
-    page-break-after:auto;
-  }
-  #reportBody th{
-    background:#10274b!important;
-    color:white!important;
-    -webkit-print-color-adjust:exact;
-    print-color-adjust:exact;
-  }
-}
+/* ===== रिपोर्ट डिजाइन ===== */
+.report-heading{text-align:center;border-bottom:3px solid var(--gold);padding-bottom:12px;margin-bottom:18px}
+.report-heading h1{color:var(--navy);font-size:25px;margin:0 0 6px;font-weight:bold}
+.report-heading h3{color:#b3831d;font-size:15px;margin:0;padding:0;border:0}
+#reportBody > h2{margin:20px 0 8px;padding:9px 12px;background:rgba(213,166,66,.18);border-left:5px solid var(--gold);color:var(--navy);text-align:left;font-size:18px}
+#reportBody table{width:100%;border-collapse:collapse;margin:8px 0 18px;background:rgba(255,255,255,.78)}
+#reportBody th,#reportBody td{border:1px solid #b9a36d;padding:7px 5px;font-size:11px;text-align:center;overflow-wrap:anywhere}
+#reportBody th{background:var(--navy);color:#fff}
+.report-thanks{text-align:center;font-weight:bold;font-size:15px;margin-top:24px;color:var(--navy)}
+.report-sign{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-top:28px;font-size:12px}
+.report-sign span:last-child{text-align:right}
+.report-footer{text-align:center;border-top:2px solid var(--gold);margin-top:24px;padding-top:10px;color:var(--navy)}
+.report-footer h3{border:0;margin:0;padding:0;color:var(--navy)}
+.report-footer p{margin:4px 0}
 
 </style>
 </head>
@@ -510,12 +390,13 @@ footer{
 <body>
 
 <header class="top">
-  <div>
+  <div class="top-brand">
     <h1>माँ मनोकामना स्मॉल फाइनेंस</h1>
-    <small>ऑफलाइन खाता-बही • सुरक्षित स्थानीय डेटा</small>
+    <small>आपकी ज़रूरत — हमारा भरोसा!</small>
     <br>
-    <span class="brand-tag">जय माता दी</span>
+    <span class="brand-tag">॥ जय माता दी ॥</span>
   </div>
+  <img class="top-durga" src="assets/durga-hero.jpg" alt="माँ दुर्गा">
 </header>
 
 <main class="wrap">
@@ -531,10 +412,7 @@ footer{
 
 <section id="appArea" class="hidden">
 
-<div class="notice">
-  <b>सुरक्षित स्थानीय खाता-बही</b><br>
-  आपका डेटा इसी कंप्यूटर में सुरक्षित रहेगा। ऐप बंद होने पर बैकअप अपने-आप बनेगा और हर 15 मिनट में भी बैकअप बनेगा।
-</div>
+<div class="welcome-ticker" aria-label="स्वागत संदेश"><span>🙏 ललित जी, आपका स्वागत है 🙏</span></div>
 
 <nav class="tabs">
   <button class="active" data-tab="home">🏠 डैशबोर्ड</button>
