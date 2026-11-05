@@ -384,6 +384,24 @@ footer{
 .report-footer h3{border:0;margin:0;padding:0;color:var(--navy)}
 .report-footer p{margin:4px 0}
 
+
+/* Number fields: direct typing, without tiny up/down spinner controls */
+input[type="number"]{
+  appearance:textfield;
+  -moz-appearance:textfield;
+  cursor:text;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+  -webkit-appearance:none;
+  margin:0;
+}
+input.money-input,
+input.days-input{
+  appearance:textfield;
+  -moz-appearance:textfield;
+}
+
 </style>
 </head>
 
@@ -501,7 +519,7 @@ footer{
 
       <div>
         <label>ऋण राशि (₹)</label>
-        <input id="loanAmount" type="number" min="1">
+        <input id="loanAmount" class="money-input" type="text" inputmode="decimal" autocomplete="off" placeholder="राशि सीधे लिखें">
       </div>
 
       <div>
@@ -514,8 +532,8 @@ footer{
 
       <div id="customDaysBox" class="hidden">
         <label>कुल दिन</label>
-        <input id="customDays" type="number" min="1" max="2000"
-        placeholder="जैसे 75">
+        <input id="customDays" class="days-input" type="text" inputmode="numeric" autocomplete="off"
+        placeholder="दिनों की संख्या सीधे लिखें (जैसे 75)">
       </div>
 
       <div>
@@ -548,7 +566,7 @@ footer{
 
       <div>
         <label>जमा राशि (₹)</label>
-        <input id="payAmount" type="number" min="0">
+        <input id="payAmount" class="money-input" type="text" inputmode="decimal" autocomplete="off" placeholder="जमा राशि सीधे लिखें">
       </div>
 
       <div>
